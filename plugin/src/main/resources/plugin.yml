@@ -1,0 +1,8 @@
+name: MagicznaKraina
+version: '${project.version}'
+main: pl.mgtm.magicznakraina.MagicznaKraina
+api-version: 1.19
+prefix: MagicznaKraina
+authors: [ m7rlin ]
+description: description
+website: https://mc.mgtm.pl
