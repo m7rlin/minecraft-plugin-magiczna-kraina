@@ -3,6 +3,46 @@ version: '${project.version}'
 main: pl.mgtm.magicznakraina.MagicznaKraina
 api-version: 1.19
 prefix: MagicznaKraina
-authors: [ m7rlin ]
+authors: [ Marcin_m7rlin_Stawowczyk ]
 description: description
 website: https://mc.mgtm.pl
+
+commands:
+  tpa:
+    description: Teleportuje gracza do innego gracza. Za pozwoleniem oczywiście.
+  tpaccept:
+    description: Akceptuje prośbę o teleportacje do Ciebie.
+  tpdeny:
+    description: Usuwa prośbę o teleportacje do Ciebie.
+  sethome:
+    description: Ustawia pozycje domu dla gracza.
+  home:
+    description: Teleportuje gracza do pozycji dom.
+  serduszko:
+    description: Dodaje pół serduszka graczowi.
+  spawn:
+    description: Przenosi gracza na spawn (punkt odrodzenia gracza) serwera.
+  setspawn:
+    description: Ustawia spawn (punkt odrodzenia gracza) serwera.
+  youtube:
+    aliases:
+      - yt
+    description: Wyświetla linki do kanałów youtube (wpisz w przeglądarce).
+  discord:
+    aliases:
+      - dc
+    description: Wyświetla adres serwera Discord (wpisz w przeglądarce).
+  enderchest:
+    aliases:
+      - ec
+    description: Otwiera skrzynie kresu (enderchest) gracza.
+  kit:
+    description: Daje graczowi dane zestaw przedmiotow/umiejętności.
+  heal:
+    description: Leczy gracza.
+  broadcast:
+    description: Wysyła wiadomość do wszystkich członków serwera.
+    aliases:
+      - bc
+  lock:
+    description: Otwiera GUI blokowania skrzynek.
