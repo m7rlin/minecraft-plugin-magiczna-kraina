@@ -1,0 +1,38 @@
+# Debug
+debug: false
+
+# Default hearts when new user joined the server
+defaultHearts: 6
+playerHeartsLimit: 40.0
+
+# Spawn location
+spawn:
+  enabled: false
+  teleportOnRespawn: true
+
+# Mesasges
+# Variables:
+# {username} - display player username
+message:
+  leaveMessage: "&7[&c-&7] {username}"
+  joinMessage: "&7[&a+&7] {username}"
+
+# Kits
+kits:
+  start:
+    label: ""
+    itemslot: 100
+    useOnce: true
+    delay: 0
+    items:
+      - 256,10
+      - 40,20
+
+# Social messages
+social:
+  discord: "Pogadaj z innymi na naszym Discordzie => https://discord.mgtm.pl/ :-)"
+  youtube: ""
+  www: ""
+
+# Players configuration
+users:
