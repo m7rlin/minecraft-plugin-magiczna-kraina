@@ -9,14 +9,13 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 
 @CommandInfo(name = "kit", permission = "", requiresPlayer = true)
 public class KitCommand extends PluginCommand {
-
-    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = pl.getConfig();
+        FileConfiguration config = plugin.getConfig();
 
         if (args.length != 0) {
             player.sendMessage(ChatColor.RED + "Work in progress!");

@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 @CommandInfo(name = "heal", permission = "mgtm.heal", requiresPlayer = true)
