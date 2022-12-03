@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class JoinServerEvent implements Listener {
-
     private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @EventHandler

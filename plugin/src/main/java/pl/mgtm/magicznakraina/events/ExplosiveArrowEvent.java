@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class ExplosiveArrowEvent implements Listener {
-
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent e) {
 

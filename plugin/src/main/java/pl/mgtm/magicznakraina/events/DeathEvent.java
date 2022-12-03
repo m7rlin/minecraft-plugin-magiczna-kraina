@@ -8,7 +8,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class DeathEvent implements Listener {
-
     private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @EventHandler
