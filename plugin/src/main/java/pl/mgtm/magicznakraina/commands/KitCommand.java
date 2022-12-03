@@ -19,8 +19,7 @@ public class KitCommand extends PluginCommand {
         FileConfiguration config = pl.getConfig();
 
         if (args.length != 0) {
-
-
+            player.sendMessage(ChatColor.RED + "Work in progress!");
         } else {
             player.sendMessage(ChatColor.RED + "/kit <nazwa zestawu>");
         }
