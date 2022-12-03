@@ -3,7 +3,7 @@ version: '${project.version}'
 main: pl.mgtm.magicznakraina.MagicznaKraina
 api-version: 1.19
 prefix: MagicznaKraina
-authors: [ Marcin_m7rlin_Stawowczyk ]
+authors: [ Marcin m7rlin Stawowczyk, Maciej Fulerenn ]
 description: description
 website: https://mc.mgtm.pl
 
