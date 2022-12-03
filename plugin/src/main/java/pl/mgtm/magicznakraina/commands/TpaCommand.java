@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class TpaCommand implements CommandExecutor {
-
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override

@@ -10,27 +10,27 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class JoinServerEvent implements Listener {
-    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @EventHandler
     public void onPlayerJoinServer(PlayerJoinEvent e) {
         Player p = e.getPlayer();
 
-        String eventMessage = pl.getMessages().get("joinMessage").replace("{username}", p.getName());
+        String eventMessage = plugin.getMessages().get("joinMessage").replace("{username}", p.getName());
         e.setJoinMessage(eventMessage);
 
         p.sendMessage(ChatColor.GREEN + "Grasz na Świątecznym serwerze MagicTM!\nŻyczymy miłej zabawy!");
 
-        double defaultHearts = pl.getConfig().getDouble("defaultHearts");
-        double playerHP = pl.getConfig().getDouble("users." + p.getUniqueId() + ".hp");
+        double defaultHearts = plugin.getConfig().getDouble("defaultHearts");
+        double playerHP = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hp");
 
-        if (!pl.getConfig().contains("users." + p.getUniqueId() + ".hearts")) {
-            pl.getConfig().set("users." + p.getUniqueId() + ".hearts", defaultHearts);
-            pl.getConfig().set("users." + p.getUniqueId() + ".heartsLevel", 0);
-            pl.saveConfig();
+        if (!plugin.getConfig().contains("users." + p.getUniqueId() + ".hearts")) {
+            plugin.getConfig().set("users." + p.getUniqueId() + ".hearts", defaultHearts);
+            plugin.getConfig().set("users." + p.getUniqueId() + ".heartsLevel", 0);
+            plugin.saveConfig();
         }
 
-        double playerMaxHealth = pl.getConfig().getDouble("users." + p.getUniqueId() + ".hearts");
+        double playerMaxHealth = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hearts");
 
         p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(playerMaxHealth);
     }
@@ -39,7 +39,7 @@ public class JoinServerEvent implements Listener {
     public void onPlayerLeaveServer(PlayerQuitEvent e) {
         Player p = e.getPlayer();
 
-        String eventMessage = pl.getMessages().get("leaveMessage").replace("{username}", p.getName());
+        String eventMessage = plugin.getMessages().get("leaveMessage").replace("{username}", p.getName());
         e.setQuitMessage(eventMessage);
     }
 }

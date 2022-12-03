@@ -6,7 +6,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class SpawnService {
-
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
     private FileConfiguration config = plugin.getConfig();
 

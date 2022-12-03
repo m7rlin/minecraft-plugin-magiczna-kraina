@@ -13,7 +13,6 @@ import pl.mgtm.magicznakraina.services.SpawnService;
 import java.util.HashMap;
 
 public final class MagicznaKraina extends JavaPlugin {
-
     private static MagicznaKraina instance;
 
     private FileConfiguration config;

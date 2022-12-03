@@ -21,7 +21,6 @@ public class ExplosiveArrowEvent implements Listener {
 
         world.createExplosion(arrowHitLocation, 3, false, true);
 
-
         e.setCancelled(true);
     }
 
