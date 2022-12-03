@@ -43,6 +43,7 @@ public final class MagicznaKraina extends JavaPlugin {
         //getServer().getPluginManager().registerEvents(new ExplosiveArrowEvent(), this);
         //getServer().getPluginManager().registerEvents(new SuperPickaxeEvent(), this);
 
+        // TODO: Command handler?
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
@@ -55,6 +56,7 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("kit").setExecutor(new KitCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("guitest").setExecutor(new GuiTestingCommand());
 
         // ===================================================== //
         //                                                       //
