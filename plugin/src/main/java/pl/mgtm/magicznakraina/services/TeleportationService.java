@@ -13,8 +13,6 @@ public class TeleportationService {
     private ArrayList<UUID> dummyRecord = new ArrayList<>();
 
     public boolean checkTeleportationRequests(UUID player, UUID target) {
-        Bukkit.getPlayer(player).sendMessage("§8[§9TeleportationService§8]§r checkTeleportationRequests();");
-
         if (requests.size() > 0) {
             return requests.get(player).contains(target);
         }
@@ -23,8 +21,6 @@ public class TeleportationService {
     }
 
     public void createTeleporationRequest(UUID player, UUID target) {
-        Bukkit.getPlayer(player).sendMessage("§8[§9TeleportationService§8]§r createTeleportationRequest();");
-
         requests.put(player, dummyRecord);
         ArrayList<UUID> request = requests.get(player);
         request.add(target);
@@ -33,7 +29,6 @@ public class TeleportationService {
     };
 
     public void removeTeleportationRequest(UUID player, UUID target) {
-        Bukkit.getPlayer(player).sendMessage("§8[§9TeleportationService§8]§r removeTeleportationRequest();");
         ArrayList<UUID> request = requests.get(player);
         request.remove(target);
 

@@ -9,6 +9,7 @@ import pl.mgtm.magicznakraina.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectChests;
 import pl.mgtm.magicznakraina.services.SpawnService;
+import pl.mgtm.magicznakraina.services.TeleportationService;
 
 import java.util.HashMap;
 
@@ -18,12 +19,9 @@ public final class MagicznaKraina extends JavaPlugin {
     private FileConfiguration config;
 
     public SpawnService spawnService;
+    public TeleportationService teleportationService;
 
     private HashMap<String, String> messages = new HashMap<>();
-
-    // TODO: Instrumenty i profiler
-    private boolean debug = false;
-
 
     @Override
     public void onEnable() {
@@ -37,13 +35,12 @@ public final class MagicznaKraina extends JavaPlugin {
 
         setInstance(this);
 
+        // Initialize event listeners
         getServer().getPluginManager().registerEvents(new JoinServerEvent(), this);
         getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
-        //getServer().getPluginManager().registerEvents(new ExplosiveArrowEvent(), this);
-        //getServer().getPluginManager().registerEvents(new SuperPickaxeEvent(), this);
 
-        // TODO: Command handler?
+        // Initialize commands
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
@@ -56,25 +53,21 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("kit").setExecutor(new KitCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
-        getCommand("guitest").setExecutor(new GuiTestingCommand());
 
-        // ===================================================== //
-        //                                                       //
-        //                  Rejestracja modulow                  //
-        //                                                       //
-        // ===================================================== //
-
+        // Initialize services
         this.spawnService = new SpawnService();
-
-        new ProtectChests();
-        loadConfig();
-
         this.spawnService.loadSpawnLocation();
+        
+        this.teleportationService = new TeleportationService();
+
+        // Initialize PC
+        new ProtectChests();
+
+        // Load config
+        this.loadConfig();
 
         messages.put("leaveMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.leaveMessage")));
         messages.put("joinMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.joinMessage")));
-
-        debug = getConfig().getBoolean("debug");
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
@@ -102,17 +95,8 @@ public final class MagicznaKraina extends JavaPlugin {
         MagicznaKraina.instance = instance;
     }
 
-    // TODO: Move it somewhere else
+    // TODO: Move it somewhere else (or remove it, its just useless)
     public HashMap<String, String> getMessages() {
         return messages;
-    }
-
-    // TODO: ... nothing to explain in here
-    public void setDebug(boolean debug) {
-        this.debug = debug;
-    }
-
-    public boolean getDebug() {
-        return this.debug;
     }
 }
