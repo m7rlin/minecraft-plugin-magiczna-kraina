@@ -12,7 +12,6 @@ public class GuiHelpers {
         ItemMeta itemMeta = itemStack.getItemMeta();
 
         itemMeta.setDisplayName(itemName);
-
         itemStack.setItemMeta(itemMeta);
 
         return itemStack;
