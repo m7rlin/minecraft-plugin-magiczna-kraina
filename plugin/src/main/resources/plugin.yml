@@ -46,5 +46,3 @@ commands:
       - bc
   lock:
     description: Otwiera GUI blokowania skrzynek.
-  guitest:
-    description: Otwiera GUI testowe
