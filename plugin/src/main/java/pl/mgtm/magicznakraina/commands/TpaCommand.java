@@ -46,14 +46,14 @@ public class TpaCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ChatColor.RED + "Gracz, od którego próbujesz przyjąć prośbę o teleportację nie jest online!");
+                player.sendMessage(ChatColor.RED + "Gracz od którego próbujesz przyjąć prośbę o teleportację nie jest online!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0f);
 
                 return false;
             }
 
             if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "Gracz, którego chcesz teleportować do siebie nie wysłał do Ciebie prośby!");
+                player.sendMessage(ChatColor.RED + "Gracz którego chcesz teleportować do siebie nie wysłał do Ciebie żadnej prośby!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0f);
 
                 return false;
@@ -84,7 +84,7 @@ public class TpaCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "Gracz, którego prośbę o teleportację chcesz anulować Ci jej nie wysłał!");
+                player.sendMessage(ChatColor.RED + "Nie możesz anulować tej prośby o teleportację ponieważ ten użytkownik Ci jej nie wysłał!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
 
                 return false;
