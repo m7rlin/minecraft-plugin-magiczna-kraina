@@ -2,16 +2,13 @@ package pl.mgtm.magicznakraina.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-
-import static pl.mgtm.magicznakraina.helpers.GuiHelpers.createItemWithLore;
 
 public class TpaCommand implements CommandExecutor {
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
@@ -30,41 +27,103 @@ public class TpaCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("tpa")) {
             if (args.length == 1) {
-                return invokeTeleportation(player, args);
+                return invokeTeleportationRequest(player, args);
             } else {
-                handleTelelportationGUI(player);
+                player.sendMessage(ChatColor.DARK_GRAY + "Musisz określić do kogo chcesz wysłać prośbę o teleportację!");
+                player.sendMessage(ChatColor.GRAY + "Użycie: /tpaccept <gracz>");
                 return true;
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("tpaccept")) {
-            player.sendMessage("tpaccept - work in progress");
+            if (args.length < 1) {
+                player.sendMessage(ChatColor.DARK_GRAY + "Musisz określić kogo prośbę o teleportację chcesz przyjąć!");
+                player.sendMessage(ChatColor.GRAY + "Użycie: /tpaccept <gracz>");
+
+                return false;
+            }
+
+            target = Bukkit.getPlayer(args[0]);
+
+            if (target == null || !target.isOnline()) {
+                player.sendMessage(ChatColor.RED + "Gracz, od którego próbujesz przyjąć prośbę o teleportację nie jest online!");
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0f);
+
+                return false;
+            }
+
+            if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
+                player.sendMessage(ChatColor.RED + "Gracz, którego chcesz teleportować do siebie nie wysłał do Ciebie prośby!");
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0f);
+
+                return false;
+            }
+
+            player.sendMessage(ChatColor.DARK_GRAY + "Teleportowanie gracza " + ChatColor.GREEN + target.getName());
+
+            this.plugin.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
+
+            target.teleport(player.getLocation());
+
+            target.sendMessage(ChatColor.GREEN + "Teleportowano do gracza " + player.getName());
+
+            player.sendMessage(ChatColor.GREEN + "Teleportowano " + player.getName() + " pomyślnie!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 2.0f);
+
             return true;
         }
 
         if (cmd.getName().equalsIgnoreCase("tpdeny")) {
-            player.sendMessage("tpdeny - work in progress");
+            if (args.length < 1) {
+                player.sendMessage(ChatColor.DARK_GRAY + "Musisz określić kogo prośbę o teleportację chcesz anulować!");
+                player.sendMessage(ChatColor.GRAY + "Użycie: /tpaccept <gracz>");
+
+                return false;
+            }
+
+            target = Bukkit.getPlayer(args[0]);
+
+            if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
+                player.sendMessage(ChatColor.RED + "Gracz, którego prośbę o teleportację chcesz anulować Ci jej nie wysłał!");
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
+
+                return false;
+            }
+
+            this.plugin.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
+
+            target.sendMessage(ChatColor.RED + "Twoja prośba o teleportację do " + player.getName() + "została anulowana!");
+
+            player.sendMessage(ChatColor.GREEN + "Anulowano prośbę o teleportację!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0f, 2.0f);
+
             return true;
         }
 
         return false;
     }
 
-    private boolean invokeTeleportation(Player player, String[] args) {
+    private boolean invokeTeleportationRequest(Player player, String[] args) {
         target = Bukkit.getPlayer(args[0]);
 
         if (target == null || !target.isOnline()) {
             player.sendMessage(ChatColor.RED + "Gracz do którego próbujesz się teleportować nie jest online!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
+
             return false;
         }
 
         if (target.getUniqueId().equals(player.getUniqueId())) {
             player.sendMessage(ChatColor.RED + "Nie możesz teleportować się do samego siebie!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
+
             return false;
         }
 
         if (this.plugin.teleportationService.checkTeleportationRequests(player.getUniqueId(), target.getUniqueId())) {
             player.sendMessage(ChatColor.GREEN + "Ten gracz posiada już oczkującą prośbę o teleportację od Ciebie!");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
+
             return false;
         }
 
@@ -76,20 +135,6 @@ public class TpaCommand implements CommandExecutor {
         target.sendMessage(ChatColor.DARK_GRAY + "Wpisz /tpaccept lub /tpdeny aby wykonać pożądaną reakcję, lub wpisz /tpa");
 
         return true;
-    }
-
-    // TODO: IMPLEMENT InventoryClickEvent
-    private void handleTelelportationGUI(Player player) {
-        inventory = Bukkit.createInventory(player, InventoryType.CHEST, "Menu teleportacji");
-
-        for (int i = 18; i < InventoryType.CHEST.getDefaultSize(); i++) {
-            inventory.setItem(i, createItemWithLore(Material.GRAY_STAINED_GLASS_PANE, 1, " "));
-        }
-
-        inventory.setItem(20, createItemWithLore(Material.ARROW, 1, ChatColor.DARK_PURPLE + "Co to jest?", "§r§7Znajdujesz się w menu", "§r§7teleportacji. Kiedy klikniesz na", "§r§7jedną z główek, prośba o", "§r§7teleportację zostanie", "§r§7wysłana do danej osoby."));
-        inventory.setItem(24, createItemWithLore(Material.BARRIER, 1, ChatColor.RED + "Wyjdź"));
-
-        player.openInventory(inventory);
     }
 }
 
