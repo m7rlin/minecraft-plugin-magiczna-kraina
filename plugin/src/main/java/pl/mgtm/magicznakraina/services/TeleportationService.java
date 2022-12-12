@@ -14,7 +14,9 @@ public class TeleportationService {
 
     public boolean checkTeleportationRequests(UUID player, UUID target) {
         if (requests.size() > 0) {
-            return requests.get(player).contains(target);
+            if (requests.get(player) != null) {
+                return requests.get(player).contains(target);
+            }
         }
 
         return false;
@@ -36,6 +38,10 @@ public class TeleportationService {
     };
 
     public void flushTeleportationRequests(UUID player) {
-        requests.get(player).clear();
+        if (requests.size() > 0) {
+            if (requests.get(player) != null) {
+                requests.get(player).clear();
+            }
+        }
     };
 };
