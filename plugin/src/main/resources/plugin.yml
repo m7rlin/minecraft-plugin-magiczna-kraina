@@ -1,5 +1,5 @@
 name: MagicznaKraina
-version: '${project.version}'
+version: ${version}
 main: pl.mgtm.magicznakraina.MagicznaKraina
 api-version: 1.19
 prefix: MagicznaKraina
