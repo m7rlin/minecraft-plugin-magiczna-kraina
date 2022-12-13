@@ -37,12 +37,12 @@ public final class MagicznaKraina extends JavaPlugin {
 
         setInstance(this);
 
-        // Initialize event listeners
+        // Register event listeners
         getServer().getPluginManager().registerEvents(new JoinServerEvent(), this);
         getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
 
-        // Initialize commands
+        // Register commands
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
