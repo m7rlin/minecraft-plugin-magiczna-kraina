@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.events;
 
+import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,9 @@ public class DeathEvent implements Listener {
         double playerHearts = plugin.getConfig().getInt("users." + player.getUniqueId() + ".hearts");
 
         if (playerHearts <= 1) {
-            // TODO: Zbanuj gracza
+            player.banPlayer(
+                    ChatColor.GRAY +
+                            "Straciłeś wszystkie serduszka!\nJeżeli chcesz grać dalej, gracze mogą cie " + ChatColor.GOLD + "wskrzeszyć!\n" + ChatColor.GRAY + "Po więcej informacji dołącz na naszego Discorda\n\n" + ChatColor.AQUA + "https://discord.mgtm.pl/ " + ChatColor.RED + "\n\nZostałeś wykluczony z serwera!");
             return;
         };
 
