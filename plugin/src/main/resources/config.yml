@@ -40,12 +40,12 @@ kits:
     useOnce: true
     delay: 0
     items:
-      - leather_boots,1
-      - leather_chestplate,1
-      - leather_helmet,1
-      - leather_leggings,1
       - wooden_sword,1
       - cooked_beef,32
+      - leather_helmet,1
+      - leather_chestplate,1
+      - leather_leggings,1
+      - leather_boots,1
 
 # Social messages
 social:
