@@ -40,8 +40,12 @@ kits:
     useOnce: true
     delay: 0
     items:
-      - diamond_pickaxe,1
-      - diamond,20
+      - leather_boots,1
+      - leather_chestplate,1
+      - leather_helmet,1
+      - leather_leggings,1
+      - wooden_sword,1
+      - cooked_beef,32
 
 # Social messages
 social:
