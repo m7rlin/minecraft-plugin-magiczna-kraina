@@ -10,9 +10,9 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class ExplosiveArrowEvent implements Listener {
     @EventHandler
-    public void onProjectileHit(ProjectileHitEvent e) {
+    public void onProjectileHit(ProjectileHitEvent event) {
 
-        Arrow arrow = (Arrow) e.getEntity();
+        Arrow arrow = (Arrow) event.getEntity();
         Player player = (Player) arrow.getShooter();
 
         Location arrowHitLocation = arrow.getLocation();
@@ -21,7 +21,7 @@ public class ExplosiveArrowEvent implements Listener {
 
         world.createExplosion(arrowHitLocation, 3, false, true);
 
-        e.setCancelled(true);
+        event.setCancelled(true);
     }
 
 }

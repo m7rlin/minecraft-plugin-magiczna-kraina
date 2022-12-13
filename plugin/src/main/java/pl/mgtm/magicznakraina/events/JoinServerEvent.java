@@ -14,29 +14,29 @@ public class JoinServerEvent implements Listener {
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @EventHandler
-    public void onPlayerJoinServer(PlayerJoinEvent e) {
-        Player p = e.getPlayer();
+    public void onPlayerJoinServer(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
 
-        String eventMessage = plugin.getMessages().get("joinMessage").replace("{username}", p.getName());
-        e.setJoinMessage(eventMessage);
+        String eventMessage = this.plugin.getMessages().get("joinMessage").replace("{username}", player.getName());
+        event.setJoinMessage(eventMessage);
 
-        p.sendMessage(ChatColor.GREEN + "Grasz na Świątecznym serwerze MagicTM!\nŻyczymy miłej zabawy!");
+        player.sendMessage(ChatColor.GREEN + "Grasz na Świątecznym serwerze MagicTM!\nŻyczymy miłej zabawy!");
 
-        double defaultHearts = plugin.getConfig().getDouble("defaultHearts");
-        double playerHP = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hp");
+        double defaultHearts = this.plugin.getConfig().getDouble("defaultHearts");
+        double playerHP = this.plugin.getConfig().getDouble("users." + player.getUniqueId() + ".hp");
 
-        ConfigHelpers.createDefaultPlayerConfig(p.getUniqueId());
+        ConfigHelpers.createDefaultPlayerConfig(player.getUniqueId());
 
-        double playerMaxHealth = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hearts");
+        double playerMaxHealth = this.plugin.getConfig().getDouble("users." + player.getUniqueId() + ".hearts");
 
-        p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(playerMaxHealth);
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(playerMaxHealth);
     }
 
     @EventHandler
-    public void onPlayerLeaveServer(PlayerQuitEvent e) {
-        Player p = e.getPlayer();
+    public void onPlayerLeaveServer(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
 
-        String eventMessage = plugin.getMessages().get("leaveMessage").replace("{username}", p.getName());
-        e.setQuitMessage(eventMessage);
+        String eventMessage = plugin.getMessages().get("leaveMessage").replace("{username}", player.getName());
+        event.setQuitMessage(eventMessage);
     }
 }
