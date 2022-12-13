@@ -14,10 +14,5 @@ public class KitsModule {
 
         // Rejestracja komend]
         plugin.getCommand("kit").setExecutor(new KitCommand());
-
-        if (!plugin.getConfig().contains("kits")) return;
-
-
-
     }
 }
