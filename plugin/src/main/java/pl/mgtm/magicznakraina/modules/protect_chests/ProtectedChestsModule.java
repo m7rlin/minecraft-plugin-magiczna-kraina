@@ -7,11 +7,11 @@ import pl.mgtm.magicznakraina.modules.protect_chests.events.BreakChest;
 import pl.mgtm.magicznakraina.modules.protect_chests.events.OpenChest;
 import pl.mgtm.magicznakraina.modules.protect_chests.events.PlaceChest;
 
-public class ProtectChests {
+public class ProtectedChestsModule {
 
     private MagicznaKraina pl = MagicznaKraina.getInstance();
 
-    public ProtectChests() {
+    public ProtectedChestsModule() {
         PluginManager pm = pl.getServer().getPluginManager();
 
         // Rejestracja komend

@@ -36,7 +36,7 @@ public class HomeCommand extends PluginCommand {
             Location location = new Location(player.getWorld(), x, y, z, yaw, pitch);
 
             player.teleport(location);
-            player.sendMessage(ChatColor.GREEN + "Przeniesiono do domu");
+            player.sendMessage(ChatColor.GREEN + "Przeniesiono do domu.");
         } else {
             player.sendMessage("§cNie posiadasz żadnego ustawionego domu!\nMożesz to zrobić używając komendy §7/sethome");
         }

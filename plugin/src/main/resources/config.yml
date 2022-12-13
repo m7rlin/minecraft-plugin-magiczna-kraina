@@ -40,8 +40,8 @@ kits:
     useOnce: true
     delay: 0
     items:
-      - 256,10
-      - 40,20
+      - diamond_pickaxe,1
+      - diamond,20
 
 # Social messages
 social:

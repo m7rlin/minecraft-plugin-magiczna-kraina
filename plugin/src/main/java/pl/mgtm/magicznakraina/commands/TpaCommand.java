@@ -53,7 +53,7 @@ public class TpaCommand implements CommandExecutor {
             }
 
             if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "Gracz, którego chcesz teleportować do siebie nie wysłał do Ciebie prośby!");
+                player.sendMessage(ChatColor.RED + "Brak prośby o teleportację od tego gracza!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0f);
 
                 return false;
@@ -75,7 +75,7 @@ public class TpaCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("tpdeny")) {
             if (args.length < 1) {
-                player.sendMessage(ChatColor.DARK_GRAY + "Musisz określić kogo prośbę o teleportację chcesz anulować!");
+                player.sendMessage(ChatColor.DARK_GRAY + "Wpisz gracza, od którego prośbę o teleportację chcesz anulować.");
                 player.sendMessage(ChatColor.GRAY + "Użycie: /tpaccept <gracz>");
 
                 return false;
@@ -84,7 +84,7 @@ public class TpaCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
-                player.sendMessage(ChatColor.RED + "Gracz, którego prośbę o teleportację chcesz anulować Ci jej nie wysłał!");
+                player.sendMessage(ChatColor.RED + "Brak prośby o teleportację od tego gracza!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
 
                 return false;
