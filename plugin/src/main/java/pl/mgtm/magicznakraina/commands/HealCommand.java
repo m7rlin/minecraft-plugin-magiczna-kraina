@@ -21,7 +21,7 @@ public class HealCommand extends PluginCommand {
                 "Co tu się stało :OOO"
         };
 
-        String message = ChatColor.DARK_GRAY + messages[new Random().nextInt(messages.length)];
+        String message = ChatColor.GREEN + messages[new Random().nextInt(messages.length-1)];
 
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
         player.setFoodLevel(20);

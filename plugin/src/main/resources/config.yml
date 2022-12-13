@@ -2,6 +2,28 @@
 defaultHearts: 6
 playerHeartsLimit: 40.0
 
+playerHearts:
+  # Default hearts when new user joined the server
+  default: 6
+  # Max hearts player can get
+  limit: 40.0
+  # Players can increase hearts by spending XP. Here is the list of required levels for each heart level.
+  levels:
+
+playerRevive:
+  # When player is banned because his hearts reached 0 HP, other users can revive this player.
+  enabled: true
+  # When player hearts reach 0 HP he will be banned.
+  banOnZeroHearts: true
+  # Items required for revive. The items will be taken away.
+  # If the list is empty it will take 50 levels by default to revive a player.
+  items:
+    - diamond,16
+    - gold,32
+    - golden_apple,2
+    - ender_pearl,2
+  level: 15
+
 # Spawn location
 spawn:
   enabled: false
@@ -15,6 +37,7 @@ message:
   joinMessage: "&7[&a+&7] {username}"
 
 # Kits
+# {delay} <integer> - number of seconds for another use
 kits:
   start:
     label: ""
@@ -22,8 +45,12 @@ kits:
     useOnce: true
     delay: 0
     items:
-      - 256,10
-      - 40,20
+      - wooden_sword,1
+      - cooked_beef,32
+      - leather_helmet,1
+      - leather_chestplate,1
+      - leather_leggings,1
+      - leather_boots,1
 
 # Social messages
 social:

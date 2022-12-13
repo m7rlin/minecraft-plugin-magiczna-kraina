@@ -16,7 +16,10 @@ public class DeathEvent implements Listener {
 
         double playerHearts = plugin.getConfig().getInt("users." + p.getUniqueId() + ".hearts");
 
-        if (playerHearts <= 1) return;
+        if (playerHearts <= 1) {
+            // TODO: Zbanuj gracza
+            return;
+        };
 
         // Zmniejsz zycie o pol serduszka
         plugin.getConfig().set("users." + p.getUniqueId() + ".hearts", playerHearts - 1.0);

@@ -7,7 +7,9 @@ import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.DeathEvent;
 import pl.mgtm.magicznakraina.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
-import pl.mgtm.magicznakraina.modules.protect_chests.ProtectChests;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
+import pl.mgtm.magicznakraina.modules.kits.KitsModule;
+import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
 
@@ -50,7 +52,6 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("setspawn").setExecutor(new SetSpawnCommand());
         getCommand("enderchest").setExecutor(new EnderchestCommand());
-        getCommand("kit").setExecutor(new KitCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
 
@@ -60,8 +61,11 @@ public final class MagicznaKraina extends JavaPlugin {
         
         this.teleportationService = new TeleportationService();
 
-        // Initialize PC
-        new ProtectChests();
+        // Initialize Protected Chests module
+        new ProtectedChestsModule();
+
+        // Initialize Kits module
+        new KitsModule();
 
         // Load config
         this.loadConfig();
