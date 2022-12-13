@@ -54,6 +54,7 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("alert").setExecutor(new AlertCommand());
 
         // Initialize services
         this.spawnService = new SpawnService();
