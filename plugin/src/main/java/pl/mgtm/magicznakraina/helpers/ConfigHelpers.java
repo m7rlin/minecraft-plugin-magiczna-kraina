@@ -8,6 +8,10 @@ import java.util.UUID;
 
 public class ConfigHelpers {
 
+    public ConfigHelpers () {
+        throw new RuntimeException("Cannot initialize helper class!");
+    }
+
     public static void createDefaultPlayerConfig(UUID playerUUID) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 

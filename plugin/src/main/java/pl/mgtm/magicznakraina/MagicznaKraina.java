@@ -7,6 +7,7 @@ import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.DeathEvent;
 import pl.mgtm.magicznakraina.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.services.SpawnService;

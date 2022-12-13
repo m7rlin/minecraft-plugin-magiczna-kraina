@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
 public class JoinServerEvent implements Listener {
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
@@ -24,11 +25,7 @@ public class JoinServerEvent implements Listener {
         double defaultHearts = plugin.getConfig().getDouble("defaultHearts");
         double playerHP = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hp");
 
-        if (!plugin.getConfig().contains("users." + p.getUniqueId() + ".hearts")) {
-            plugin.getConfig().set("users." + p.getUniqueId() + ".hearts", defaultHearts);
-            plugin.getConfig().set("users." + p.getUniqueId() + ".heartsLevel", 0);
-            plugin.saveConfig();
-        }
+        ConfigHelpers.createDefaultPlayerConfig(p.getUniqueId());
 
         double playerMaxHealth = plugin.getConfig().getDouble("users." + p.getUniqueId() + ".hearts");
 
