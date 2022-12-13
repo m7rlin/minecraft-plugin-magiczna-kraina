@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class ConfigHelpers {
-
     public ConfigHelpers () {
         throw new RuntimeException("Cannot initialize helper class!");
     }
@@ -33,12 +32,13 @@ public class ConfigHelpers {
 
         List<String> kits = new ArrayList<>();
 
-
         if (plugin.getConfig().contains("users." + playerUUID + ".kits")) {
             kits = (List<String>) plugin.getConfig().getList("users." + playerUUID + ".kits");
         }
 
-        if (!kits.contains(kitname)) { kits.add(kitname); }
+        if (!kits.contains(kitname)) {
+            kits.add(kitname);
+        }
 
         // Save new data
         plugin.getConfig().set("users." + playerUUID + ".kits", kits);
@@ -56,12 +56,13 @@ public class ConfigHelpers {
 
         List<String> kits = new ArrayList<>();
 
-
         if (plugin.getConfig().contains("users." + playerUUID + ".kits")) {
             kits = (List<String>) plugin.getConfig().getList("users." + playerUUID + ".kits");
         }
 
-        if (!kits.contains(kitname)) { return false; }
+        if (!kits.contains(kitname)) {
+            return false;
+        }
 
         return true;
     }

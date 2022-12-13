@@ -7,6 +7,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Arrays;
 
 public class GuiHelpers {
+
+    public GuiHelpers () {
+        throw new RuntimeException("Cannot initialize helper class!");
+    }
+
     public static ItemStack createItem(Material material, Integer amount, String itemName) {
         ItemStack itemStack = new ItemStack(material, amount);
         ItemMeta itemMeta = itemStack.getItemMeta();

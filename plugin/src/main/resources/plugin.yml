@@ -43,8 +43,10 @@ commands:
   heal:
     description: Leczy gracza.
   broadcast:
-    description: Wysyła wiadomość do wszystkich członków serwera.
+    description: Wysyła wiadomość do wszystkich graczy na serwerze.
     aliases:
       - bc
   lock:
     description: Otwiera GUI blokowania skrzynek.
+  alert:
+    description: Wysyła alert do wszystkich graczy na serwerze.
