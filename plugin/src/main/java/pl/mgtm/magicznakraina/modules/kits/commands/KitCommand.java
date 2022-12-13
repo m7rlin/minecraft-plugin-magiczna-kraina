@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
 import java.util.List;
 import java.util.Set;
@@ -39,6 +40,12 @@ public class KitCommand extends PluginCommand {
                 return;
             }
 
+            // Sprawdz czy uzytkownik uzyl wczesniej komendy
+            if (ConfigHelpers.playerUsedKit(player.getUniqueId(), kitNameArg)) {
+                player.sendMessage(ChatColor.RED + "Kit '" + kitNameArg +"' został już użyty!");
+                return;
+            }
+
             for (String kitname : kits) {
                 //player.sendMessage(kitname);
                 List<String> kititems = (List<String>) config.getList("kits." + kitname + ".items");
@@ -63,6 +70,8 @@ public class KitCommand extends PluginCommand {
                 }
             }
 
+            ConfigHelpers.addPlayerKit(player.getUniqueId(), kitNameArg);
+
             player.sendMessage(ChatColor.GREEN + "Przedmioty z zestawu '" + kitNameArg +"' zostały dodane do Twojego ekwipunku.");
 
 
@@ -74,3 +83,4 @@ public class KitCommand extends PluginCommand {
 
 
 }
+
