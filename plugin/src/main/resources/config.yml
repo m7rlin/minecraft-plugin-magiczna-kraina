@@ -18,6 +18,11 @@ playerRevive:
   # Items required for revive. The items will be taken away.
   # If the list is empty it will take 50 levels by default to revive a player.
   items:
+    - diamond,16
+    - gold,32
+    - golden_apple,2
+    - ender_pearl,2
+  level: 15
 
 # Spawn location
 spawn:
