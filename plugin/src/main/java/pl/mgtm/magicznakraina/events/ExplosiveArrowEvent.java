@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class ExplosiveArrowEvent implements Listener {
-
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent e) {
 
@@ -21,7 +20,6 @@ public class ExplosiveArrowEvent implements Listener {
         World world = player.getWorld();
 
         world.createExplosion(arrowHitLocation, 3, false, true);
-
 
         e.setCancelled(true);
     }

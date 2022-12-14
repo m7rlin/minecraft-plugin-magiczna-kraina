@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SuperPickaxeEvent implements Listener {
-
     private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @EventHandler

@@ -1,4 +1,4 @@
-package pl.mgtm.magicznakraina.commands;
+package pl.mgtm.magicznakraina.modules.serduszko.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

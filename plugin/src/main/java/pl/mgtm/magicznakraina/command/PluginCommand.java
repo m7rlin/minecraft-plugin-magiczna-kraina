@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 public abstract class PluginCommand implements CommandExecutor {
-
     private final CommandInfo commandInfo;
 
     public PluginCommand() {
@@ -25,7 +24,7 @@ public abstract class PluginCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!commandInfo.permission().isEmpty()) {
             if (!sender.hasPermission(commandInfo.permission())) {
-                noPermission(sender);
+                insufficientPermissions(sender);
                 return true;
             }
         }
@@ -44,7 +43,7 @@ public abstract class PluginCommand implements CommandExecutor {
         return true;
     }
 
-    public void noPermission(CommandSender sender) {
+    public void insufficientPermissions(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "Nie masz uprawnien do wykonania tej komendy.");
     }
 
