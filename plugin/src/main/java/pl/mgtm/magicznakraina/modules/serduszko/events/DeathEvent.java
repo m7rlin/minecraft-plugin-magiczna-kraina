@@ -1,4 +1,4 @@
-package pl.mgtm.magicznakraina.events;
+package pl.mgtm.magicznakraina.modules.serduszko.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;

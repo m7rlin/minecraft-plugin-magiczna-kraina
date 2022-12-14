@@ -1,4 +1,4 @@
-package pl.mgtm.magicznakraina.events;
+package pl.mgtm.magicznakraina.modules.serduszko.events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -17,11 +17,6 @@ public class JoinServerEvent implements Listener {
     public void onPlayerJoinServer(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        String eventMessage = this.plugin.getMessages().get("joinMessage").replace("{username}", player.getName());
-        event.setJoinMessage(eventMessage);
-
-        player.sendMessage(ChatColor.GREEN + "Grasz na Świątecznym serwerze MagicTM!\nŻyczymy miłej zabawy!");
-
         double defaultHearts = this.plugin.getConfig().getDouble("defaultHearts");
         double playerHP = this.plugin.getConfig().getDouble("users." + player.getUniqueId() + ".hp");
 
@@ -32,11 +27,4 @@ public class JoinServerEvent implements Listener {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(playerMaxHealth);
     }
 
-    @EventHandler
-    public void onPlayerLeaveServer(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-
-        String eventMessage = plugin.getMessages().get("leaveMessage").replace("{username}", player.getName());
-        event.setQuitMessage(eventMessage);
-    }
 }

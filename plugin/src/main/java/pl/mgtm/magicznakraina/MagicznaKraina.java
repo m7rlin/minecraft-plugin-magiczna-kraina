@@ -2,14 +2,14 @@ package pl.mgtm.magicznakraina;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
-import pl.mgtm.magicznakraina.events.DeathEvent;
-import pl.mgtm.magicznakraina.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
-import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
+import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
+import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
 
@@ -37,16 +37,15 @@ public final class MagicznaKraina extends JavaPlugin {
 
         setInstance(this);
 
+        PluginManager pm = getServer().getPluginManager();
+
         // Register event listeners
-        getServer().getPluginManager().registerEvents(new JoinServerEvent(), this);
-        getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
-        getServer().getPluginManager().registerEvents(new DeathEvent(), this);
+        pm.registerEvents(new RespawnEvent(), this);
 
         // Register commands
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
-        getCommand("serduszko").setExecutor(new SerduszkoCommand());
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("home").setExecutor(new HomeCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
@@ -67,6 +66,9 @@ public final class MagicznaKraina extends JavaPlugin {
 
         // Initialize Kits module
         new KitsModule();
+
+        // Initialize Serduszko module
+        new SerduszkoModule();
 
         // Load config
         this.loadConfig();
