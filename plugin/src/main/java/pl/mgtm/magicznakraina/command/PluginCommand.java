@@ -13,7 +13,7 @@ public abstract class PluginCommand implements CommandExecutor {
 
     public PluginCommand() {
         commandInfo = getClass().getDeclaredAnnotation(CommandInfo.class);
-        Objects.requireNonNull(commandInfo, "Komendy musza miec przypisana 'CommandInfo' adnotacje!");
+        Objects.requireNonNull(commandInfo, "Komendy muszą mieć przypisaną adnotacje 'CommandInfo'!");
     }
 
     public CommandInfo getCommandInfo() {

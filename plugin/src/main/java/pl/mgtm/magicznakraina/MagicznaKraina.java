@@ -6,10 +6,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
+import pl.mgtm.magicznakraina.events.WelcomeMessageEvent;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
-import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
 
@@ -41,6 +41,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
         // Register event listeners
         pm.registerEvents(new RespawnEvent(), this);
+        pm.registerEvents(new WelcomeMessageEvent(), this);
 
         // Register commands
         getCommand("tpa").setExecutor(new TpaCommand());

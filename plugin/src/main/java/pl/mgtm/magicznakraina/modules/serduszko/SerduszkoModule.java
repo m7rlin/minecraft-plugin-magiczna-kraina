@@ -2,6 +2,7 @@ package pl.mgtm.magicznakraina.modules.serduszko;
 
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.modules.serduszko.commands.ReviveCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.SerduszkoCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
 import pl.mgtm.magicznakraina.modules.serduszko.events.JoinServerEvent;
@@ -20,5 +21,6 @@ public class SerduszkoModule {
 
         // Rejestracja komend
         plugin.getCommand("serduszko").setExecutor(new SerduszkoCommand());
+        plugin.getCommand("revive").setExecutor(new ReviveCommand());
     }
 }

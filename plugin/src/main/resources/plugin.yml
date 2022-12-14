@@ -20,6 +20,8 @@ commands:
     description: Teleportuje gracza do pozycji dom.
   serduszko:
     description: Dodaje pół serduszka graczowi.
+  revive:
+    description: Wkrzesza poległego gracza jeżeli spełnia wymagania.
   spawn:
     description: Przenosi gracza na spawn (punkt odrodzenia gracza) serwera.
   setspawn:
