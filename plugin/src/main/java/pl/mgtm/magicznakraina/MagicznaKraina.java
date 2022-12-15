@@ -23,6 +23,8 @@ public final class MagicznaKraina extends JavaPlugin {
     public SpawnService spawnService;
     public TeleportationService teleportationService;
 
+    public SerduszkoModule serduszkoModule;
+
     private HashMap<String, String> messages = new HashMap<>();
 
     @Override
@@ -69,7 +71,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new KitsModule();
 
         // Initialize Serduszko module
-        new SerduszkoModule();
+        serduszkoModule = new SerduszkoModule();
 
         // Load config
         this.loadConfig();

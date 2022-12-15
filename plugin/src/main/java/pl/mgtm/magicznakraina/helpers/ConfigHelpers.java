@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.helpers;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 import java.util.ArrayList;
@@ -16,12 +17,24 @@ public class ConfigHelpers {
 
         double defaultHearts = plugin.getConfig().getDouble("defaultHearts");
 
-        if (!plugin.getConfig().contains("users." + playerUUID + ".hearts")) {
-            plugin.getConfig().set("users." + playerUUID + ".hearts", defaultHearts);
-            plugin.getConfig().set("users." + playerUUID + ".heartsLevel", 0);
+        FileConfiguration cfg = plugin.getConfig();
 
-            plugin.saveConfig();
+        if (!cfg.contains("users." + playerUUID)) {
+            cfg.createSection("users." + playerUUID);
         }
+
+        if (!cfg.contains("users." + playerUUID + ".hearts")) {
+            cfg.set("users." + playerUUID + ".hearts", defaultHearts);
+        }
+        if (!cfg.contains("users." + playerUUID + ".heartsLevel")) {
+            cfg.set("users." + playerUUID + ".heartsLevel", 0);
+        }
+        if (!cfg.contains("users." + playerUUID + ".zeroHeartsBanned")) {
+            cfg.set("users." + playerUUID + ".zeroHeartsBanned", false);
+        }
+
+
+        plugin.saveConfig();
     }
     public static void addPlayerKit(UUID playerUUID, String kitname) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
@@ -47,6 +60,7 @@ public class ConfigHelpers {
         plugin.saveConfig();
     }
 
+
     public static boolean playerUsedKit(UUID playerUUID, String kitname) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 
@@ -65,6 +79,36 @@ public class ConfigHelpers {
         }
 
         return true;
+    }
+
+    public static void setPlayerZeroHeartsBan(UUID playerUUID, boolean state) {
+        MagicznaKraina plugin = MagicznaKraina.getInstance();
+
+        if (!userExist(playerUUID)) {
+            ConfigHelpers.createDefaultPlayerConfig(playerUUID);
+        }
+
+        // Save new data
+        plugin.getConfig().set("users." + playerUUID + ".zeroHeartsBanned", state);
+
+        // Save config
+        plugin.saveConfig();
+    }
+
+    public static boolean getPlayerZeroHeartsBan(UUID playerUUID) {
+        MagicznaKraina plugin = MagicznaKraina.getInstance();
+
+        if (!userExist(playerUUID)) {
+            ConfigHelpers.createDefaultPlayerConfig(playerUUID);
+        }
+
+        // Save new data
+        return plugin.getConfig().getBoolean("users." + playerUUID + ".zeroHeartsBanned");
+    }
+
+    private static boolean userExist(UUID playerUUID) {
+        MagicznaKraina plugin = MagicznaKraina.getInstance();
+        return plugin.getConfig().contains("users." + playerUUID);
     }
 
 }

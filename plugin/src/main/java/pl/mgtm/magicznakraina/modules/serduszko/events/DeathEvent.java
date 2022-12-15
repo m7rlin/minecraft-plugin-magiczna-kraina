@@ -7,6 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
+
+import java.awt.*;
 
 public class DeathEvent implements Listener {
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
@@ -18,9 +21,8 @@ public class DeathEvent implements Listener {
         double playerHearts = plugin.getConfig().getInt("users." + player.getUniqueId() + ".hearts");
 
         if (playerHearts <= 1) {
-            player.banPlayer(
-                    ChatColor.GRAY +
-                            "Straciłeś wszystkie serduszka!\nJeżeli chcesz grać dalej, gracze mogą cie " + ChatColor.GOLD + "wskrzeszyć!\n" + ChatColor.GRAY + "Po więcej informacji dołącz na naszego Discorda\n\n" + ChatColor.AQUA + "https://discord.mgtm.pl/ " + ChatColor.RED + "\n\nZostałeś wykluczony z serwera!");
+            ConfigHelpers.setPlayerZeroHeartsBan(player.getUniqueId(), true);
+            player.kickPlayer(plugin.serduszkoModule.getBannedPlayerMessage());
             return;
         };
 
