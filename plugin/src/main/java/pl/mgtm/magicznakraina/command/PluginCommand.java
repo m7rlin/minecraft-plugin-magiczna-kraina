@@ -30,7 +30,7 @@ public abstract class PluginCommand implements CommandExecutor {
         }
 
         if (commandInfo.requiresPlayer()) {
-            if (!(sender instanceof Player)) {
+            if (!isPlayer(sender)) {
                 sender.sendMessage(ChatColor.RED + "Tylko gracz może użyć tej komendy.");
                 return true;
             }
@@ -41,6 +41,10 @@ public abstract class PluginCommand implements CommandExecutor {
 
         execute(sender, args);
         return true;
+    }
+
+    public boolean isPlayer(CommandSender sender) {
+        return sender instanceof Player;
     }
 
     public void insufficientPermissions(CommandSender sender) {

@@ -8,6 +8,7 @@ description: description
 website: https://mc.mgtm.pl
 
 commands:
+  test:
   tpa:
     description: Teleportuje gracza do innego gracza. Za pozwoleniem oczywiście.
   tpaccept:

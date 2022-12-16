@@ -3,6 +3,8 @@ package pl.mgtm.magicznakraina.modules.serduszko;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.command.CommandInfo;
+import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.ReviveCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.SerduszkoCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
@@ -25,8 +27,8 @@ public class SerduszkoModule {
         pm.registerEvents(new PreLoginEvent(), plugin);
 
         // Rejestracja komend
-        plugin.getCommand("serduszko").setExecutor(new SerduszkoCommand());
-        plugin.getCommand("revive").setExecutor(new ReviveCommand());
+        plugin.getCommand(SerduszkoCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new SerduszkoCommand());
+        plugin.getCommand(ReviveCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new ReviveCommand());
     }
 
     public String getBannedPlayerMessage() {

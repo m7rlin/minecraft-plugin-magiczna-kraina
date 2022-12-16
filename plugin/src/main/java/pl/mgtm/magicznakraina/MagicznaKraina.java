@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.events.WelcomeMessageEvent;
+import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
@@ -46,6 +47,7 @@ public final class MagicznaKraina extends JavaPlugin {
         pm.registerEvents(new WelcomeMessageEvent(), this);
 
         // Register commands
+        //getCommand("test").setExecutor(new TestCommand()); // comment on production
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
@@ -74,7 +76,7 @@ public final class MagicznaKraina extends JavaPlugin {
         serduszkoModule = new SerduszkoModule();
 
         // Load config
-        this.loadConfig();
+        ConfigHelpers.loadConfig();
 
         messages.put("leaveMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.leaveMessage")));
         messages.put("joinMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.joinMessage")));
@@ -87,12 +89,8 @@ public final class MagicznaKraina extends JavaPlugin {
         getLogger().info("MagicznaKraina has been shutdown!");
     }
 
-    // TODO: Move it somewhere else
-    private void loadConfig() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-
-        config = getConfig();
+    public void setConfig(FileConfiguration config) {
+        this.config = config;
     }
 
     // Get plugin instance
