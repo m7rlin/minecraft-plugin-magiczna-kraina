@@ -1,6 +1,5 @@
 package pl.mgtm.magicznakraina.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

@@ -46,7 +46,7 @@ public class TpaCommand implements CommandExecutor {
             target = Bukkit.getPlayer(args[0]);
 
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ChatColor.RED + "Gracz, od którego próbujesz przyjąć prośbę o teleportację nie jest online!");
+                player.sendMessage(ChatColor.RED + "Gracz od którego próbujesz przyjąć prośbę o teleportację nie jest online!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1f, 0f);
 
                 return false;

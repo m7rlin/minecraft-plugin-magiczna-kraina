@@ -2,14 +2,15 @@ package pl.mgtm.magicznakraina;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
-import pl.mgtm.magicznakraina.events.DeathEvent;
-import pl.mgtm.magicznakraina.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
+import pl.mgtm.magicznakraina.events.WelcomeMessageEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
+import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
 
@@ -22,6 +23,8 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public SpawnService spawnService;
     public TeleportationService teleportationService;
+
+    public SerduszkoModule serduszkoModule;
 
     private HashMap<String, String> messages = new HashMap<>();
 
@@ -37,16 +40,17 @@ public final class MagicznaKraina extends JavaPlugin {
 
         setInstance(this);
 
-        // Initialize event listeners
-        getServer().getPluginManager().registerEvents(new JoinServerEvent(), this);
-        getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
-        getServer().getPluginManager().registerEvents(new DeathEvent(), this);
+        PluginManager pm = getServer().getPluginManager();
 
-        // Initialize commands
+        // Register event listeners
+        pm.registerEvents(new RespawnEvent(), this);
+        pm.registerEvents(new WelcomeMessageEvent(), this);
+
+        // Register commands
+        //getCommand("test").setExecutor(new TestCommand()); // comment on production
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
-        getCommand("serduszko").setExecutor(new SerduszkoCommand());
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("home").setExecutor(new HomeCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
@@ -54,6 +58,7 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("alert").setExecutor(new AlertCommand());
 
         // Initialize services
         this.spawnService = new SpawnService();
@@ -67,8 +72,11 @@ public final class MagicznaKraina extends JavaPlugin {
         // Initialize Kits module
         new KitsModule();
 
+        // Initialize Serduszko module
+        serduszkoModule = new SerduszkoModule();
+
         // Load config
-        this.loadConfig();
+        ConfigHelpers.loadConfig();
 
         messages.put("leaveMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.leaveMessage")));
         messages.put("joinMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.joinMessage")));
@@ -81,12 +89,8 @@ public final class MagicznaKraina extends JavaPlugin {
         getLogger().info("MagicznaKraina has been shutdown!");
     }
 
-    // TODO: Move it somewhere else
-    private void loadConfig() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-
-        config = getConfig();
+    public void setConfig(FileConfiguration config) {
+        this.config = config;
     }
 
     // Get plugin instance

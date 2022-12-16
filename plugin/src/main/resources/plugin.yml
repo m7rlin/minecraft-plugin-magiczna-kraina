@@ -8,6 +8,7 @@ description: description
 website: https://mc.mgtm.pl
 
 commands:
+  test:
   tpa:
     description: Teleportuje gracza do innego gracza. Za pozwoleniem oczywiście.
   tpaccept:
@@ -20,6 +21,8 @@ commands:
     description: Teleportuje gracza do pozycji dom.
   serduszko:
     description: Dodaje pół serduszka graczowi.
+  revive:
+    description: Wkrzesza poległego gracza jeżeli spełnia wymagania.
   spawn:
     description: Przenosi gracza na spawn (punkt odrodzenia gracza) serwera.
   setspawn:
@@ -43,8 +46,10 @@ commands:
   heal:
     description: Leczy gracza.
   broadcast:
-    description: Wysyła wiadomość do wszystkich członków serwera.
+    description: Wysyła wiadomość do wszystkich graczy na serwerze.
     aliases:
       - bc
   lock:
     description: Otwiera GUI blokowania skrzynek.
+  alert:
+    description: Wysyła alert do wszystkich graczy na serwerze.
