@@ -1,5 +1,7 @@
 # Magiczna Kraina
 
+> This plugin is used by our official MagicTM server, the IP address is `mc.mgtm.pl`.
+
 This plugin adds new mobs and functionality to the game, making it more challenging and immersive than ever before. With Magiczna Kraina, players can sleep on the server without needing everyone in bed, player kits system, teleportation and more. The plugin also includes a variety of new commands, such as a command to set custom difficulty levels. 
 
 ## Features
