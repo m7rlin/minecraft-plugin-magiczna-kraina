@@ -1,13 +1,15 @@
-package pl.mgtm.magicznakraina.command;
+package pl.mgtm.magicznakraina.templates;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
 
 import java.util.Objects;
 
+// TODO: Try to make it more user friendly
 public abstract class PluginCommand implements CommandExecutor {
     private final CommandInfo commandInfo;
 

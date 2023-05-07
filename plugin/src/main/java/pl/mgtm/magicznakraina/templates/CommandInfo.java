@@ -1,4 +1,4 @@
-package pl.mgtm.magicznakraina.command;
+package pl.mgtm.magicznakraina.templates;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
