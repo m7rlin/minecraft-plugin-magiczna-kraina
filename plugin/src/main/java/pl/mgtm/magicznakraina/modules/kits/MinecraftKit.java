@@ -1,13 +1,13 @@
 package pl.mgtm.magicznakraina.modules.kits;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class MinecraftKit {
-    String name;
-    String label;
+public interface MinecraftKit {
+    String name = "unknown";
+    String label = "unknown";
     Boolean useOnce = true;
-
     Integer delay = 0;
 
-    ItemStack[] items;
+    ItemStack[] items = new ItemStack[Material.BARRIER.getId()];
 }

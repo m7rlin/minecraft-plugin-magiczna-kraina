@@ -10,8 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
+// TODO: Refactor this code (its decent, but there is a lot of room for improvements)
 public class TpaCommand implements CommandExecutor {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     private Player target;
     private Inventory inventory;

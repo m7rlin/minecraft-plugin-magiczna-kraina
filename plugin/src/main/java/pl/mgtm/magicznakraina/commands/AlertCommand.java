@@ -5,9 +5,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
+// TODO: Command written in 10 seconds (I remember it xd)
+// TODO: Refactor code
 @CommandInfo(name = "alert", permission = "mgtm.alert", requiresPlayer = false)
 public class AlertCommand extends PluginCommand {
     @Override
@@ -29,6 +31,7 @@ public class AlertCommand extends PluginCommand {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 0.0f);
     }
 
+    // was ist das? v2
     protected String stringArrayToString(String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
 

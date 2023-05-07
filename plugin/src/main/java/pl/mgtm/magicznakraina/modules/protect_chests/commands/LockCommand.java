@@ -4,13 +4,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
+// TODO: No implementation?
 @CommandInfo(name = "lock", permission = "", requiresPlayer = true)
 public class LockCommand extends PluginCommand {
-
-    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
@@ -19,10 +19,7 @@ public class LockCommand extends PluginCommand {
         FileConfiguration config = pl.getConfig();
 
         if (args.length == 0) {
-
-
             player.sendMessage(ChatColor.GREEN + "Blokowanie skrzynki...");
-
         } else {
             player.sendMessage(ChatColor.RED + "/lock");
         }

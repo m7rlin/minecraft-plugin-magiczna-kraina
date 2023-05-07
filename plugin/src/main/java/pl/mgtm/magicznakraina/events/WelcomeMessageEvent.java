@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
+// TODO: Refactor this
 public class WelcomeMessageEvent implements Listener {
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
 

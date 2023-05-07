@@ -2,8 +2,8 @@ package pl.mgtm.magicznakraina.modules.serduszko.commands;
 
 import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
 @CommandInfo(name = "serduszko", permission = "", requiresPlayer = true)
 public class SerduszkoCommand extends PluginCommand {

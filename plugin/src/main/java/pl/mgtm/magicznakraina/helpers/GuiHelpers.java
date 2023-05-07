@@ -6,6 +6,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 
+// TODO: Rewrite this, iirc this was failed attempt at creating
+// a gui handler that would be used for serduszko commands
 public class GuiHelpers {
 
     public GuiHelpers () {

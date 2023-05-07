@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
 @CommandInfo(name = "broadcast", permission = "mgtm.broadcast", requiresPlayer = false)
 public class BroadcastCommand extends PluginCommand {
@@ -22,6 +22,7 @@ public class BroadcastCommand extends PluginCommand {
         }
     }
 
+    // was ist das?
     protected String stringArrayToString(String[] args) {
         StringBuilder stringBuilder = new StringBuilder();
 

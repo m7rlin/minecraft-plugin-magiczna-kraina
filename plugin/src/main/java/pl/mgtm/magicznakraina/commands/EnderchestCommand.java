@@ -6,29 +6,24 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
 @CommandInfo(name = "enderchest", permission = "", requiresPlayer = true)
 public class EnderchestCommand extends PluginCommand {
-    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private final MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
-
-        FileConfiguration config = pl.getConfig();
+        FileConfiguration config = plugin.getConfig();
 
         if (args.length == 0) {
             Inventory enderChest = player.getEnderChest();
-
-            // Otwieramy enderchest gracza
             player.openInventory(enderChest);
 
             player.sendMessage(ChatColor.GREEN + "Twoja skrzynia kresu została otworzona");
         } else if (args.length == 1) {
-            // Otwieramy encherchesta innego gracza, ! DOSTEPNE TYLKO DLA ADMINOW !
-
             if (player.isOp()) {
                 Player target = Bukkit.getPlayer(args[0]);
 
@@ -41,8 +36,6 @@ public class EnderchestCommand extends PluginCommand {
             } else {
                 insufficientPermissions(player);
             }
-
         }
     }
-
 }

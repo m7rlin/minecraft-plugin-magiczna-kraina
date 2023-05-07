@@ -16,6 +16,7 @@ import pl.mgtm.magicznakraina.services.TeleportationService;
 
 import java.util.HashMap;
 
+// TODO: Cleaning
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
 
@@ -26,7 +27,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public SerduszkoModule serduszkoModule;
 
-    private HashMap<String, String> messages = new HashMap<>();
+    private final HashMap<String, String> messages = new HashMap<>();
 
     @Override
     public void onEnable() {

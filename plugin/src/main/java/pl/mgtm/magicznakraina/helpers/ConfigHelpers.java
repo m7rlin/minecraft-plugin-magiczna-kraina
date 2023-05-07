@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+// TODO: Urgent refactor! (spaghetti police)
 public class ConfigHelpers {
     public ConfigHelpers () {
         throw new RuntimeException("Cannot initialize helper class!");
@@ -25,6 +26,7 @@ public class ConfigHelpers {
         plugin.setConfig(plugin.getConfig());
     }
 
+    // what is that abomination
     public static void createDefaultPlayerConfig(UUID playerUUID) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 
@@ -46,9 +48,9 @@ public class ConfigHelpers {
             cfg.set("users." + playerUUID + ".zeroHeartsBanned", false);
         }
 
-
         plugin.saveConfig();
     }
+
     public static void createDefaultPlayerReviveConfig() {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 
@@ -67,6 +69,7 @@ public class ConfigHelpers {
             loadConfig();
         }
     }
+
     public static void addPlayerKit(UUID playerUUID, String kitname) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 

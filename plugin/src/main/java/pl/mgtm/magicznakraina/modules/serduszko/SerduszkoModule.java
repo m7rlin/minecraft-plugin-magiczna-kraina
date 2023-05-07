@@ -3,15 +3,14 @@ package pl.mgtm.magicznakraina.modules.serduszko;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.ReviveCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.SerduszkoCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
 import pl.mgtm.magicznakraina.modules.serduszko.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.modules.serduszko.events.PreLoginEvent;
 
-
+// TODO: Refactor
 public class SerduszkoModule {
 
     private MagicznaKraina plugin = MagicznaKraina.getInstance();
@@ -21,12 +20,10 @@ public class SerduszkoModule {
     public SerduszkoModule() {
         PluginManager pm = plugin.getServer().getPluginManager();
 
-        // Rejestracja zdarzeń
         pm.registerEvents(new JoinServerEvent(), plugin);
         pm.registerEvents(new DeathEvent(), plugin);
         pm.registerEvents(new PreLoginEvent(), plugin);
 
-        // Rejestracja komend
         plugin.getCommand(SerduszkoCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new SerduszkoCommand());
         plugin.getCommand(ReviveCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new ReviveCommand());
     }

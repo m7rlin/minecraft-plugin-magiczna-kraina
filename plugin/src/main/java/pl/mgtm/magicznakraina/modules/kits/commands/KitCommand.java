@@ -6,16 +6,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
 import java.util.List;
 import java.util.Set;
 
+// TODO: Use slightly different types (for example there is used Set? why?)
+// also fix some other things
 @CommandInfo(name = "kit", permission = "", requiresPlayer = true)
 public class KitCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {

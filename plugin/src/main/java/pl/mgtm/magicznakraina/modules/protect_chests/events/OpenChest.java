@@ -13,6 +13,7 @@ import pl.mgtm.magicznakraina.MagicznaKraina;
 
 import java.util.Arrays;
 
+// TODO: Refactor (my god those ifs)
 public class OpenChest implements Listener {
 
     @EventHandler

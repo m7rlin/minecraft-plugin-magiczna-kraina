@@ -12,7 +12,7 @@ public class RespawnEvent implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        // Jezeli spawn istnieje i teleportOnRespawn jest true, wtedy teleportujemy gracza na spawn
+
         if (plugin.spawnService.getSpawnLocation() != null && plugin.getConfig().getBoolean("spawn.teleportOnRespawn", true)) {
             event.setRespawnLocation(plugin.spawnService.getSpawnLocation());
         }

@@ -4,12 +4,13 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
+// TODO: Change § (color char) for coloring to ChatColor from org.bukkit
 @CommandInfo(name = "setspawn", permission = "mgtm.setspawn", requiresPlayer = true)
 public class SetSpawnCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
@@ -39,13 +40,9 @@ public class SetSpawnCommand extends PluginCommand {
 
         plugin.saveConfig();
 
-        // Ustawiamy zmienna spawnLocation
         plugin.spawnService.setSpawnLocation(location);
 
         player.sendMessage("§aNowy spawn serwera ustawiony!\n");
         player.sendMessage("§7Użyj §a/spawn §7aby przenieść się na spawn serwera.");
-
-        // Albo to sensu nie ma, albo ja jestem za głupi. Jezeli spawn.enabled jest false to wyswietla sie nowy spawn serwera ustawiony i informacja, ze jest wylaczony. I TAK NIE MOZNA SIE TEPNAC KOMENDA SPAWN PONIEWAZ spawn.enabled JEST FALSE!
-        //player.sendMessage("§aNowy spawn serwera ustawiony!\n" + (config.getBoolean("spawn.enabled", false) ? "§7Użyj §a/spawn §7aby przenieść się na spawn serwera." : "§cSpawn serwera jest wyłączony!"));
     }
 }

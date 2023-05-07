@@ -3,11 +3,12 @@ package pl.mgtm.magicznakraina.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
 import java.util.Random;
 
+// TODO: Add different messages
 @CommandInfo(name = "heal", permission = "mgtm.heal", requiresPlayer = true)
 public class HealCommand extends PluginCommand {
     @Override

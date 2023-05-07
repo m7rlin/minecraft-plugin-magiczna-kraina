@@ -8,18 +8,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
+// TODO: Get some info from Marcin about this - is it even gonna be used?
 public class ExplosiveArrowEvent implements Listener {
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent event) {
-
         Arrow arrow = (Arrow) event.getEntity();
         Player player = (Player) arrow.getShooter();
-
-        Location arrowHitLocation = arrow.getLocation();
-
         World world = player.getWorld();
 
-        world.createExplosion(arrowHitLocation, 3, false, true);
+        world.createExplosion(arrow.getLocation(), 3, false, true);
 
         event.setCancelled(true);
     }

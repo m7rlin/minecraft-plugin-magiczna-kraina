@@ -9,17 +9,15 @@ import pl.mgtm.magicznakraina.modules.protect_chests.events.PlaceChest;
 
 public class ProtectedChestsModule {
 
-    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     public ProtectedChestsModule() {
-        PluginManager pm = pl.getServer().getPluginManager();
+        PluginManager pm = plugin.getServer().getPluginManager();
 
-        // Rejestracja komend
-        pl.getCommand("lock").setExecutor(new LockCommand());
+        plugin.getCommand("lock").setExecutor(new LockCommand());
 
-        // Rejestracja eventow
-        pm.registerEvents(new OpenChest(), pl);
-        pm.registerEvents(new PlaceChest(), pl);
-        pm.registerEvents(new BreakChest(), pl);
+        pm.registerEvents(new OpenChest(), plugin);
+        pm.registerEvents(new PlaceChest(), plugin);
+        pm.registerEvents(new BreakChest(), plugin);
     }
 }

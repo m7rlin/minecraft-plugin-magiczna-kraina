@@ -23,6 +23,7 @@ import pl.mgtm.magicznakraina.MagicznaKraina;
 import java.util.Iterator;
 import java.util.List;
 
+// TODO: i need to analyze this with a clean head
 public class BreakChest implements Listener {
 
     private MagicznaKraina pl = MagicznaKraina.getInstance();

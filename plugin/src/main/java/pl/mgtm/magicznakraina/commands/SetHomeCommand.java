@@ -4,13 +4,12 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.templates.CommandInfo;
+import pl.mgtm.magicznakraina.templates.PluginCommand;
 
 @CommandInfo(name = "sethome", permission = "", requiresPlayer = true)
 public class SetHomeCommand extends PluginCommand {
-
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina plugin = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
@@ -32,7 +31,6 @@ public class SetHomeCommand extends PluginCommand {
         config.set("users." + player.getUniqueId() + ".home.yaw", yaw);
         config.set("users." + player.getUniqueId() + ".home.pitch", pitch);
         config.set("users." + player.getUniqueId() + ".home.world", worldName);
-
         plugin.saveConfig();
 
         player.sendMessage("§aTwój nowy dom został ustawiony.\n§7Użyj §a/home §7aby przenieść się do domu.");

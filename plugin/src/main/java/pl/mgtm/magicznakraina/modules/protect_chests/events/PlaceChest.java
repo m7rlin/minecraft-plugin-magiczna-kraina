@@ -15,6 +15,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
+// TODO: Formatting
 public class PlaceChest implements Listener {
 
     private MagicznaKraina pl = MagicznaKraina.getInstance();
