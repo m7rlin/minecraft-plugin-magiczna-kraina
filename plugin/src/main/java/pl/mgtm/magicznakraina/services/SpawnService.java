@@ -6,8 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class SpawnService {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
-    private FileConfiguration config = plugin.getConfig();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
+    private FileConfiguration config = pl.getConfig();
 
     private Location spawnLocation;
 
@@ -22,7 +22,7 @@ public class SpawnService {
             float pitch = (float) config.getDouble("spawn.pitch");
             float yaw = (float) config.getDouble("spawn.yaw");
 
-            this.spawnLocation = new Location(plugin.getServer().getWorld(worldName), x, y, z, yaw, pitch);
+            this.spawnLocation = new Location(pl.getServer().getWorld(worldName), x, y, z, yaw, pitch);
         }
     }
 

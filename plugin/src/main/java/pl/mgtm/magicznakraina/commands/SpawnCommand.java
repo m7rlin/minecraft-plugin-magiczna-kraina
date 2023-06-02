@@ -9,17 +9,17 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 
 @CommandInfo(name = "spawn", permission = "", requiresPlayer = true)
 public class SpawnCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = plugin.getConfig();
+        FileConfiguration config = pl.getConfig();
 
         // Sprawdzamy, czy spawn jest ustawiony
         if (config.contains("spawn.x") && config.getBoolean("spawn.enabled", false)) {
-            player.teleport(plugin.spawnService.getSpawnLocation());
+            player.teleport(pl.spawnService.getSpawnLocation());
 
             player.sendMessage(ChatColor.GREEN + "Przeteleportowano na spawn serwera.");
         } else {

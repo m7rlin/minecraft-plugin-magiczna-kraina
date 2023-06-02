@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class TpaCommand implements CommandExecutor {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     private Player target;
     private Inventory inventory;
@@ -52,7 +52,7 @@ public class TpaCommand implements CommandExecutor {
                 return false;
             }
 
-            if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
+            if (!this.pl.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "Brak prośby o teleportację od tego gracza!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0f);
 
@@ -61,7 +61,7 @@ public class TpaCommand implements CommandExecutor {
 
             player.sendMessage(ChatColor.DARK_GRAY + "Teleportowanie gracza " + ChatColor.GREEN + target.getName());
 
-            this.plugin.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
+            this.pl.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
 
             target.teleport(player.getLocation());
 
@@ -83,14 +83,14 @@ public class TpaCommand implements CommandExecutor {
 
             target = Bukkit.getPlayer(args[0]);
 
-            if (!this.plugin.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
+            if (!this.pl.teleportationService.checkTeleportationRequests(target.getUniqueId(), player.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "Brak prośby o teleportację od tego gracza!");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
 
                 return false;
             }
 
-            this.plugin.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
+            this.pl.teleportationService.removeTeleportationRequest(target.getUniqueId(), player.getUniqueId());
 
             target.sendMessage(ChatColor.RED + "Twoja prośba o teleportację do " + player.getName() + "została anulowana!");
 
@@ -120,14 +120,14 @@ public class TpaCommand implements CommandExecutor {
             return false;
         }
 
-        if (this.plugin.teleportationService.checkTeleportationRequests(player.getUniqueId(), target.getUniqueId())) {
+        if (this.pl.teleportationService.checkTeleportationRequests(player.getUniqueId(), target.getUniqueId())) {
             player.sendMessage(ChatColor.GREEN + "Ten gracz posiada już oczkującą prośbę o teleportację od Ciebie!");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 0.0f);
 
             return false;
         }
 
-        this.plugin.teleportationService.createTeleporationRequest(player.getUniqueId(), target.getUniqueId());
+        this.pl.teleportationService.createTeleporationRequest(player.getUniqueId(), target.getUniqueId());
 
         player.sendMessage(ChatColor.DARK_GRAY + "Wysłano prośbę o teleportację do gracza " + ChatColor.GREEN + target.getName());
 

@@ -59,3 +59,5 @@ commands:
     description: Włącza latanie.
   vanish:
     description: Ukrywa gracza. Ukryty gracz jest kompletnie niewidoczny dla innych graczy.
+    aliases:
+      - v

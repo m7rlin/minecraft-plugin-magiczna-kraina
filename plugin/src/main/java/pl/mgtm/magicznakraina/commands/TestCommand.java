@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 @CommandInfo(name = "test", permission = "", requiresPlayer = true)
 public class TestCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
@@ -35,7 +35,7 @@ public class TestCommand extends PluginCommand {
 
         player.getInventory().removeItem(items2.toArray(new ItemStack[0]));*/
 
-       // player.sendMessage(plugin.getServer().getOfflinePlayer("merlin"));
+       // player.sendMessage(pl.getServer().getOfflinePlayer("merlin"));
 
     }
 }

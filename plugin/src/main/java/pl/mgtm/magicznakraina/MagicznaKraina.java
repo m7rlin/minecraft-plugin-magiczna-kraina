@@ -1,21 +1,19 @@
 package pl.mgtm.magicznakraina;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
-import pl.mgtm.magicznakraina.events.WelcomeMessageEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
+import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
+import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
-
-import java.util.HashMap;
 
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
@@ -27,7 +25,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public SerduszkoModule serduszkoModule;
 
-    private HashMap<String, String> messages = new HashMap<>();
+
 
     @Override
     public void onEnable() {
@@ -45,7 +43,6 @@ public final class MagicznaKraina extends JavaPlugin {
 
         // Register event listeners
         pm.registerEvents(new RespawnEvent(), this);
-        pm.registerEvents(new WelcomeMessageEvent(), this);
 
         // Register commands
         //getCommand("test").setExecutor(new TestCommand()); // comment on production
@@ -61,6 +58,7 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("broadcast").setExecutor(new BroadcastCommand());
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
+        getCommand("fly").setExecutor(new FlyCommand());
 
         // Initialize services
         this.spawnService = new SpawnService();
@@ -76,12 +74,13 @@ public final class MagicznaKraina extends JavaPlugin {
         serduszkoModule = new SerduszkoModule();
         // Initialize "Cleever Sleep" module
         new CleverSleepModule();
+        // Initialize "Vanish" module
+        new VanishModule();
+        // Initialize "Welcome" module
+        new WelcomeModule();
 
         // Load config
         ConfigHelpers.loadConfig();
-
-        messages.put("leaveMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.leaveMessage")));
-        messages.put("joinMessage", ChatColor.translateAlternateColorCodes('&', getConfig().getString("message.joinMessage")));
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
@@ -105,8 +104,5 @@ public final class MagicznaKraina extends JavaPlugin {
         MagicznaKraina.instance = instance;
     }
 
-    // TODO: Move it somewhere else (or remove it, its just useless)
-    public HashMap<String, String> getMessages() {
-        return messages;
-    }
+
 }

@@ -10,13 +10,13 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 
 @CommandInfo(name = "home", permission = "", requiresPlayer = true)
 public class HomeCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = plugin.getConfig();
+        FileConfiguration config = pl.getConfig();
 
         // Sprawdz czy dom jest ustawiony
         if (config.contains("users." + player.getUniqueId() + ".home")) {

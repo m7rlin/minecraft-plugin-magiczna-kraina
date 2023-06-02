@@ -1,24 +1,30 @@
 package pl.mgtm.magicznakraina.commands;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 
-@CommandInfo(name = "broadcast", permission = "mgtm.broadcast", requiresPlayer = false)
+@CommandInfo(name = "broadcast", permission = "mgtm.broadcast", requiresPlayer = false, usage = "/bc <wiadomość>")
 public class BroadcastCommand extends PluginCommand {
+
+    private final MagicznaKraina pl = MagicznaKraina.getInstance();
     @Override
     public void execute(CommandSender sender, String[] args) {
         super.execute(sender, args);
 
+        TextComponent message = Component.text(ChatColor.translateAlternateColorCodes('&', stringArrayToString(args)));
+
         if (args.length != 0) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', stringArrayToString(args)));
-            }
+            pl.getServer().broadcast(message);
         } else {
-            sender.sendMessage(ChatColor.RED + "/bc <wiadomość>");
+            super.commandUsage(sender);
         }
     }
 

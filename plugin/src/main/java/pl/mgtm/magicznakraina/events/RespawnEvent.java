@@ -7,14 +7,14 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 
 public class RespawnEvent implements Listener {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         // Jezeli spawn istnieje i teleportOnRespawn jest true, wtedy teleportujemy gracza na spawn
-        if (plugin.spawnService.getSpawnLocation() != null && plugin.getConfig().getBoolean("spawn.teleportOnRespawn", true)) {
-            event.setRespawnLocation(plugin.spawnService.getSpawnLocation());
+        if (pl.spawnService.getSpawnLocation() != null && pl.getConfig().getBoolean("spawn.teleportOnRespawn", true)) {
+            event.setRespawnLocation(pl.spawnService.getSpawnLocation());
         }
     }
 }

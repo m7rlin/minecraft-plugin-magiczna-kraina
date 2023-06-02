@@ -13,14 +13,8 @@ public class CleverSleepModule {
     public CleverSleepModule() {
         PluginManager pm = pl.getServer().getPluginManager();
 
-        // Rejestracja zdarzeń
+        // Register events
         pm.registerEvents(new BedEvent(), pl);
-        //pm.registerEvents(new DeathEvent(), plugin);
-        //pm.registerEvents(new PreLoginEvent(), plugin);
-
-        // Rejestracja komend
-        //plugin.getCommand(SerduszkoCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new SerduszkoCommand());
-        //plugin.getCommand(ReviveCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new ReviveCommand());
     }
 
 

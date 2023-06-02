@@ -9,13 +9,13 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 
 @CommandInfo(name = "setspawn", permission = "mgtm.setspawn", requiresPlayer = true)
 public class SetSpawnCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = plugin.getConfig();
+        FileConfiguration config = pl.getConfig();
 
         if (!config.getBoolean("spawn.enabled", false)) {
             player.sendMessage("§cSpawn serwera jest wyłączony!");
@@ -37,10 +37,10 @@ public class SetSpawnCommand extends PluginCommand {
         config.set("spawn.pitch", pitch);
         config.set("spawn.world", worldName);
 
-        plugin.saveConfig();
+        pl.saveConfig();
 
         // Ustawiamy zmienna spawnLocation
-        plugin.spawnService.setSpawnLocation(location);
+        pl.spawnService.setSpawnLocation(location);
 
         player.sendMessage("§aNowy spawn serwera ustawiony!\n");
         player.sendMessage("§7Użyj §a/spawn §7aby przenieść się na spawn serwera.");

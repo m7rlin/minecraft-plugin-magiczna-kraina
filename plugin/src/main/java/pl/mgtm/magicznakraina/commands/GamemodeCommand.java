@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.helpers.ServerHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,12 +60,7 @@ public class GamemodeCommand extends PluginCommand {
     public List<String> tabAutocomplete(CommandSender sender, Command command, String label, String[] args) {
         super.tabAutocomplete(sender,command,label,args);
 
-        List<String> playerNames = new ArrayList<>();
-
-        // Get online players 
-        for (Player player : pl.getServer().getOnlinePlayers()) {
-            playerNames.add(player.getName());
-        }
+        List<String> playerNames = ServerHelper.getOnlinePlayerNames();
         
         if (args.length == 1) {
             return gamemodes;
