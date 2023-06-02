@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
-import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.ReviveCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.SerduszkoCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
