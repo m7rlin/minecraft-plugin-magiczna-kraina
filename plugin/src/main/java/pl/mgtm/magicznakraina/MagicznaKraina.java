@@ -1,23 +1,19 @@
 package pl.mgtm.magicznakraina;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
-import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
-import pl.mgtm.magicznakraina.modules.welcome.events.WelcomeMessageEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
+import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
-
-import java.util.HashMap;
 
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
@@ -62,6 +58,7 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("broadcast").setExecutor(new BroadcastCommand());
         getCommand("alert").setExecutor(new AlertCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
+        getCommand("fly").setExecutor(new FlyCommand());
 
         // Initialize services
         this.spawnService = new SpawnService();
