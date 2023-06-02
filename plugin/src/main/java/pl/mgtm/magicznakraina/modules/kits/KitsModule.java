@@ -12,7 +12,7 @@ public class KitsModule {
     public KitsModule() {
         PluginManager pm = pl.getServer().getPluginManager();
 
-        // Command registration
+        // Register commands
         pl.getCommand("kit").setExecutor(new KitCommand());
     }
 }

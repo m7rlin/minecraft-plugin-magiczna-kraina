@@ -1,12 +1,13 @@
-package pl.mgtm.magicznakraina.events;
+package pl.mgtm.magicznakraina.modules.welcome.events;
 
-import org.bukkit.ChatColor;
+import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 
 public class WelcomeMessageEvent implements Listener {
     private MagicznaKraina pl = MagicznaKraina.getInstance();
@@ -15,17 +16,17 @@ public class WelcomeMessageEvent implements Listener {
     public void onPlayerJoinServer(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        String eventMessage = this.pl.getMessages().get("joinMessage").replace("{username}", player.getName());
-        event.setJoinMessage(eventMessage);
-
-        player.sendMessage(ChatColor.GREEN + "Grasz na Świątecznym serwerze MagicTM!\nŻyczymy miłej zabawy!");
+        Component eventMessage = WelcomeModule.getJoinMessage(player);
+        event.joinMessage(eventMessage);
     }
 
     @EventHandler
     public void onPlayerLeaveServer(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        String eventMessage = pl.getMessages().get("leaveMessage").replace("{username}", player.getName());
-        event.setQuitMessage(eventMessage);
+        Component eventMessage = WelcomeModule.getLeaveMessage(player);
+        event.quitMessage(eventMessage);
     }
+
+
 }

@@ -1,3 +1,33 @@
+# =================================================================== #
+#                                                                     #
+#                        Default config                               #
+#                                                                     #
+# =================================================================== #
+
+# =================================================================== #
+#                                                                     #
+#                             MODULES                                 #
+#                                                                     #
+# =================================================================== #
+
+modules:
+  serduszko:
+    enabled: true
+  kits:
+    enabled: true
+  clever-sleep:
+    enabled: true
+  protect-chests:
+    enabled: true
+  welcome:
+    enabled: true
+
+# =================================================================== #
+#                                                                     #
+#                         Serduszko module                            #
+#                                                                     #
+# =================================================================== #
+
 # Default hearts when new user joined the server
 defaultHearts: 6
 playerHeartsLimit: 40.0
@@ -24,17 +54,35 @@ playerRevive:
     - ender_pearl,2
   level: 15
 
+  # =================================================================== #
+  #                                                                     #
+  #                              SPAWN                                  #
+  #                                                                     #
+  # =================================================================== #
+
 # Spawn location
 spawn:
   enabled: false
   teleportOnRespawn: true
 
+  # =================================================================== #
+  #                                                                     #
+  #                         Join/Leave messages                         #
+  #                                                                     #
+  # =================================================================== #
+
 # Mesasges
 # Variables:
 # {username} - display player username
-message:
-  leaveMessage: "&7[&c-&7] {username}"
-  joinMessage: "&7[&a+&7] {username}"
+join-message: "&7[&a+&7] {username}"
+leave-message: "&7[&c-&7] {username}"
+
+
+# =================================================================== #
+#                                                                     #
+#                                 KITS                                #
+#                                                                     #
+# =================================================================== #
 
 # Kits
 # {delay} <integer> - number of seconds for another use
@@ -52,11 +100,40 @@ kits:
       - leather_leggings,1
       - leather_boots,1
 
+# =================================================================== #
+#                                                                     #
+#                               SOCIAL                                #
+#                                                                     #
+# =================================================================== #
+
 # Social messages
 social:
   discord: "Pogadaj z innymi na naszym Discordzie => https://discord.mgtm.pl/ :-)"
   youtube: ""
   www: ""
 
+# =================================================================== #
+#                                                                     #
+#                          USERS CONFIG                               #
+#                                                                     #
+# =================================================================== #
+
 # Players configuration
 users:
+
+# =================================================================== #
+#                                                                     #
+#                            DATASTORAGE                              #
+#                                                                     #
+# =================================================================== #
+
+# Select where the plugin data will be store [config|api]
+data-storage: "config"
+
+# =================================================================== #
+#                                                                     #
+#                               API                                   #
+#                                                                     #
+# =================================================================== #
+apiUrl: "https://api.example.com/"
+apiKey: "YOUR_API_KEY_HERE"
