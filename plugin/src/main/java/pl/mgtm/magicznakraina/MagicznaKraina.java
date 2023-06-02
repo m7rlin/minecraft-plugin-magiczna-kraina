@@ -60,11 +60,12 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
         getCommand("alert").setExecutor(new AlertCommand());
+        getCommand("gm").setExecutor(new GamemodeCommand());
 
         // Initialize services
         this.spawnService = new SpawnService();
         this.spawnService.loadSpawnLocation();
-        
+
         this.teleportationService = new TeleportationService();
 
         // Initialize "Protected Chests" module

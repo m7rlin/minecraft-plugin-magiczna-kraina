@@ -53,3 +53,9 @@ commands:
     description: Otwiera GUI blokowania skrzynek.
   alert:
     description: Wysyła alert do wszystkich graczy na serwerze.
+  gm:
+    description: Zmienia aktualny tryb gry siebie, albo innego gracza.
+  fly:
+    description: Włącza latanie.
+  vanish:
+    description: Ukrywa gracza. Ukryty gracz jest kompletnie niewidoczny dla innych graczy.
