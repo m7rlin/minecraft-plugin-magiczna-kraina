@@ -2,13 +2,15 @@ package pl.mgtm.magicznakraina.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public abstract class PluginCommand implements CommandExecutor {
+public abstract class PluginCommand implements TabExecutor {
     private final CommandInfo commandInfo;
 
     public PluginCommand() {
@@ -43,12 +45,35 @@ public abstract class PluginCommand implements CommandExecutor {
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        // Check if player has permissions
+        if (!commandInfo.permission().isEmpty()) {
+            if (!sender.hasPermission(commandInfo.permission())) {
+                // Return empty list
+                return new ArrayList<>();
+            }
+        }
+
+        List<String> arguments = tabAutocomplete(sender,  command, label, args);
+
+        return arguments;
+    }
+
+    public List<String> tabAutocomplete(CommandSender sender, Command command, String label, String[] args) {
+        return null;
+    }
+
     public boolean isPlayer(CommandSender sender) {
         return sender instanceof Player;
     }
 
     public void insufficientPermissions(CommandSender sender) {
-        sender.sendMessage(ChatColor.RED + "Nie masz uprawnien do wykonania tej komendy.");
+        sender.sendMessage(ChatColor.RED + "Nie masz uprawnień do wykonania tej komendy.");
+    }
+
+    public void commandUsage(CommandSender sender) {
+        sender.sendMessage(ChatColor.RED + "Użycie: " + commandInfo.usage().toString());
     }
 
     public void execute(Player player, String[] args) {

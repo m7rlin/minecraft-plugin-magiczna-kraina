@@ -15,4 +15,6 @@ public @interface CommandInfo {
 
     boolean requiresPlayer();
 
+    String usage() default "";
+
 }
