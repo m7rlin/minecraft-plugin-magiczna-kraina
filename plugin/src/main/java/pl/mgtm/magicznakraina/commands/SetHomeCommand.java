@@ -10,13 +10,13 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 @CommandInfo(name = "sethome", permission = "", requiresPlayer = true)
 public class SetHomeCommand extends PluginCommand {
 
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = plugin.getConfig();
+        FileConfiguration config = pl.getConfig();
 
         Location loc = player.getLocation();
         double x = loc.getX();
@@ -33,7 +33,7 @@ public class SetHomeCommand extends PluginCommand {
         config.set("users." + player.getUniqueId() + ".home.pitch", pitch);
         config.set("users." + player.getUniqueId() + ".home.world", worldName);
 
-        plugin.saveConfig();
+        pl.saveConfig();
 
         player.sendMessage("§aTwój nowy dom został ustawiony.\n§7Użyj §a/home §7aby przenieść się do domu.");
     }

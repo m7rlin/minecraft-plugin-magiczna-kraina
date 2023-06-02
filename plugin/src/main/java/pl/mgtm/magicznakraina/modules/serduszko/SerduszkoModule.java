@@ -13,21 +13,21 @@ import pl.mgtm.magicznakraina.modules.serduszko.events.PreLoginEvent;
 
 public class SerduszkoModule {
 
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
     private String bannedPlayerMessage = ChatColor.GRAY + "Straciłeś wszystkie serduszka!\nJeżeli chcesz grać dalej, gracze mogą cie " + ChatColor.GOLD + "wskrzeszyć!\n" + ChatColor.GRAY + "Po więcej informacji dołącz na naszego Discorda\n\n" + ChatColor.AQUA + "https://discord.mgtm.pl/ " + ChatColor.RED + "\n\nZostałeś wykluczony z serwera!";
 
     public SerduszkoModule() {
-        PluginManager pm = plugin.getServer().getPluginManager();
+        PluginManager pm = pl.getServer().getPluginManager();
 
-        // Rejestracja zdarzeń
-        pm.registerEvents(new JoinServerEvent(), plugin);
-        pm.registerEvents(new DeathEvent(), plugin);
-        pm.registerEvents(new PreLoginEvent(), plugin);
+        // Register events
+        pm.registerEvents(new JoinServerEvent(), pl);
+        pm.registerEvents(new DeathEvent(), pl);
+        pm.registerEvents(new PreLoginEvent(), pl);
 
-        // Rejestracja komend
-        plugin.getCommand(SerduszkoCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new SerduszkoCommand());
-        plugin.getCommand(ReviveCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new ReviveCommand());
+        // Register commands
+        pl.getCommand(SerduszkoCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new SerduszkoCommand());
+        pl.getCommand(ReviveCommand.class.getAnnotation(CommandInfo.class).name()).setExecutor(new ReviveCommand());
     }
 
     public String getBannedPlayerMessage() {

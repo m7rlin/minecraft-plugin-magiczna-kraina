@@ -7,12 +7,12 @@ import pl.mgtm.magicznakraina.modules.kits.commands.KitCommand;
 
 public class KitsModule {
 
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
     public KitsModule() {
-        PluginManager pm = plugin.getServer().getPluginManager();
+        PluginManager pm = pl.getServer().getPluginManager();
 
         // Command registration
-        plugin.getCommand("kit").setExecutor(new KitCommand());
+        pl.getCommand("kit").setExecutor(new KitCommand());
     }
 }
