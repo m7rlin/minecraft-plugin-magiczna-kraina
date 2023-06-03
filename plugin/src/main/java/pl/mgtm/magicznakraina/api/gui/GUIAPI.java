@@ -1,5 +1,7 @@
 package pl.mgtm.magicznakraina.api.gui;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,20 +30,16 @@ public class GUIAPI {
             eventHandlers = new HashMap<>();
         }
 
-        Inventory inventory = Bukkit.createInventory(player, gui.getSize(), gui.getTitle());
+        Inventory inventory = Bukkit.createInventory(player, gui.getSize(), gui.getParsedTitle());
         inventory.setContents(gui.getItems());
         player.openInventory(inventory);
         playerGUIs.put(player, gui);
 
-        // Register an event handler for each item in the GUI
         GUIEventHandler eventHandler = new GUIEventHandler(player);
-        for (Map.Entry<Integer, GUIAction> entry : gui.getClickActions().entrySet()) {
-            int slot = entry.getKey();
-            GUIAction action = entry.getValue();
-            eventHandler.registerSlot(slot, action);
-        }
         eventHandlers.put(player, eventHandler);
+        Bukkit.getPluginManager().registerEvents(eventHandler, MagicznaKraina.getInstance());
     }
+
 
     // Handle GUI clicks
     public static void handleGUIClick(Player player, int slot, boolean isRightClick) {
@@ -55,12 +53,10 @@ public class GUIAPI {
             }
         }
     }
-
     // Close a GUI for a specific player
     public static void closeGUI(Player player) {
         if (eventHandlers != null && eventHandlers.containsKey(player)) {
             GUIEventHandler eventHandler = eventHandlers.get(player);
-            eventHandler.unregisterAllSlots();
             HandlerList.unregisterAll(eventHandler);
             eventHandlers.remove(player);
         }
@@ -75,14 +71,12 @@ public class GUIAPI {
         private String title;
         private ItemStack[] items;
         private Map<Integer, GUIAction> clickActions;
-        private boolean[] requiresItem;
 
         public GUI(String title, int size) {
             this.size = size;
             this.title = title;
             this.items = new ItemStack[size];
             this.clickActions = new HashMap<>();
-            this.requiresItem = new boolean[size];
         }
 
         public int getSize() {
@@ -93,12 +87,16 @@ public class GUIAPI {
             return title;
         }
 
+        public Component getParsedTitle() {
+            return MiniMessage.miniMessage().deserialize(title);
+        }
+
         public ItemStack[] getItems() {
             return items;
         }
 
-        public void setItem(int slot, ItemStack item) {
-            items[slot] = item;
+        public void setItem(int slot, GUIItem item) {
+            items[slot] = item.getItemStack();
         }
 
         public void setClickAction(int slot, GUIAction action) {
@@ -117,44 +115,34 @@ public class GUIAPI {
     // GUI event handler class
     private static class GUIEventHandler implements Listener {
         private Player player;
-        private Map<Integer, GUIAction> slotActions;
 
         public GUIEventHandler(Player player) {
             this.player = player;
-            this.slotActions = new HashMap<>();
-            Bukkit.getPluginManager().registerEvents(this, MagicznaKraina.getInstance());
-        }
-
-        public void registerSlot(int slot, GUIAction action) {
-            slotActions.put(slot, action);
-        }
-
-        public void unregisterSlot(int slot) {
-            slotActions.remove(slot);
-        }
-
-        public void unregisterAllSlots() {
-            slotActions.clear();
         }
 
         @EventHandler
         public void onGUIClick(InventoryClickEvent event) {
 
-            if (event.getWhoClicked() == player && event.getClickedInventory() != null &&
-                    event.getClickedInventory().getHolder() == player.getOpenInventory().getTopInventory().getHolder()) {
-                event.setCancelled(true); // Prevent the item from being taken
-                player.updateInventory();
+            if (event.getWhoClicked() instanceof Player) {
+                Player player = (Player) event.getWhoClicked();
+                if (player.equals(this.player)) {
+                    event.setCancelled(true); // Prevent the item from being taken
+                    player.updateInventory();
 
-                int slot = event.getRawSlot();
-                boolean isRightClick = event.isRightClick();
-                handleGUIClick(player, slot, isRightClick);
+                    int slot = event.getRawSlot();
+                    boolean isRightClick = event.isRightClick();
+                    handleGUIClick(player, slot, isRightClick);
+                }
             }
         }
 
         @EventHandler
         public void onGUIClose(InventoryCloseEvent event) {
-            if (event.getPlayer() == player) {
-                closeGUI(player);
+            if (event.getPlayer() instanceof Player) {
+                Player player = (Player) event.getPlayer();
+                if (player.equals(this.player)) {
+                    closeGUI(player);
+                }
             }
         }
     }
