@@ -1,9 +1,6 @@
 package pl.mgtm.magicznakraina.modules.vanish.commands;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.ComponentBuilder;
-import net.kyori.adventure.text.TextComponent;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +13,6 @@ import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 
 import java.util.*;
-import java.util.List;
 
 @CommandInfo(name = "vanish", permission = "mgtm.vanish", requiresPlayer = true, usage = "/vanish [on|off] [gracz]")
 public class VanishCommand extends PluginCommand {

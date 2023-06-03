@@ -2,7 +2,6 @@ package pl.mgtm.magicznakraina.modules.vanish;
 
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.modules.kits.commands.KitCommand;
 import pl.mgtm.magicznakraina.modules.vanish.commands.VanishCommand;
 import pl.mgtm.magicznakraina.modules.vanish.events.JoinLeaveEvent;
 

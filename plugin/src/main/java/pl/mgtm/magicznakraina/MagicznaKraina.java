@@ -3,6 +3,7 @@ package pl.mgtm.magicznakraina;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.mgtm.magicznakraina.api.gui.GUIAPI;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
@@ -24,7 +25,6 @@ public final class MagicznaKraina extends JavaPlugin {
     public TeleportationService teleportationService;
 
     public SerduszkoModule serduszkoModule;
-
 
 
     @Override

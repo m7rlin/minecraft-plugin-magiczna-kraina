@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.modules.kits;
 
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class MinecraftKit {
@@ -10,4 +11,7 @@ public class MinecraftKit {
     Integer delay = 0;
 
     ItemStack[] items;
+
+    // Kit item
+    Material icon = Material.WOODEN_PICKAXE;
 }
