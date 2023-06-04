@@ -10,6 +10,7 @@ import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
+import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
@@ -21,6 +22,8 @@ import pl.mgtm.magicznakraina.services.TeleportationService;
 
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
+
+    private static PluginModuleManager pluginModuleManager;
 
     private FileConfiguration config;
 
@@ -43,6 +46,9 @@ public final class MagicznaKraina extends JavaPlugin {
         getLogger().info("Loading MagicznaKraina (v" + getDescription().getVersion() + " - " + pluginAuthor + ")");
 
         setInstance(this);
+
+        // Register modules
+        registerModules();
 
         // Set MAIN plugin config
         mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.INLINE, false, this);
@@ -112,6 +118,11 @@ public final class MagicznaKraina extends JavaPlugin {
     // Set plugin instance
     private static void setInstance(MagicznaKraina instance) {
         MagicznaKraina.instance = instance;
+    }
+
+    private void registerModules() {
+        pluginModuleManager = new PluginModuleManager();
+        //pluginModuleManager.registerModule();
     }
 
     public static MainConfig getMainConfig() {

@@ -1,25 +1,25 @@
 package pl.mgtm.magicznakraina.modules.protect_chests;
 
-import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.commands.LockCommand;
 import pl.mgtm.magicznakraina.modules.protect_chests.events.BreakChest;
 import pl.mgtm.magicznakraina.modules.protect_chests.events.OpenChest;
 import pl.mgtm.magicznakraina.modules.protect_chests.events.PlaceChest;
 
-public class ProtectedChestsModule {
+public class ProtectedChestsModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
     public ProtectedChestsModule() {
-        PluginManager pm = pl.getServer().getPluginManager();
+        super();
 
         // Register commands
-        pl.getCommand("lock").setExecutor(new LockCommand());
+        super.registerCommand(new LockCommand());
 
         // Register events
-        pm.registerEvents(new OpenChest(), pl);
-        pm.registerEvents(new PlaceChest(), pl);
-        pm.registerEvents(new BreakChest(), pl);
+        super.registerEvents(new OpenChest());
+        super.registerEvents(new PlaceChest());
+        super.registerEvents(new BreakChest());
     }
 }

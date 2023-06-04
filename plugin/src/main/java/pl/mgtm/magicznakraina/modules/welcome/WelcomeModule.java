@@ -6,12 +6,13 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.welcome.events.WelcomeMessageEvent;
 
 import java.util.HashMap;
 
 
-public class WelcomeModule {
+public class WelcomeModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
@@ -19,7 +20,7 @@ public class WelcomeModule {
 
 
     public WelcomeModule() {
-        PluginManager pm = pl.getServer().getPluginManager();
+        super();
 
         String joinMesssage = pl.getConfig().getString("join-message", "");
         String leaveMessage = pl.getConfig().getString("leave-message", "");
@@ -32,7 +33,7 @@ public class WelcomeModule {
         pl.getLogger().info(messages.toString());
 
         // Register events
-        pm.registerEvents(new WelcomeMessageEvent(), pl);
+        super.registerEvents(new WelcomeMessageEvent());
     }
 
     public static HashMap<String, String> getMessages() {
