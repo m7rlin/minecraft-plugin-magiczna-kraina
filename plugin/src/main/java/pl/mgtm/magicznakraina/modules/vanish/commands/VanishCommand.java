@@ -52,7 +52,6 @@ public class VanishCommand extends PluginCommand {
             Component leaveMessage = WelcomeModule.getLeaveMessage(player);
 
             if (args[0].equalsIgnoreCase("login")) {
-                player.sendMessage(joinMessage);
                 pl.getServer().broadcast(joinMessage);
             } else if (args[0].equalsIgnoreCase("logout")) {
                 pl.getServer().broadcast(leaveMessage);
