@@ -3,9 +3,11 @@ package pl.mgtm.magicznakraina;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.mgtm.magicznakraina.api.gui.GUIAPI;
+import pl.mgtm.magicznakraina.api.config.ConfigAPI;
+import pl.mgtm.magicznakraina.api.config.style.CommentStyle;
+import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
-import pl.mgtm.magicznakraina.events.ExplosiveArrowEvent;
+import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
@@ -27,6 +29,8 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public SerduszkoModule serduszkoModule;
 
+    private static MainConfig mainConfig;
+
 
     @Override
     public void onEnable() {
@@ -39,6 +43,10 @@ public final class MagicznaKraina extends JavaPlugin {
         getLogger().info("Loading MagicznaKraina (v" + getDescription().getVersion() + " - " + pluginAuthor + ")");
 
         setInstance(this);
+
+        // Set MAIN plugin config
+        mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.INLINE, false, this);
+        //cfg.setCooldown(50);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -104,6 +112,10 @@ public final class MagicznaKraina extends JavaPlugin {
     // Set plugin instance
     private static void setInstance(MagicznaKraina instance) {
         MagicznaKraina.instance = instance;
+    }
+
+    public static MainConfig getMainConfig() {
+        return mainConfig;
     }
 
 
