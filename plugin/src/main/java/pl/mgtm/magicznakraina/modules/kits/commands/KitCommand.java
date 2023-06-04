@@ -36,21 +36,23 @@ public class KitCommand extends PluginCommand {
             String chosenKit = args[0].toLowerCase();
 
             if (!kits.contains(chosenKit)) {
-                player.sendMessage(ChatColor.RED + "Kit '" + chosenKit +"' nie istnieje!");
-                player.sendMessage(ChatColor.GRAY +  "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", kits));
+                player.sendMessage(ChatColor.RED + "Kit '" + chosenKit + "' nie istnieje!");
+                player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", kits));
                 return;
             }
 
             // Sprawdz czy uzytkownik uzyl wczesniej komendy
             if (ConfigHelpers.playerUsedKit(player.getUniqueId(), chosenKit)) {
-                player.sendMessage(ChatColor.RED + "Kit '" + chosenKit +"' został już użyty!");
+                player.sendMessage(ChatColor.RED + "Kit '" + chosenKit + "' został już użyty!");
                 return;
             }
 
             for (String kitname : kits) {
                 List<String> kititems = (List<String>) config.getList("kits." + kitname + ".items");
 
-                if (!kitname.equalsIgnoreCase(chosenKit)) { continue; }
+                if (!kitname.equalsIgnoreCase(chosenKit)) {
+                    continue;
+                }
 
                 for (String x : kititems) {
                     String materialName = x.split(",")[0];
@@ -60,7 +62,7 @@ public class KitCommand extends PluginCommand {
                         Integer amount;
 
                         try {
-                            amount =  Integer.parseInt(x.split(",")[1]);
+                            amount = Integer.parseInt(x.split(",")[1]);
                         } catch (NumberFormatException e) {
                             amount = 1;
                         }
@@ -72,10 +74,10 @@ public class KitCommand extends PluginCommand {
 
             ConfigHelpers.addPlayerKit(player.getUniqueId(), chosenKit);
 
-            player.sendMessage(ChatColor.GREEN + "Przedmioty z zestawu '" + chosenKit +"' zostały dodane do Twojego ekwipunku.");
+            player.sendMessage(ChatColor.GREEN + "Przedmioty z zestawu '" + chosenKit + "' zostały dodane do Twojego ekwipunku.");
         } else {
             player.sendMessage(ChatColor.RED + "/kit <nazwa zestawu>");
-            player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE +  String.join(", ", kits));
+            player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", kits));
 
             //TODO: add gui system for kits
             /*

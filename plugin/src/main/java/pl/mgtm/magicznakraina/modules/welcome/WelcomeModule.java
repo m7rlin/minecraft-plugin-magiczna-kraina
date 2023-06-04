@@ -22,7 +22,7 @@ public class WelcomeModule {
         PluginManager pm = pl.getServer().getPluginManager();
 
         String joinMesssage = pl.getConfig().getString("join-message", "");
-        String leaveMessage =  pl.getConfig().getString("leave-message", "");
+        String leaveMessage = pl.getConfig().getString("leave-message", "");
 
         pl.getLogger().info(joinMesssage + " " + leaveMessage);
 

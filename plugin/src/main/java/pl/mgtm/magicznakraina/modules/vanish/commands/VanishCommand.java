@@ -82,17 +82,17 @@ public class VanishCommand extends PluginCommand {
                 } else if (args[0].equalsIgnoreCase("off")) {
                     if (vanishedPlayers.containsKey(targetUUID) && !vanishedPlayers.get(targetUUID)) {
                         // Player is already visible
-                        player.sendMessage(ChatColor.GOLD +targetPlayer.getName() + ChatColor.RED + " jest już widoczny.");
+                        player.sendMessage(ChatColor.GOLD + targetPlayer.getName() + ChatColor.RED + " jest już widoczny.");
                     } else {
                         // Make the player visible
                         vanishedPlayers.put(targetUUID, false);
                         for (Player onlinePlayer : pl.getServer().getOnlinePlayers()) {
                             onlinePlayer.showPlayer(pl, targetPlayer);
                         }
-                        player.sendMessage(ChatColor.GOLD +targetPlayer.getName() + ChatColor.RED + " jest teraz widoczny.");
+                        player.sendMessage(ChatColor.GOLD + targetPlayer.getName() + ChatColor.RED + " jest teraz widoczny.");
                     }
                 } else {
-                   super.commandUsage(player);
+                    super.commandUsage(player);
                 }
             }
         }
@@ -100,7 +100,7 @@ public class VanishCommand extends PluginCommand {
 
     @Override
     public List<String> tabAutocomplete(CommandSender sender, Command command, String label, String[] args) {
-        super.tabAutocomplete(sender,command,label,args);
+        super.tabAutocomplete(sender, command, label, args);
 
         List<String> subcommands = Arrays.asList("login", "logout", "on", "off");
 

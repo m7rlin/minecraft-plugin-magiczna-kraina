@@ -28,14 +28,18 @@ public class TeleportationService {
         request.add(target);
 
         requests.replace(player, requests.get(player), request);
-    };
+    }
+
+    ;
 
     public void removeTeleportationRequest(UUID player, UUID target) {
         ArrayList<UUID> request = requests.get(player);
         request.remove(target);
 
         requests.replace(player, requests.get(player), request);
-    };
+    }
+
+    ;
 
     public void flushTeleportationRequests(UUID player) {
         if (requests.size() > 0) {
@@ -43,5 +47,7 @@ public class TeleportationService {
                 requests.get(player).clear();
             }
         }
-    };
+    }
+
+    ;
 };

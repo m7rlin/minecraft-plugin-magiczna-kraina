@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ConfigHelpers {
-    public ConfigHelpers () {
+    public ConfigHelpers() {
         throw new RuntimeException("Cannot initialize helper class!");
     }
 
@@ -46,6 +46,7 @@ public class ConfigHelpers {
 
         plugin.saveConfig();
     }
+
     public static void createDefaultPlayerReviveConfig() {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 
@@ -54,7 +55,7 @@ public class ConfigHelpers {
         FileConfiguration cfg = plugin.getConfig();
 
         if (!cfg.contains(key)) {
-           // cfg.createSection(key);
+            // cfg.createSection(key);
             cfg.options().copyDefaults(true);
             loadConfig();
             return;
@@ -64,6 +65,7 @@ public class ConfigHelpers {
             loadConfig();
         }
     }
+
     public static void addPlayerKit(UUID playerUUID, String kitname) {
         MagicznaKraina plugin = MagicznaKraina.getInstance();
 
@@ -165,7 +167,7 @@ public class ConfigHelpers {
                 Integer amount;
 
                 try {
-                    amount =  Integer.parseInt(x.split(",")[1]);
+                    amount = Integer.parseInt(x.split(",")[1]);
                 } catch (NumberFormatException e) {
                     amount = 1;
                 }
