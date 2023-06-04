@@ -6,6 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.api.gui.GUIAPI;
+import pl.mgtm.magicznakraina.api.gui.GUIItem;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
@@ -15,13 +17,13 @@ import java.util.Set;
 
 @CommandInfo(name = "kit", permission = "", requiresPlayer = true)
 public class KitCommand extends PluginCommand {
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = plugin.getConfig();
+        FileConfiguration config = pl.getConfig();
 
         if (!config.isConfigurationSection("kits")) {
             player.sendMessage(ChatColor.RED + "Ta funkcja jest obecnie niedostępna.");
@@ -74,6 +76,30 @@ public class KitCommand extends PluginCommand {
         } else {
             player.sendMessage(ChatColor.RED + "/kit <nazwa zestawu>");
             player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE +  String.join(", ", kits));
+
+            //TODO: add gui system for kits
+            /*
+            GUIAPI.GUI kitsGUI = new GUIAPI.GUI("Kity", 9);
+
+            kitsGUI.setItem(0, new GUIItem(new ItemStack(Material.DIAMOND, 1), "<reset><red>Admin"));
+            kitsGUI.setClickAction(0, (p,isRightClick) -> {
+                player.sendMessage("Kliknales w GUI :).");
+            });
+
+            kitsGUI.setItem(1, new GUIItem(new ItemStack(Material.WOODEN_PICKAXE, 1), "Start"));
+            kitsGUI.setClickAction(1, (p,isRightClick) -> {
+                player.sendMessage("Oto twoj przedmiot.");
+            });
+
+            kitsGUI.setItem(2, new GUIItem(new ItemStack(Material.COOKED_BEEF, 1), "Jedzonko", "<red>Niedostępne!","<blue>Od 20 VI możliwe do użycia."));
+            kitsGUI.setClickAction(2, (p,isRightClick) -> {
+                player.sendMessage("Oto twoj przedmiot.");
+            });
+
+            GUIAPI.openGUI(player, kitsGUI);
+            */
+
+
         }
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.api.gui.GUIAPI;
 import pl.mgtm.magicznakraina.commands.*;
+import pl.mgtm.magicznakraina.events.ExplosiveArrowEvent;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
@@ -43,6 +44,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
         // Register event listeners
         pm.registerEvents(new RespawnEvent(), this);
+        //pm.registerEvents(new ExplosiveArrowEvent(), this); // do not register on production
 
         // Register commands
         //getCommand("test").setExecutor(new TestCommand()); // comment on production
