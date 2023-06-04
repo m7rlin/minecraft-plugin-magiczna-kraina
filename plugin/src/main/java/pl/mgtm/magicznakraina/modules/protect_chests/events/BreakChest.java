@@ -60,7 +60,6 @@ public class BreakChest implements Listener {
         //Bukkit.getPlayer("merlin").sendMessage(e.getEntity().getName() + blocks.toArray());
 
 
-
         String playerId = "";
         if (e.getEntity().hasMetadata(metaKey)) {
             playerId = e.getEntity().getMetadata(metaKey).get(0).asString();

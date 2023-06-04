@@ -3,9 +3,14 @@ package pl.mgtm.magicznakraina;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.mgtm.magicznakraina.api.config.ConfigAPI;
+import pl.mgtm.magicznakraina.api.config.style.CommentStyle;
+import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
+import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
+import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
@@ -18,6 +23,8 @@ import pl.mgtm.magicznakraina.services.TeleportationService;
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
 
+    private static PluginModuleManager pluginModuleManager;
+
     private FileConfiguration config;
 
     public SpawnService spawnService;
@@ -25,6 +32,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public SerduszkoModule serduszkoModule;
 
+    private static MainConfig mainConfig;
 
 
     @Override
@@ -39,10 +47,18 @@ public final class MagicznaKraina extends JavaPlugin {
 
         setInstance(this);
 
+        // Register modules
+        registerModules();
+
+        // Set MAIN plugin config
+        mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.INLINE, false, this);
+        //cfg.setCooldown(50);
+
         PluginManager pm = getServer().getPluginManager();
 
         // Register event listeners
         pm.registerEvents(new RespawnEvent(), this);
+        //pm.registerEvents(new ExplosiveArrowEvent(), this); // do not register on production
 
         // Register commands
         //getCommand("test").setExecutor(new TestCommand()); // comment on production
@@ -102,6 +118,15 @@ public final class MagicznaKraina extends JavaPlugin {
     // Set plugin instance
     private static void setInstance(MagicznaKraina instance) {
         MagicznaKraina.instance = instance;
+    }
+
+    private void registerModules() {
+        pluginModuleManager = new PluginModuleManager();
+        //pluginModuleManager.registerModule();
+    }
+
+    public static MainConfig getMainConfig() {
+        return mainConfig;
     }
 
 

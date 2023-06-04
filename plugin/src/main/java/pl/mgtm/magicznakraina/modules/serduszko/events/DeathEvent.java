@@ -24,7 +24,7 @@ public class DeathEvent implements Listener {
             ConfigHelpers.setPlayerZeroHeartsBan(player.getUniqueId(), true);
             player.kickPlayer(plugin.serduszkoModule.getBannedPlayerMessage());
             return;
-        };
+        }
 
         // Zmniejsz zycie o pol serduszka
         plugin.getConfig().set("users." + player.getUniqueId() + ".hearts", playerHearts - 1.0);

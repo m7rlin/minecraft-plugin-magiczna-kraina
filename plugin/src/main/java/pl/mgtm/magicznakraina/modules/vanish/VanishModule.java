@@ -1,8 +1,7 @@
 package pl.mgtm.magicznakraina.modules.vanish;
 
-import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.modules.kits.commands.KitCommand;
+import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.vanish.commands.VanishCommand;
 import pl.mgtm.magicznakraina.modules.vanish.events.JoinLeaveEvent;
 
@@ -11,20 +10,20 @@ import java.util.Map;
 import java.util.UUID;
 
 
-public class VanishModule {
+public class VanishModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
     private static Map<UUID, Boolean> vanishedPlayers = new HashMap<>();
 
 
     public VanishModule() {
-        PluginManager pm = pl.getServer().getPluginManager();
+        super();
 
         // Register commands
-        pl.getCommand("vanish").setExecutor(new VanishCommand());
+        super.registerCommand(new VanishCommand());
 
         // Register events
-        pm.registerEvents(new JoinLeaveEvent(), pl);
+        super.registerEvents(new JoinLeaveEvent());
     }
 
     public static Map<UUID, Boolean> getVanishedPlayers() {
