@@ -13,86 +13,86 @@ import java.util.*;
 
 /**
  * Helper built-in serializer for processing Collections
+ *
+ * @author Mikołaj Gałązka
  * @see Collection
  * @see Serializer
  * @since 1.0
- * @author Mikołaj Gałązka
  */
 public class UniversalCollectionSerializer extends Serializer<Collection> {
 
-	@Override
-	protected void saveObject(String path, Collection object, BukkitConfiguration configuration) {
-		if (object.size() == 0) {
-			// Java's generics suck so I can't check generic type of empty Collection
-			throw new IllegalStateException("Can't set empty Collection to config");
-		}
+    @Override
+    protected void saveObject(String path, Collection object, BukkitConfiguration configuration) {
+        if (object.size() == 0) {
+            // Java's generics suck so I can't check generic type of empty Collection
+            throw new IllegalStateException("Can't set empty Collection to config");
+        }
 
-		if (object.getClass().isMemberClass()) {
-			// Workaround for utilities, e. g. Arrays.asList()
-			object = new ArrayList(object);
-		}
+        if (object.getClass().isMemberClass()) {
+            // Workaround for utilities, e. g. Arrays.asList()
+            object = new ArrayList(object);
+        }
 
-		Class<?> generic = TypeUtils.getCollectionGeneric(object);
-		boolean simple = TypeUtils.isSimpleType(generic);
+        Class<?> generic = TypeUtils.getCollectionGeneric(object);
+        boolean simple = TypeUtils.isSimpleType(generic);
 
-		Serializer<?> serializer = simple ? null : Serializers.of(generic);
-		if (!simple && serializer == null) {
-			throw new MissingSerializerException(generic);
-		}
+        Serializer<?> serializer = simple ? null : Serializers.of(generic);
+        if (!simple && serializer == null) {
+            throw new MissingSerializerException(generic);
+        }
 
-		configuration.set(path + ".structure", object.getClass().getName());
-		configuration.set(path + ".type", generic.getName());
+        configuration.set(path + ".structure", object.getClass().getName());
+        configuration.set(path + ".type", generic.getName());
 
-		int index = 0;
-		for (Object element : object) {
-			if (simple) {
-				configuration.set(path + "." + index, element);
-			}
-			else {
-				serializer.serialize(path + "." + index, element, configuration);
-			}
+        int index = 0;
+        for (Object element : object) {
+            if (simple) {
+                configuration.set(path + "." + index, element);
+            } else {
+                serializer.serialize(path + "." + index, element, configuration);
+            }
 
-			index++;
-		}
-	}
+            index++;
+        }
+    }
 
-	@Override
-	public Collection<?> deserialize(String path, BukkitConfiguration configuration) {
-		ConfigurationSection section = configuration.getConfigurationSection(path);
+    @Override
+    public Collection<?> deserialize(String path, BukkitConfiguration configuration) {
+        ConfigurationSection section = configuration.getConfigurationSection(path);
 
-		String collectionRaw = section.getString("structure");
-		String type = section.getString("type");
+        String collectionRaw = section.getString("structure");
+        String type = section.getString("type");
 
-		Objects.requireNonNull(collectionRaw, "Collection type is not defined for " + path);
-		Objects.requireNonNull(type, "Serializer type is not defined for " + path);
+        Objects.requireNonNull(collectionRaw, "Collection type is not defined for " + path);
+        Objects.requireNonNull(type, "Serializer type is not defined for " + path);
 
-		try {
-			Class<?> collectionClass = Class.forName(collectionRaw);
-			Class<?> typeClass = Class.forName(type);
-			boolean simple = TypeUtils.isSimpleType(typeClass);
+        try {
+            Class<?> collectionClass = Class.forName(collectionRaw);
+            Class<?> typeClass = Class.forName(type);
+            boolean simple = TypeUtils.isSimpleType(typeClass);
 
-			Serializer<?> serializer = simple ? null : Serializers.of(typeClass);
-			if (!simple && serializer == null) {
-				throw new MissingSerializerException(type);
-			}
+            Serializer<?> serializer = simple ? null : Serializers.of(typeClass);
+            if (!simple && serializer == null) {
+                throw new MissingSerializerException(type);
+            }
 
-			Collection collection = (Collection) collectionClass.newInstance();
-			for (String index : section.getKeys(false)) {
-				if (index.equals("type") || index.equals("structure")) {
-					continue;
-				}
+            Collection collection = (Collection) collectionClass.newInstance();
+            for (String index : section.getKeys(false)) {
+                if (index.equals("type") || index.equals("structure")) {
+                    continue;
+                }
 
-				if (simple) {
-					collection.add(configuration.get(path + "." + index));
-					continue;
-				}
+                if (simple) {
+                    collection.add(configuration.get(path + "." + index));
+                    continue;
+                }
 
-				collection.add(serializer.deserialize(path + "." + index, configuration));
-			}
+                collection.add(serializer.deserialize(path + "." + index, configuration));
+            }
 
-			return collection;
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            return collection;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
