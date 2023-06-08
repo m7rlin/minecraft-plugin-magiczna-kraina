@@ -7,6 +7,7 @@ import pl.mgtm.magicznakraina.api.config.annotation.ConfigName;
 @ConfigName("merlin.yml")
 public interface MainConfig extends Config {
 
+    /*
     @Comment("API key")
     default String getApiKey() {
         return "YOUR_API_KEY_HERE";
@@ -16,6 +17,7 @@ public interface MainConfig extends Config {
     default String getApiUrl() {
         return "https://api.example.com/";
     }
+    */
 
     default SerduszkoModuleConfig getSerduszkoModule() {
         return new SerduszkoModuleConfig(true, true);
