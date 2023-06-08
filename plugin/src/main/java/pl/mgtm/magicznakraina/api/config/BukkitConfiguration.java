@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.api.config;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
@@ -70,6 +71,12 @@ public class BukkitConfiguration extends YamlConfiguration {
 
 	@Override
 	public void set(String path, Object value) {
+		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+		StackTraceElement e = stacktrace[2];//maybe this number needs to be corrected
+		String methodName = e.getMethodName();
+
+
+		Bukkit.getLogger().info("path: " + path + " value: " + value + " method: " + methodName);
 		if (!(value instanceof Collection) && !(value instanceof Map) && (value == null || TypeUtils.isSimpleType(value))) {
 			super.set(path, value);
 

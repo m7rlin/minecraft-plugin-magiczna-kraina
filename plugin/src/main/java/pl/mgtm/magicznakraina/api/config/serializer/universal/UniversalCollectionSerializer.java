@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.api.config.serializer.universal;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import pl.mgtm.magicznakraina.api.config.BukkitConfiguration;
 import pl.mgtm.magicznakraina.api.config.exception.MissingSerializerException;
@@ -32,6 +33,11 @@ public class UniversalCollectionSerializer extends Serializer<Collection> {
             // Workaround for utilities, e. g. Arrays.asList()
             object = new ArrayList(object);
         }
+
+        Bukkit.getLogger().info("COLLECTION SERIALIZATION ==========================");
+        Bukkit.getLogger().info(object.getClass().getName() + " " + object.toString());
+
+        Bukkit.getLogger().info("===============================================");
 
         Class<?> generic = TypeUtils.getCollectionGeneric(object);
         boolean simple = TypeUtils.isSimpleType(generic);

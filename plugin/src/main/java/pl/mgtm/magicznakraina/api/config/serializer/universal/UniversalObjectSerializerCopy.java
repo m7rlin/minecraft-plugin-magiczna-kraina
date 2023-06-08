@@ -8,7 +8,6 @@ import pl.mgtm.magicznakraina.api.config.serializer.Serializer;
 import pl.mgtm.magicznakraina.api.config.serializer.Serializers;
 import pl.mgtm.magicznakraina.api.config.util.TypeUtils;
 
-
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -23,7 +22,7 @@ import java.lang.reflect.Modifier;
  * @see Serializable
  * @since 1.1.7
  */
-public class UniversalObjectSerializer extends Serializer<Serializable> {
+public class UniversalObjectSerializerCopy extends Serializer<Serializable> {
 
     @Override
     protected void saveObject(String path, Serializable object, BukkitConfiguration configuration) {
@@ -35,26 +34,29 @@ public class UniversalObjectSerializer extends Serializer<Serializable> {
                     continue;
                 }
 
-
+                String fullpath = path + "." + configuration.getNameStyle().format(field.getName());
 
                 field.setAccessible(true);
                 Object value = field.get(object);
 
-                Bukkit.getLogger().info("OBJECT SERIALIZATION ==========================");
-                Bukkit.getLogger().info(value + "");
+                Bukkit.getLogger().info("...........saveobject............." + fullpath);
 
-                Bukkit.getLogger().info("===============================================");
+                // Check if field is optional
+//                if (field.isAnnotationPresent(ConfigOptional.class)) {
+//                    field.setAccessible(false);
+//                    if (value == null) continue;
+//                }
 
                 try {
                     if (TypeUtils.isSimpleType(field.getType())) {
-                        configuration.set(path + "." + configuration.getNameStyle().format(field.getName()), value);
+                        configuration.set(fullpath, value);
                     } else {
                         Serializer<?> serializer = Serializers.of(field.getType());
                         if (serializer == null) {
                             throw new MissingSerializerException(field.getType());
                         }
 
-                        serializer.serialize(path + "." + configuration.getNameStyle().format(field.getName()), value, configuration);
+                        serializer.serialize(fullpath, value, configuration);
                     }
                 } catch (Exception e) {
                     throw new RuntimeException("An error occurred while serializing field '" + field.getName() + "' from class '" + object.getClass().getName() + "'", e);
@@ -96,18 +98,27 @@ public class UniversalObjectSerializer extends Serializer<Serializable> {
                     continue;
                 }
 
+                String fullpath = path + "." + configuration.getNameStyle().format(field.getName());
+
+                // Check if field is optional
+//                if (field.isAnnotationPresent(ConfigOptional.class)) {
+//                    Bukkit.getLogger().info("...........!!!OBJECT SKIPPED!!!............." + fullpath);
+//                    if (configuration.get(fullpath) == null) continue;
+//                }
+
                 field.setAccessible(true);
 
                 Class<?> type = field.getType();
+
                 if (TypeUtils.isSimpleType(type)) {
-                    field.set(instance, configuration.get(path + "." + configuration.getNameStyle().format(field.getName())));
+                    field.set(instance, configuration.get(fullpath));
                 } else {
                     Serializer<?> serializer = Serializers.of(field.getType());
                     if (serializer == null) {
                         throw new MissingSerializerException(field.getType());
                     }
 
-                    field.set(instance, serializer.deserialize(path + "." + configuration.getNameStyle().format(field.getName()), configuration));
+                    field.set(instance, serializer.deserialize(fullpath, configuration));
                 }
             }
         } catch (IllegalAccessException e) {

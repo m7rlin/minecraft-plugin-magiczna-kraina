@@ -1,21 +1,14 @@
 package pl.mgtm.magicznakraina.commands;
 
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Item;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 @CommandInfo(name = "test", permission = "", requiresPlayer = true)
 public class TestCommand extends PluginCommand {
@@ -24,6 +17,40 @@ public class TestCommand extends PluginCommand {
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
+
+        if (args.length > 0) {
+            player.sendMessage("test command executed!");
+            if (args[0].equalsIgnoreCase("get")) {
+                player.sendMessage("....................get....................");
+                HashMap<String, User> users = pl.getUserConfig().getUsers();
+
+                player.sendMessage("cache: "+ pl.getUserConfig().getBukkitConfiguration().getCache().toString());
+
+                if (users == null) {
+                    player.sendMessage(ChatColor.RED + "users is null");
+                    return;
+                };
+
+                User userconfig = users.get(player.getUniqueId().toString());
+
+                player.sendMessage("getHearts: " + userconfig.getHearts());
+                //player.sendMessage("home: " + userconfig.getHome());
+                player.sendMessage("newusers: " + userconfig.getHearts());
+                userconfig.setHearts(userconfig.getHearts() + 1);
+
+                player.sendMessage("newusers2: " + userconfig.getHearts());
+                player.sendMessage("test" + pl.getUserConfig().getTest());
+
+
+                pl.getUserConfig().setUsers(users);
+            } else if (args[0].equalsIgnoreCase("set")) {
+                player.sendMessage("....................set....................");
+                HashMap<String, User> users2 = new HashMap<>();
+
+                users2.put(player.getUniqueId().toString(), new User(player.getName()));
+                //pl.getUserConfig().setUsers(users);
+            }
+        }
 
         // Remove item
         //ItemStack item = new ItemStack(Material.CHEST, 10);
@@ -35,7 +62,7 @@ public class TestCommand extends PluginCommand {
 
         player.getInventory().removeItem(items2.toArray(new ItemStack[0]));*/
 
-       // player.sendMessage(pl.getServer().getOfflinePlayer("merlin"));
+        // player.sendMessage(pl.getServer().getOfflinePlayer("merlin"));
 
     }
 }

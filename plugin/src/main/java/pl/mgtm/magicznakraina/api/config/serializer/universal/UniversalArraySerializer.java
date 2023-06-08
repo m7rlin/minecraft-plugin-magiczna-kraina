@@ -1,5 +1,6 @@
 package pl.mgtm.magicznakraina.api.config.serializer.universal;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import pl.mgtm.magicznakraina.api.config.BukkitConfiguration;
 import pl.mgtm.magicznakraina.api.config.exception.InvalidConfigFileException;
@@ -30,6 +31,11 @@ public class UniversalArraySerializer extends Serializer<Object[]> {
         if (!simple && serializer == null) {
             throw new MissingSerializerException(generic);
         }
+
+        Bukkit.getLogger().info("ARRAY SERIALIZATION ==========================");
+        Bukkit.getLogger().info(object.getClass().getName() + " " + object.toString());
+
+        Bukkit.getLogger().info("===============================================");
 
         configuration.set(path + ".type", generic.getName());
 

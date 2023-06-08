@@ -8,6 +8,7 @@ import pl.mgtm.magicznakraina.api.config.style.CommentStyle;
 import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.MainConfig;
+import pl.mgtm.magicznakraina.config.UsersConfig;
 import pl.mgtm.magicznakraina.events.RespawnEvent;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 import pl.mgtm.magicznakraina.module.PluginModuleManager;
@@ -34,6 +35,7 @@ public final class MagicznaKraina extends JavaPlugin {
     public SerduszkoModule serduszkoModule;
 
     private static MainConfig mainConfig;
+    private static UsersConfig userConfig;
 
 
     @Override
@@ -52,8 +54,8 @@ public final class MagicznaKraina extends JavaPlugin {
         registerModules();
 
         // Set MAIN plugin config
-        mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.INLINE, false, this);
-        //cfg.setCooldown(50);
+        mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
+        userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -62,7 +64,7 @@ public final class MagicznaKraina extends JavaPlugin {
         //pm.registerEvents(new ExplosiveArrowEvent(), this); // do not register on production
 
         // Register commands
-        //getCommand("test").setExecutor(new TestCommand()); // comment on production
+        getCommand("test").setExecutor(new TestCommand()); // comment on production
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
@@ -129,6 +131,9 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public static MainConfig getMainConfig() {
         return mainConfig;
+    }
+    public static UsersConfig getUserConfig() {
+        return userConfig;
     }
 
 
