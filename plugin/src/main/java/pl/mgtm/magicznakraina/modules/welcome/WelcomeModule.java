@@ -22,15 +22,15 @@ public class WelcomeModule extends PluginModule {
     public WelcomeModule() {
         super();
 
-        String joinMesssage = pl.getConfig().getString("join-message", "");
-        String leaveMessage = pl.getConfig().getString("leave-message", "");
+        String joinMesssage = pl.getMainConfig().getWelcomeModule().getJoinMessage();
+        String leaveMessage = pl.getMainConfig().getWelcomeModule().getLeaveMessage();
 
-        pl.getLogger().info(joinMesssage + " " + leaveMessage);
+        //pl.getLogger().info(joinMesssage + " " + leaveMessage); // Debug
 
         messages.put("leave-message", leaveMessage);
         messages.put("join-message", joinMesssage);
 
-        pl.getLogger().info(messages.toString());
+        //pl.getLogger().info(messages.toString()); // Debug
 
         // Register events
         super.registerEvents(new WelcomeMessageEvent());

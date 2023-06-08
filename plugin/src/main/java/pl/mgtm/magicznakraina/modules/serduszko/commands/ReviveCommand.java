@@ -26,7 +26,7 @@ import java.util.ArrayList;
 @CommandInfo(name = "revive", permission = "", requiresPlayer = false)
 public class ReviveCommand extends PluginCommand {
 
-    private MagicznaKraina plugin = MagicznaKraina.getInstance();
+    private MagicznaKraina pl = MagicznaKraina.getInstance();
 
     @Override
     public void execute(CommandSender sender, String[] args) {
@@ -41,7 +41,7 @@ public class ReviveCommand extends PluginCommand {
         ConfigHelpers.createDefaultPlayerReviveConfig();
 
         String revivePlayerName = args[0];
-        OfflinePlayer reviveOffilinePlayer = plugin.getServer().getOfflinePlayer(revivePlayerName);
+        OfflinePlayer reviveOffilinePlayer = pl.getServer().getOfflinePlayer(revivePlayerName);
 
         if (!ConfigHelpers.userExist(reviveOffilinePlayer.getUniqueId())) {
             sender.sendMessage(ChatColor.RED + "Możesz wskrzesić TYLKO gracza, który grał już na serwerze.");
