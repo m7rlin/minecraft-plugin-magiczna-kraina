@@ -98,7 +98,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new ResetWorldsModule();
 
         // Load config
-        ConfigHelpers.loadConfig();
+        //ConfigHelpers.loadConfig();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }

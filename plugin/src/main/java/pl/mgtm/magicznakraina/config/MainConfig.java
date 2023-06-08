@@ -4,20 +4,37 @@ import pl.mgtm.magicznakraina.api.config.Config;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigName;
 
-@ConfigName("test.yml")
+@ConfigName("merlin.yml")
 public interface MainConfig extends Config {
 
-    @Comment("This is a comment for the message key.")
-    default String getMessage() {
-        return "This is the default message";
+    @Comment("Player joins the server.")
+    default String getJoinMessage() {
+        return "<gray>[<green>+<gray>] <user>";
     }
 
-    @Comment("This is a comment for the cooldown key.")
-    default int getCooldown() {
-        return 10;
+    @Comment("Player leaves the server.")
+    default String getLeaveMessage() {
+        return "<gray>[<red>-<gray>] <user>";
     }
 
-    void setCooldown(int cooldown);
+    @Comment("API key")
+    default String getApiKey() {
+        return "YOUR_API_KEY_HERE";
+    }
+
+    @Comment("API server url")
+    default String getApiUrl() {
+        return "https://api.example.com/";
+    }
+
+    default SerduszkoModuleConfig getSerduszkoModule() {
+        return new SerduszkoModuleConfig(true, true);
+    }
+
+    default CleverSleepModuleConfig getCleverSleepModule() {
+        return new CleverSleepModuleConfig(true, 50);
+    }
+
 }
 
 
