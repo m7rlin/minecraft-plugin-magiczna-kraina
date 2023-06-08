@@ -14,6 +14,7 @@ import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
+import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
@@ -94,6 +95,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new VanishModule();
         // Initialize "Welcome" module
         new WelcomeModule();
+        new ResetWorldsModule();
 
         // Load config
         ConfigHelpers.loadConfig();

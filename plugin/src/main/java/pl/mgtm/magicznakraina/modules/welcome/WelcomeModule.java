@@ -4,14 +4,14 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.welcome.events.WelcomeMessageEvent;
 
 import java.util.HashMap;
 
-
+@ModuleInfo(name = "welcome")
 public class WelcomeModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
