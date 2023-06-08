@@ -1,13 +1,18 @@
 package pl.mgtm.magicznakraina.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.SerduszkoModuleConfig;
 import pl.mgtm.magicznakraina.config.User;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CommandInfo(name = "test", permission = "", requiresPlayer = true)
@@ -45,10 +50,42 @@ public class TestCommand extends PluginCommand {
                 pl.getUserConfig().setUsers(users);
             } else if (args[0].equalsIgnoreCase("set")) {
                 player.sendMessage("....................set....................");
-                HashMap<String, User> users2 = new HashMap<>();
+                HashMap<String, User> users = new HashMap<>();
 
-                users2.put(player.getUniqueId().toString(), new User(player.getName()));
-                //pl.getUserConfig().setUsers(users);
+                users.put(player.getUniqueId().toString(), new User(player.getName()));
+                pl.getUserConfig().setUsers(users);
+            } else if (args[0].equalsIgnoreCase("home")) {
+                HashMap<String, User> users = pl.getUserConfig().getUsers();
+
+                if (users == null) {
+                    player.sendMessage(ChatColor.RED + "users is null");
+                    return;
+                };
+
+                User userconfig = users.get(player.getUniqueId().toString());
+
+                userconfig.setHome(player.getLocation());
+
+
+                pl.getUserConfig().setUsers(users);
+            } else if (args[0].equalsIgnoreCase("item")) {
+
+                SerduszkoModuleConfig config = pl.getMainConfig().getSerduszkoModule();
+                List<ItemStack> items = config.getReviveItems();
+                items.add(new ItemStack(Material.GOLDEN_APPLE, 2));
+                pl.getMainConfig().setSerduszkoModule(config);
+
+                player.sendMessage(ChatColor.GREEN + "new item has been added");
+            } else if (args[0].equalsIgnoreCase("item2")) {
+
+                SerduszkoModuleConfig config = pl.getMainConfig().getSerduszkoModule();
+                List<ItemStack> items = config.getReviveItems();
+                for (ItemStack item : items)
+                {
+                    player.sendMessage("item: " + item.getType().name());
+                }
+
+                player.sendMessage(ChatColor.GREEN + "new item has been added");
             }
         }
 

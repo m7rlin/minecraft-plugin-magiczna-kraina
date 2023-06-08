@@ -2,6 +2,7 @@ package pl.mgtm.magicznakraina.api.config;
 
 
 import org.bukkit.Bukkit;
+import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigOptional;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigPath;
@@ -48,7 +49,9 @@ public class ConfigInvocationHandler implements InvocationHandler {
 
         // Execute all getter for test and fill cache
         for (Method method : this.clazz.getDeclaredMethods()) {
-            Bukkit.getServer().getLogger().info("method:............... "+method.getName());
+            if (MagicznaKraina.ConfigAPIDebug) {
+                Bukkit.getServer().getLogger().info("method:............... " + method.getName());
+            }
             this.executeGetter(method);
         }
     }
@@ -115,11 +118,15 @@ public class ConfigInvocationHandler implements InvocationHandler {
         }
 
         if (!serializer.getSerializerType().equals(value.getClass())) {
-            Bukkit.getServer().getLogger().info("path:............... "+path +  " " + value);
+            if (MagicznaKraina.ConfigAPIDebug) {
+                Bukkit.getServer().getLogger().info("path:............... " + path + " " + value);
+            }
 
             value = serializer.deserialize(path, this.configuration);
 
-            Bukkit.getServer().getLogger().info("deserialized:............... "+value);
+            if (MagicznaKraina.ConfigAPIDebug) {
+                Bukkit.getServer().getLogger().info("deserialized:............... " + value);
+            }
 
             this.configuration.addToCache(path, value);
         }

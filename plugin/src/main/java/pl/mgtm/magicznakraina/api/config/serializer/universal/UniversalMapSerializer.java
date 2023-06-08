@@ -2,6 +2,7 @@ package pl.mgtm.magicznakraina.api.config.serializer.universal;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
+import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.api.config.BukkitConfiguration;
 import pl.mgtm.magicznakraina.api.config.exception.MissingSerializerException;
 import pl.mgtm.magicznakraina.api.config.serializer.Serializer;
@@ -32,10 +33,11 @@ public class UniversalMapSerializer extends Serializer<Map> {
             object = new HashMap(object);
         }
 
-        Bukkit.getLogger().info("MAP SERIALIZATION ==========================");
-        Bukkit.getLogger().info(object.getClass().getName() + " " + object.toString());
-
-        Bukkit.getLogger().info("===============================================");
+        if (MagicznaKraina.ConfigAPIDebug) {
+            Bukkit.getLogger().info("MAP SERIALIZATION ==========================");
+            Bukkit.getLogger().info(object.getClass().getName() + " " + object.toString());
+            Bukkit.getLogger().info("===============================================");
+        }
 
         Class<?> generic = TypeUtils.getMapGeneric(object)[1];
         boolean simple = TypeUtils.isSimpleType(generic);

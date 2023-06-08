@@ -1,6 +1,7 @@
 package pl.mgtm.magicznakraina.api.config.serializer;
 
 import org.bukkit.Bukkit;
+import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.api.config.BukkitConfiguration;
 import pl.mgtm.magicznakraina.api.config.exception.InvalidConfigException;
 
@@ -40,14 +41,17 @@ public abstract class Serializer<T> {
      * @see BukkitConfiguration
      */
     public final void serialize(String path, Object object, BukkitConfiguration configuration) {
-        Bukkit.getLogger().info("........................SERIALIZER...............");
-        Bukkit.getLogger().info("..........path: " + path + "......object: "+ object.toString());
+        if (MagicznaKraina.ConfigAPIDebug) {
+            Bukkit.getLogger().info("........................SERIALIZER...............");
+            Bukkit.getLogger().info("..........path: " + path + "......object: " + object.toString());
+        }
         configuration.set(path, null);
         if (object == null) {
             return;
         }
 
         this.saveObject(path, (T) object, configuration);
+        configuration.addToCache(path, object);
     }
 
     /**

@@ -12,8 +12,8 @@ public class User implements Serializable {
     private double hearts = 6.0;
     private int heartsLevel = 0;
 
-//    @ConfigOptional
-//    private Location home;
+    @ConfigOptional
+    private Location home;
 
     private boolean homeUnlocked = false;
 
@@ -42,13 +42,13 @@ public class User implements Serializable {
     }
 
 
-//    public void setHome(Location location) {
-//        this.home = location;
-//    }
-//
-//    public Location getHome() {
-//        return this.home;
-//    }
+    public void setHome(Location location) {
+        this.home = location;
+    }
+
+    public Location getHome() {
+        return this.home;
+    }
 
 }
 

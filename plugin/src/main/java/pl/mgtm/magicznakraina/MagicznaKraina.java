@@ -37,6 +37,8 @@ public final class MagicznaKraina extends JavaPlugin {
     private static MainConfig mainConfig;
     private static UsersConfig userConfig;
 
+    public static final boolean ConfigAPIDebug = false;
+
 
     @Override
     public void onEnable() {
@@ -58,6 +60,7 @@ public final class MagicznaKraina extends JavaPlugin {
         userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
 
         PluginManager pm = getServer().getPluginManager();
+
 
         // Register event listeners
         pm.registerEvents(new RespawnEvent(), this);

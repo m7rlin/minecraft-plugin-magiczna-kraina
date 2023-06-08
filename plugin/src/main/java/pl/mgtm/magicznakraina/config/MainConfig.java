@@ -7,6 +7,12 @@ import pl.mgtm.magicznakraina.api.config.annotation.ConfigName;
 @ConfigName("merlin.yml")
 public interface MainConfig extends Config {
 
+    default boolean getDebug() {
+        return false;
+    }
+
+    public void setDebug(boolean debug);
+
     /*
     @Comment("API key")
     default String getApiKey() {
@@ -23,13 +29,18 @@ public interface MainConfig extends Config {
         return new SerduszkoModuleConfig(true, true);
     }
 
+    void setSerduszkoModule(SerduszkoModuleConfig serduszkoModuleConfig);
+
     default CleverSleepModuleConfig getCleverSleepModule() {
         return new CleverSleepModuleConfig(true, 50);
     }
 
+    void setCleverSleepModule(CleverSleepModuleConfig cleverSleepModuleConfig);
     default WelcomeModuleConfig getWelcomeModule() {
         return new WelcomeModuleConfig();
     }
+
+    void setWelcomeModule(WelcomeModuleConfig welcomeModuleConfig);
 
 }
 

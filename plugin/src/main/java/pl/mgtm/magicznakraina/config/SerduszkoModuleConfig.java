@@ -76,6 +76,10 @@ public class SerduszkoModuleConfig implements Serializable {
         return reviveItems;
     }
 
+    public void addReviveItem(ItemStack item) {
+        this.reviveItems.add(item);
+    }
+
     public Integer[] getLevels() {
         return levels;
     }

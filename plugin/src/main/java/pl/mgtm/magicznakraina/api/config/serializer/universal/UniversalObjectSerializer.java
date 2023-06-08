@@ -1,7 +1,9 @@
 package pl.mgtm.magicznakraina.api.config.serializer.universal;
 
 import org.bukkit.Bukkit;
+import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.api.config.BukkitConfiguration;
+import pl.mgtm.magicznakraina.api.config.annotation.ConfigOptional;
 import pl.mgtm.magicznakraina.api.config.exception.InvalidConfigException;
 import pl.mgtm.magicznakraina.api.config.exception.MissingSerializerException;
 import pl.mgtm.magicznakraina.api.config.serializer.Serializer;
@@ -36,14 +38,20 @@ public class UniversalObjectSerializer extends Serializer<Serializable> {
                 }
 
 
-
                 field.setAccessible(true);
                 Object value = field.get(object);
 
-                Bukkit.getLogger().info("OBJECT SERIALIZATION ==========================");
-                Bukkit.getLogger().info(value + "");
+                // Check if field is optional
+                if (field.isAnnotationPresent(ConfigOptional.class)) {
+                    field.setAccessible(false);
+                    if (value == null) continue;
+                }
 
-                Bukkit.getLogger().info("===============================================");
+                if (MagicznaKraina.ConfigAPIDebug)  {
+                    Bukkit.getLogger().info("OBJECT SERIALIZATION ==========================");
+                    Bukkit.getLogger().info(value + "");
+                    Bukkit.getLogger().info("===============================================");
+                }
 
                 try {
                     if (TypeUtils.isSimpleType(field.getType())) {
@@ -97,6 +105,16 @@ public class UniversalObjectSerializer extends Serializer<Serializable> {
                 }
 
                 field.setAccessible(true);
+
+                String fullpath = path + "." + configuration.getNameStyle().format(field.getName());
+
+                // Check if field is optional
+                if (field.isAnnotationPresent(ConfigOptional.class)) {
+                    if (MagicznaKraina.ConfigAPIDebug) {
+                        Bukkit.getLogger().info("...........!!!OBJECT SKIPPED!!!............." + fullpath);
+                    }
+                    if (configuration.get(fullpath) == null) continue;
+                }
 
                 Class<?> type = field.getType();
                 if (TypeUtils.isSimpleType(type)) {
