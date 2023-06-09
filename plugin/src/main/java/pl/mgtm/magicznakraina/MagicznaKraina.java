@@ -9,6 +9,7 @@ import pl.mgtm.magicznakraina.api.economy.DecimalFormats;
 import pl.mgtm.magicznakraina.api.economy.EconomyAPI;
 import pl.mgtm.magicznakraina.api.economy.TaxType;
 import pl.mgtm.magicznakraina.commands.*;
+import pl.mgtm.magicznakraina.config.EconomyModuleConfig;
 import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
@@ -63,8 +64,10 @@ public final class MagicznaKraina extends JavaPlugin {
         userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
         kitsConfig = ConfigAPI.init(KitsConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
 
+        EconomyModuleConfig ecoConfig = mainConfig.getEconomyModule();
+
         // Set EconomyAPI
-        eco = new EconomyAPI(0, TaxType.PERCENTAGE, "$", DecimalFormats.EUROPEAN);
+        eco = new EconomyAPI(0, TaxType.PERCENTAGE, ecoConfig.getCurrencySymbol(), DecimalFormats.EUROPEAN);
 
         PluginManager pm = getServer().getPluginManager();
 

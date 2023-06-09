@@ -64,6 +64,12 @@ public interface MainConfig extends Config {
 
     void setBetterMobsModule(BetterMobsModuleConfig kitsModuleConfig);
 
+    default EconomyModuleConfig getEconomyModule() {
+        return new EconomyModuleConfig(true);
+    }
+
+    void setEconomyModule(EconomyModuleConfig economyModuleConfig);
+
 }
 
 
