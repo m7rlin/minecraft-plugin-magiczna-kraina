@@ -4,20 +4,60 @@ import pl.mgtm.magicznakraina.api.config.Config;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigName;
 
-@ConfigName("test.yml")
+@ConfigName("merlin.yml")
 public interface MainConfig extends Config {
 
-    @Comment("This is a comment for the message key.")
-    default String getMessage() {
-        return "This is the default message";
+    default boolean getDebug() {
+        return false;
     }
 
-    @Comment("This is a comment for the cooldown key.")
-    default int getCooldown() {
-        return 10;
+    public void setDebug(boolean debug);
+
+    /*
+    @Comment("API key")
+    default String getApiKey() {
+        return "YOUR_API_KEY_HERE";
     }
 
-    void setCooldown(int cooldown);
+    @Comment("API server url")
+    default String getApiUrl() {
+        return "https://api.example.com/";
+    }
+    */
+
+    default SerduszkoModuleConfig getSerduszkoModule() {
+        return new SerduszkoModuleConfig(true, true);
+    }
+
+    void setSerduszkoModule(SerduszkoModuleConfig serduszkoModuleConfig);
+
+    default CleverSleepModuleConfig getCleverSleepModule() {
+        return new CleverSleepModuleConfig(true, 50);
+    }
+
+    void setCleverSleepModule(CleverSleepModuleConfig cleverSleepModuleConfig);
+    default WelcomeModuleConfig getWelcomeModule() {
+        return new WelcomeModuleConfig(true);
+    }
+
+    void setWelcomeModule(WelcomeModuleConfig welcomeModuleConfig);
+    default SpawnModuleConfig getSpawnModule() {
+        return new SpawnModuleConfig(true);
+    }
+
+    void setSpawnModule(SpawnModuleConfig spawnModuleConfig);
+
+    default HomeModuleConfig getHomeModule() {
+        return new HomeModuleConfig(true);
+    }
+
+    void setHomeModule(HomeModuleConfig homeModuleConfig);
+    default KitsModuleConfig getKitsModule() {
+        return new KitsModuleConfig(true);
+    }
+
+    void setKitsModule(KitsModuleConfig kitsModuleConfig);
+
 }
 
 

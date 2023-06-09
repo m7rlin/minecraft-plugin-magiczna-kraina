@@ -1,6 +1,7 @@
 package pl.mgtm.magicznakraina.modules.vanish;
 
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.vanish.commands.VanishCommand;
 import pl.mgtm.magicznakraina.modules.vanish.events.JoinLeaveEvent;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
+@ModuleInfo(name = "vanish")
 public class VanishModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();

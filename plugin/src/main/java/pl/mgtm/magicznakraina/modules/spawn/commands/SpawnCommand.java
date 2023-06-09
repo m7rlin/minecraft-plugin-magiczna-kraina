@@ -1,11 +1,11 @@
-package pl.mgtm.magicznakraina.commands;
+package pl.mgtm.magicznakraina.modules.spawn.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.SpawnModuleConfig;
 
 @CommandInfo(name = "spawn", permission = "", requiresPlayer = true)
 public class SpawnCommand extends PluginCommand {
@@ -15,12 +15,12 @@ public class SpawnCommand extends PluginCommand {
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = pl.getConfig();
+        SpawnModuleConfig config = pl.getMainConfig().getSpawnModule();
 
         // Sprawdzamy, czy spawn jest ustawiony
-        if (config.contains("spawn.x") && config.getBoolean("spawn.enabled", false)) {
-            player.teleport(pl.spawnService.getSpawnLocation());
+        if (config.getSpawnEnabled() && config.getSpawn() != null) {
 
+            player.teleport(config.getSpawn());
             player.sendMessage(ChatColor.GREEN + "Przeteleportowano na spawn serwera.");
         } else {
             player.sendMessage(ChatColor.RED + "Wybacz, ale aktualnie nie ma aktywnego spawnu, do którego możesz się przenieść.");

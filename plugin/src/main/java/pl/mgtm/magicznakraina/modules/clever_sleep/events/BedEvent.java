@@ -13,8 +13,7 @@ import pl.mgtm.magicznakraina.MagicznaKraina;
 public class BedEvent implements Listener {
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
 
-    //TODO: add this to config
-    private final int requiredPercentage = 40;
+    private final int requiredPercentage = pl.getMainConfig().getCleverSleepModule().getPlayersInBedPercentage();
 
     @EventHandler
     public void onPlayerBedEnter(PlayerBedEnterEvent event) {

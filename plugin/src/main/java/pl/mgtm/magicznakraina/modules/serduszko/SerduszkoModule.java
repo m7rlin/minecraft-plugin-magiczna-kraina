@@ -2,6 +2,7 @@ package pl.mgtm.magicznakraina.modules.serduszko;
 
 import org.bukkit.ChatColor;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.ReviveCommand;
 import pl.mgtm.magicznakraina.modules.serduszko.commands.SerduszkoCommand;
@@ -9,7 +10,7 @@ import pl.mgtm.magicznakraina.modules.serduszko.events.DeathEvent;
 import pl.mgtm.magicznakraina.modules.serduszko.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.modules.serduszko.events.PreLoginEvent;
 
-
+@ModuleInfo(name = "serduszko")
 public class SerduszkoModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();

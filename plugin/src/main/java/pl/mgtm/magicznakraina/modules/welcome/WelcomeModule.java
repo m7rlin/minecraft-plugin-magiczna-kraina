@@ -4,14 +4,14 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginManager;
 import pl.mgtm.magicznakraina.MagicznaKraina;
+import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.welcome.events.WelcomeMessageEvent;
 
 import java.util.HashMap;
 
-
+@ModuleInfo(name = "welcome")
 public class WelcomeModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
@@ -22,15 +22,15 @@ public class WelcomeModule extends PluginModule {
     public WelcomeModule() {
         super();
 
-        String joinMesssage = pl.getConfig().getString("join-message", "");
-        String leaveMessage = pl.getConfig().getString("leave-message", "");
+        String joinMesssage = pl.getMainConfig().getWelcomeModule().getJoinMessage();
+        String leaveMessage = pl.getMainConfig().getWelcomeModule().getLeaveMessage();
 
-        pl.getLogger().info(joinMesssage + " " + leaveMessage);
+        //pl.getLogger().info(joinMesssage + " " + leaveMessage); // Debug
 
         messages.put("leave-message", leaveMessage);
         messages.put("join-message", joinMesssage);
 
-        pl.getLogger().info(messages.toString());
+        //pl.getLogger().info(messages.toString()); // Debug
 
         // Register events
         super.registerEvents(new WelcomeMessageEvent());
