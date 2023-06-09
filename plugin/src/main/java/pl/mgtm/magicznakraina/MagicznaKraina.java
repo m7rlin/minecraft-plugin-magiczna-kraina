@@ -69,8 +69,6 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
-        getCommand("sethome").setExecutor(new SetHomeCommand());
-        getCommand("home").setExecutor(new HomeCommand());
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
