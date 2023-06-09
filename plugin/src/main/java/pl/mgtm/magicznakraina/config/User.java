@@ -4,7 +4,6 @@ import org.bukkit.Location;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigOptional;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -13,7 +12,11 @@ public class User implements Serializable {
     private int heartsLevel = 0;
 
     @ConfigOptional
+    private boolean bannedOnZeroHearts = false;
+
+    @ConfigOptional
     private Location home;
+
 
     private boolean homeUnlocked = false;
 
@@ -26,6 +29,13 @@ public class User implements Serializable {
 
     public void setHearts(double hearts) {
         this.hearts = hearts;
+    }
+
+    public void addHearts(double hearts) {
+        this.hearts += hearts;
+    }
+    public void removeHearts(double hearts) {
+        this.hearts -= hearts;
     }
 
     @Comment("Players hp.")
@@ -41,6 +51,10 @@ public class User implements Serializable {
         this.heartsLevel = heartsLevel;
     }
 
+    public void addHeartsLevel(int level) {
+        this.heartsLevel += level;
+    }
+
 
     public void setHome(Location location) {
         this.home = location;
@@ -48,6 +62,14 @@ public class User implements Serializable {
 
     public Location getHome() {
         return this.home;
+    }
+
+    public void setBannedOnZeroHearts(boolean status) {
+        this.bannedOnZeroHearts = status;
+    }
+
+    public boolean getBannedOnZeroHearts() {
+        return this.bannedOnZeroHearts;
     }
 
 }

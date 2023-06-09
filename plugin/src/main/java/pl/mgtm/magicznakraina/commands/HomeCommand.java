@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.MainConfig;
 
 @CommandInfo(name = "home", permission = "", requiresPlayer = true)
 public class HomeCommand extends PluginCommand {
@@ -15,6 +16,7 @@ public class HomeCommand extends PluginCommand {
     @Override
     public void execute(Player player, String[] args) {
         super.execute(player, args);
+
 
         FileConfiguration config = pl.getConfig();
 
