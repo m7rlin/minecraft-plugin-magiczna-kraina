@@ -5,6 +5,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.api.config.ConfigAPI;
 import pl.mgtm.magicznakraina.api.config.style.CommentStyle;
 import pl.mgtm.magicznakraina.api.config.style.NameStyle;
+import pl.mgtm.magicznakraina.api.economy.DecimalFormats;
+import pl.mgtm.magicznakraina.api.economy.EconomyAPI;
+import pl.mgtm.magicznakraina.api.economy.TaxType;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
@@ -12,9 +15,8 @@ import pl.mgtm.magicznakraina.config.UsersConfig;
 import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.better_mobs.BetterMobsModule;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
+import pl.mgtm.magicznakraina.modules.economy.EconomyModule;
 import pl.mgtm.magicznakraina.modules.home.HomeModule;
-import pl.mgtm.magicznakraina.modules.home.commands.HomeCommand;
-import pl.mgtm.magicznakraina.modules.home.commands.SetHomeCommand;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
@@ -38,6 +40,8 @@ public final class MagicznaKraina extends JavaPlugin {
 
     public static final boolean ConfigAPIDebug = false;
 
+    private static EconomyAPI eco;
+
 
     @Override
     public void onEnable() {
@@ -58,6 +62,9 @@ public final class MagicznaKraina extends JavaPlugin {
         mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
         userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
         kitsConfig = ConfigAPI.init(KitsConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
+
+        // Set EconomyAPI
+        eco = new EconomyAPI(0, TaxType.PERCENTAGE, "$", DecimalFormats.EUROPEAN);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -91,6 +98,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new SpawnModule();
         new HomeModule();
         new BetterMobsModule();
+        new EconomyModule();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
@@ -124,6 +132,9 @@ public final class MagicznaKraina extends JavaPlugin {
     }
     public static KitsConfig getKitsConfig() {
         return kitsConfig;
+    }
+    public static EconomyAPI getEco() {
+        return eco;
     }
 
 

@@ -33,7 +33,7 @@ public class SilverFishSpawnEvent implements Listener {
 
             // Check if Silverfish should be spawned
             if (spawnChance > 0 && BetterMobsModule.shouldSpawnSilverfish(spawnChance)) {
-                block.getWorld().spawnEntity(block.getLocation(), EntityType.SILVERFISH);
+                block.getWorld().spawnEntity(block.getLocation().add(.5, 0, .5), EntityType.SILVERFISH);
             }
         }
     }

@@ -53,6 +53,18 @@ public class MobDamageEvent implements Listener {
 
                     // Give it the attacker monster
                     ItemStack weapon = player.getInventory().getItemInMainHand();
+
+                    // Get only weapons
+                    if (!weapon.getType().equals(Material.SHIELD)
+                            && !weapon.getType().toString().endsWith("_SWORD")
+                            && !weapon.getType().toString().endsWith("_AXE")
+                            && !weapon.getType().toString().endsWith("_PICKAXE")
+                            && !weapon.getType().toString().endsWith("_SHOVEL")
+                            && !weapon.getType().toString().endsWith("_HOE")
+                    ) {
+                        return;
+                    }
+
                     if (weapon != null && !weapon.getType().equals(Material.AIR)) {
                         player.getInventory().setItemInMainHand(null);
 
