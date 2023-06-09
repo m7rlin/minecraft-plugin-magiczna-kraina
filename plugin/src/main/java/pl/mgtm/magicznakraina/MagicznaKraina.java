@@ -1,6 +1,5 @@
 package pl.mgtm.magicznakraina;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.mgtm.magicznakraina.api.config.ConfigAPI;
@@ -10,16 +9,16 @@ import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
+import pl.mgtm.magicznakraina.module.PluginModuleManager;
+import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.home.HomeModule;
 import pl.mgtm.magicznakraina.modules.home.commands.HomeCommand;
 import pl.mgtm.magicznakraina.modules.home.commands.SetHomeCommand;
-import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
-import pl.mgtm.magicznakraina.module.PluginModuleManager;
-import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
 import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
+import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 import pl.mgtm.magicznakraina.services.TeleportationService;
@@ -37,8 +36,6 @@ public final class MagicznaKraina extends JavaPlugin {
     private static KitsConfig kitsConfig;
 
     public static final boolean ConfigAPIDebug = false;
-
-    private FileConfiguration config;
 
 
     @Override
@@ -129,9 +126,6 @@ public final class MagicznaKraina extends JavaPlugin {
         return kitsConfig;
     }
 
-    public void setConfig(FileConfiguration config) {
-        this.config = config;
-    }
 
 
 }

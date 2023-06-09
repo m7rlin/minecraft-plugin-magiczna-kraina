@@ -1,8 +1,6 @@
 package pl.mgtm.magicznakraina.modules.kits.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
@@ -11,7 +9,6 @@ import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.config.Kit;
 import pl.mgtm.magicznakraina.config.User;
 import pl.mgtm.magicznakraina.config.UserKitConfig;
-import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
 import java.util.HashMap;
 import java.util.List;
