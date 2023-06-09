@@ -18,10 +18,13 @@ import org.checkerframework.checker.units.qual.C;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.User;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @CommandInfo(name = "revive", permission = "", requiresPlayer = false)
 public class ReviveCommand extends PluginCommand {
@@ -38,29 +41,33 @@ public class ReviveCommand extends PluginCommand {
             return;
         }
 
-        ConfigHelpers.createDefaultPlayerReviveConfig();
+        HashMap<String, User> users = pl.getUserConfig().getUsers();
+        if (users == null) users = new HashMap<>();
+
 
         String revivePlayerName = args[0];
         OfflinePlayer reviveOffilinePlayer = pl.getServer().getOfflinePlayer(revivePlayerName);
 
-        if (!ConfigHelpers.userExist(reviveOffilinePlayer.getUniqueId())) {
+        User revivePlayer = users.get(reviveOffilinePlayer.getUniqueId().toString());
+
+        if (revivePlayer == null) {
             sender.sendMessage(ChatColor.RED + "Możesz wskrzesić TYLKO gracza, który grał już na serwerze.");
             return;
         }
 
-        boolean isPlayerBanned = ConfigHelpers.getPlayerZeroHeartsBan(reviveOffilinePlayer.getUniqueId());
-        // Sprawdz czy gracz jest martwy
+        boolean isPlayerBanned = revivePlayer.getBannedOnZeroHearts();
+        // Check if player is dead
         if (!isPlayerBanned) {
             sender.sendMessage(ChatColor.RED + "Możesz wskrzesić TYLKO gracza, który poległ.");
             return;
         }
 
-        // Jest graczem
+        // Sender is player
         if (super.isPlayer(sender)) {
             Player player = (Player) sender;
 
-            ArrayList<ItemStack> requiredItems = ConfigHelpers.getPlayerReviveItems();
-            int requiredLevel = ConfigHelpers.getPlayerReviveLevel();
+            List<ItemStack> requiredItems = pl.getMainConfig().getSerduszkoModule().getReviveItems();
+            int requiredLevel = pl.getMainConfig().getSerduszkoModule().getReviveLevel();
 
             // Validate user
             if (!validateUser(player, requiredItems, requiredLevel)) return;
@@ -68,32 +75,29 @@ public class ReviveCommand extends PluginCommand {
             PlayerInventory playerInventory = player.getInventory();
 
             if (requiredItems.size() != 0) {
-                // Usun przedmioty z ekwipunku gracza
+                // Remove items from players inventory
                 playerInventory.removeItem(requiredItems.toArray(new ItemStack[0]));
             }
 
-            // Zaktualizuj poziom gracza
+            // Update player level
             if (requiredLevel > 0) {
                 player.setLevel(player.getLevel() - requiredLevel);
             }
 
-
-            // Wskrzes gracza
-            ConfigHelpers.setPlayerZeroHeartsBan(reviveOffilinePlayer.getUniqueId(), false);
+            // Revive player
+            revivePlayer.setBannedOnZeroHearts(false);
 
             player.sendMessage(ChatColor.GREEN + "Pomyślnie wskrzeszono gracza '" + revivePlayerName + "'.");
-
-
         } else {
-            // Wskrzes gracza
+            // Revive player
             ConfigHelpers.setPlayerZeroHeartsBan(reviveOffilinePlayer.getUniqueId(), false);
             sender.sendMessage(ChatColor.GREEN + "Pomyślnie wskrzeszono gracza '" + revivePlayerName + "'.");
         }
 
-
+        pl.getUserConfig().setUsers(users);
     }
 
-    private boolean validateUser(Player player, ArrayList<ItemStack> requiredItems, int requiredLevel) {
+    private boolean validateUser(Player player, List<ItemStack> requiredItems, int requiredLevel) {
         // Sprawdz czy gracz posiada wymagany level
         if (requiredLevel > 0) {
             if (player.getLevel() < requiredLevel) {
@@ -118,7 +122,7 @@ public class ReviveCommand extends PluginCommand {
         return true;
     }
 
-    private TextComponent getItemsMessage(ArrayList<ItemStack> requiredItems, int requiredLevel) {
+    private TextComponent getItemsMessage(List<ItemStack> requiredItems, int requiredLevel) {
         TextComponent textComponent = Component.text("Aby wkrzesić gracza musisz spełnić następujące wymogi:", NamedTextColor.GRAY)
                 .append(Component.newline())
                 .append(Component.text("Przedmioty:", NamedTextColor.GRAY))
