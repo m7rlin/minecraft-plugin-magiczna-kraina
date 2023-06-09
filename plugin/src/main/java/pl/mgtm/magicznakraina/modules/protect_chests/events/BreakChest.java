@@ -1,6 +1,5 @@
 package pl.mgtm.magicznakraina.modules.protect_chests.events;
 
-import com.destroystokyo.paper.event.block.TNTPrimeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -13,6 +12,7 @@ import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.TNTPrimeEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -110,9 +110,9 @@ public class BreakChest implements Listener {
     @EventHandler
     public void onBreakChest4(TNTPrimeEvent e) {
         // Tylko gracz
-        if (!(e.getPrimerEntity() instanceof Player)) return;
+        if (!(e.getPrimingEntity() instanceof Player)) return;
 
-        Player player = (Player) e.getPrimerEntity();
+        Player player = (Player) e.getPrimingEntity();
         String playerId = player.getUniqueId().toString();
 
         Block block = e.getBlock();

@@ -8,8 +8,12 @@ import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
+import pl.mgtm.magicznakraina.config.Kit;
+import pl.mgtm.magicznakraina.config.User;
+import pl.mgtm.magicznakraina.config.UserKitConfig;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -21,61 +25,59 @@ public class KitCommand extends PluginCommand {
     public void execute(Player player, String[] args) {
         super.execute(player, args);
 
-        FileConfiguration config = pl.getConfig();
+        HashMap<String, Kit> kits = pl.getKitsConfig().getKits();
+        HashMap<String, Kit> enabledKits = new HashMap<>();
 
-        if (!config.isConfigurationSection("kits")) {
-            player.sendMessage(ChatColor.RED + "Ta funkcja jest obecnie niedostępna.");
-            return;
-        }
+        kits.forEach((key, kit) -> {
+            if (kit.getEnabled()) enabledKits.put(key, kit);
+        });
 
-        Set<String> kits = config.getConfigurationSection("kits").getKeys(false);
+        Set<String> enabledKitNames = enabledKits.keySet();
 
         if (args.length != 0) {
             String chosenKit = args[0].toLowerCase();
 
-            if (!kits.contains(chosenKit)) {
+            if (!enabledKitNames.contains(chosenKit)) {
                 player.sendMessage(ChatColor.RED + "Kit '" + chosenKit + "' nie istnieje!");
-                player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", kits));
+                player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", enabledKitNames));
                 return;
             }
 
-            // Sprawdz czy uzytkownik uzyl wczesniej komendy
-            if (ConfigHelpers.playerUsedKit(player.getUniqueId(), chosenKit)) {
+            HashMap<String, User> users = pl.getUserConfig().getUsers();
+            User user = users.get(player.getUniqueId().toString());
+
+            UserKitConfig userKit = user.getUserKit(chosenKit);
+
+            // Check if user already used that kit
+            if (userKit != null && userKit.getUseCount() > 0) {
                 player.sendMessage(ChatColor.RED + "Kit '" + chosenKit + "' został już użyty!");
                 return;
             }
 
-            for (String kitname : kits) {
-                List<String> kititems = (List<String>) config.getList("kits." + kitname + ".items");
-
+            for (String kitname : enabledKitNames) {
                 if (!kitname.equalsIgnoreCase(chosenKit)) {
                     continue;
                 }
 
-                for (String x : kititems) {
-                    String materialName = x.split(",")[0];
-                    Material itemMaterial = Material.matchMaterial(materialName);
+                Kit choosenKit = enabledKits.get(kitname);
+                List<ItemStack> kitItems = choosenKit.getItems();
 
-                    if (itemMaterial != null) {
-                        Integer amount;
-
-                        try {
-                            amount = Integer.parseInt(x.split(",")[1]);
-                        } catch (NumberFormatException e) {
-                            amount = 1;
-                        }
-
-                        player.getInventory().addItem(new ItemStack(itemMaterial, amount));
-                    }
+                for (ItemStack item : kitItems) {
+                    player.getInventory().addItem(new ItemStack(item));
                 }
             }
 
-            ConfigHelpers.addPlayerKit(player.getUniqueId(), chosenKit);
+            if (userKit == null) userKit = new UserKitConfig(player.getUniqueId().toString());
+            userKit.addUseCount();
 
-            player.sendMessage(ChatColor.GREEN + "Przedmioty z zestawu '" + chosenKit + "' zostały dodane do Twojego ekwipunku.");
+            user.setUserKit(chosenKit, userKit);
+
+            pl.getUserConfig().setUsers(users);
+
+            player.sendMessage(ChatColor.GREEN + "Przedmioty z zestawu '" + ChatColor.GOLD + chosenKit + ChatColor.GREEN + "' zostały dodane do Twojego ekwipunku.");
         } else {
             player.sendMessage(ChatColor.RED + "/kit <nazwa zestawu>");
-            player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", kits));
+            player.sendMessage(ChatColor.GRAY + "Lista dotępnych zestawów: " + ChatColor.WHITE + String.join(", ", enabledKitNames));
 
             //TODO: add gui system for kits
             /*

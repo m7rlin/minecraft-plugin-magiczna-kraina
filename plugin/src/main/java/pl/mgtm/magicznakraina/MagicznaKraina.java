@@ -7,6 +7,7 @@ import pl.mgtm.magicznakraina.api.config.ConfigAPI;
 import pl.mgtm.magicznakraina.api.config.style.CommentStyle;
 import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
+import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
 import pl.mgtm.magicznakraina.modules.home.HomeModule;
@@ -33,6 +34,7 @@ public final class MagicznaKraina extends JavaPlugin {
 
     private static MainConfig mainConfig;
     private static UsersConfig userConfig;
+    private static KitsConfig kitsConfig;
 
     public static final boolean ConfigAPIDebug = false;
 
@@ -57,6 +59,7 @@ public final class MagicznaKraina extends JavaPlugin {
         // Set MAIN plugin config
         mainConfig = ConfigAPI.init(MainConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
         userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
+        kitsConfig = ConfigAPI.init(KitsConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -121,6 +124,9 @@ public final class MagicznaKraina extends JavaPlugin {
     }
     public static UsersConfig getUserConfig() {
         return userConfig;
+    }
+    public static KitsConfig getKitsConfig() {
+        return kitsConfig;
     }
 
     public void setConfig(FileConfiguration config) {

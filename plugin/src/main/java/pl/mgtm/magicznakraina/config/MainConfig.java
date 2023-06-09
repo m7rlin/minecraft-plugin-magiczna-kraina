@@ -37,21 +37,26 @@ public interface MainConfig extends Config {
 
     void setCleverSleepModule(CleverSleepModuleConfig cleverSleepModuleConfig);
     default WelcomeModuleConfig getWelcomeModule() {
-        return new WelcomeModuleConfig();
+        return new WelcomeModuleConfig(true);
     }
 
     void setWelcomeModule(WelcomeModuleConfig welcomeModuleConfig);
     default SpawnModuleConfig getSpawnModule() {
-        return new SpawnModuleConfig();
+        return new SpawnModuleConfig(true);
     }
 
     void setSpawnModule(SpawnModuleConfig spawnModuleConfig);
 
     default HomeModuleConfig getHomeModule() {
-        return new HomeModuleConfig();
+        return new HomeModuleConfig(true);
     }
 
     void setHomeModule(HomeModuleConfig homeModuleConfig);
+    default KitsModuleConfig getKitsModule() {
+        return new KitsModuleConfig(true);
+    }
+
+    void setKitsModule(KitsModuleConfig kitsModuleConfig);
 
 }
 

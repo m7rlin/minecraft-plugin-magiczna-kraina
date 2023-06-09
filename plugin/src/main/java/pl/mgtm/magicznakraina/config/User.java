@@ -5,6 +5,7 @@ import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigOptional;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class User implements Serializable {
     private transient String username;
@@ -22,6 +23,9 @@ public class User implements Serializable {
 
     @ConfigOptional
     private boolean enderchestUnlocked = false;
+
+    @ConfigOptional
+    private HashMap<String, UserKitConfig> kits;
 
     public User() {
     }
@@ -81,6 +85,23 @@ public class User implements Serializable {
 
     public boolean getBannedOnZeroHearts() {
         return this.bannedOnZeroHearts;
+    }
+
+    public HashMap<String, UserKitConfig> getUserKits() { return kits; }
+    public void setUserKits(HashMap<String, UserKitConfig> kits) { this.kits = kits; }
+    public void setUserKit(String kitname,  UserKitConfig kit) {
+        if (kits == null) kits = new HashMap<>();
+        kits.put(kitname,kit);
+    }
+
+    public boolean hasKit(String kitname) {
+        if (kits != null && kits.get(kitname) != null) return true;
+        return false;
+    }
+
+    public UserKitConfig getUserKit(String kitname) {
+        if (kits == null) return null;
+        return kits.get(kitname);
     }
 
 }

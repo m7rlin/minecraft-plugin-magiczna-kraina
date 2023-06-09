@@ -1,13 +1,11 @@
 package pl.mgtm.magicznakraina.config;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SerduszkoModuleConfig implements Serializable {
@@ -24,9 +22,9 @@ public class SerduszkoModuleConfig implements Serializable {
     private boolean banOnZeroHearts = true;
     // Items required for revive. The items will be taken away.
     // If the list is empty it will take 50 levels by default to revive a player.
-    private List<ItemStack> reviveItems = Arrays.asList(new ItemStack(Material.DIAMOND, 64));
+    private List<ItemStack> reviveItems;
     // Revive level
-    private int reviveLevel = 50;
+    private int reviveLevel = 30;
     //
     private Integer[] levels = { 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 22, 24, 26, 27, 28, 29, 30, 31, 33, 35, 36, 37, 38, 39, 40 };
 
@@ -36,6 +34,13 @@ public class SerduszkoModuleConfig implements Serializable {
     public SerduszkoModuleConfig(boolean moduleEnabled, boolean playerReviveEnabled) {
         this.enabled = moduleEnabled;
         this.playerReviveEnabled = playerReviveEnabled;
+
+        List<ItemStack> reviveItems = new ArrayList<>();
+        reviveItems.add(new ItemStack(Material.DIAMOND, 64));
+        reviveItems.add(new ItemStack(Material.GOLD_INGOT, 32));
+        reviveItems.add(new ItemStack(Material.GOLDEN_APPLE, 2));
+        reviveItems.add(new ItemStack(Material.ENDER_PEARL, 4));
+        this.reviveItems = reviveItems;
     }
 
     public boolean getEnabled() {

@@ -6,11 +6,20 @@ import java.io.Serializable;
 
 public class WelcomeModuleConfig implements Serializable {
 
+    // Module status on/off
+    private boolean enabled;
+
     private String joinMessage = "<gray>[<green>+<gray>] <user>";
     private String leaveMessage = "<gray>[<red>-<gray>] <user>";
 
-    public WelcomeModuleConfig() {
+    public WelcomeModuleConfig() {}
+    public WelcomeModuleConfig(boolean moduleEnabled) { enabled = moduleEnabled; }
 
+    public boolean getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean status) {
+        enabled = status;
     }
 
     @Comment("Player joins the server.")

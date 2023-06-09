@@ -1,17 +1,20 @@
 package pl.mgtm.magicznakraina.modules.kits;
 
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public class MinecraftKit {
     String name;
-    String label;
-    Boolean useOnce = true;
 
-    Integer delay = 0;
+    ItemStack itemSlot;
 
-    ItemStack[] items;
+    int delay = 0;
+    int uses = 0;
 
-    // Kit item
-    Material icon = Material.WOODEN_PICKAXE;
+    List<ItemStack> items;
+
+    public MinecraftKit() {
+
+    }
 }
