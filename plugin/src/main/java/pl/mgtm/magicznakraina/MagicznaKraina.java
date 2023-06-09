@@ -9,6 +9,9 @@ import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
+import pl.mgtm.magicznakraina.modules.home.HomeModule;
+import pl.mgtm.magicznakraina.modules.home.commands.HomeCommand;
+import pl.mgtm.magicznakraina.modules.home.commands.SetHomeCommand;
 import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
 import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
@@ -78,23 +81,16 @@ public final class MagicznaKraina extends JavaPlugin {
 
         this.teleportationService = new TeleportationService();
 
-        // Initialize "Protected Chests" module
+        // Loading modules
         new ProtectedChestsModule();
-        // Initialize "Kits" module
         new KitsModule();
-        // Initialize "Serduszko" module
         serduszkoModule = new SerduszkoModule();
-        // Initialize "Cleever Sleep" module
         new CleverSleepModule();
-        // Initialize "Vanish" module
         new VanishModule();
-        // Initialize "Welcome" module
         new WelcomeModule();
         new ResetWorldsModule();
         new SpawnModule();
-
-        // Load config
-        //ConfigHelpers.loadConfig();
+        new HomeModule();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
