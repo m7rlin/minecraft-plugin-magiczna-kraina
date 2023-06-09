@@ -63,3 +63,5 @@ commands:
       - v
   resetworlds:
     description: Resetuje nether i end.
+  money:
+    description: Pokazuje ile masz pieniędzy.

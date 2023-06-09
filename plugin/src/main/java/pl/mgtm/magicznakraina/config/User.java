@@ -27,6 +27,8 @@ public class User implements Serializable {
     @ConfigOptional
     private HashMap<String, UserKitConfig> kits;
 
+    private int money = 0;
+
     public User() {
     }
 
@@ -41,6 +43,7 @@ public class User implements Serializable {
     public void addHearts(double hearts) {
         this.hearts += hearts;
     }
+
     public void removeHearts(double hearts) {
         this.hearts -= hearts;
     }
@@ -87,11 +90,17 @@ public class User implements Serializable {
         return this.bannedOnZeroHearts;
     }
 
-    public HashMap<String, UserKitConfig> getUserKits() { return kits; }
-    public void setUserKits(HashMap<String, UserKitConfig> kits) { this.kits = kits; }
-    public void setUserKit(String kitname,  UserKitConfig kit) {
+    public HashMap<String, UserKitConfig> getUserKits() {
+        return kits;
+    }
+
+    public void setUserKits(HashMap<String, UserKitConfig> kits) {
+        this.kits = kits;
+    }
+
+    public void setUserKit(String kitname, UserKitConfig kit) {
         if (kits == null) kits = new HashMap<>();
-        kits.put(kitname,kit);
+        kits.put(kitname, kit);
     }
 
     public boolean hasKit(String kitname) {
@@ -102,6 +111,22 @@ public class User implements Serializable {
     public UserKitConfig getUserKit(String kitname) {
         if (kits == null) return null;
         return kits.get(kitname);
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
+    public void removeMoney(int money) {
+        this.money -= money;
     }
 
 }
