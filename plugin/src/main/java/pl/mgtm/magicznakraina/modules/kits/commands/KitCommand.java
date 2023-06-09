@@ -6,8 +6,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import pl.mgtm.magicznakraina.MagicznaKraina;
-import pl.mgtm.magicznakraina.api.gui.GUIAPI;
-import pl.mgtm.magicznakraina.api.gui.GUIItem;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.helpers.ConfigHelpers;

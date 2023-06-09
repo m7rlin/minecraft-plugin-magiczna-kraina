@@ -9,8 +9,7 @@ import pl.mgtm.magicznakraina.api.config.style.NameStyle;
 import pl.mgtm.magicznakraina.commands.*;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
-import pl.mgtm.magicznakraina.events.RespawnEvent;
-import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
+import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
 import pl.mgtm.magicznakraina.module.PluginModuleManager;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.kits.KitsModule;
@@ -19,17 +18,12 @@ import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
-import pl.mgtm.magicznakraina.services.SpawnService;
 import pl.mgtm.magicznakraina.services.TeleportationService;
 
 public final class MagicznaKraina extends JavaPlugin {
     private static MagicznaKraina instance;
 
     private static PluginModuleManager pluginModuleManager;
-
-    private FileConfiguration config;
-
-    public SpawnService spawnService;
     public TeleportationService teleportationService;
 
     public SerduszkoModule serduszkoModule;
@@ -38,6 +32,8 @@ public final class MagicznaKraina extends JavaPlugin {
     private static UsersConfig userConfig;
 
     public static final boolean ConfigAPIDebug = false;
+
+    private FileConfiguration config;
 
 
     @Override
@@ -63,7 +59,6 @@ public final class MagicznaKraina extends JavaPlugin {
 
 
         // Register event listeners
-        pm.registerEvents(new RespawnEvent(), this);
         //pm.registerEvents(new ExplosiveArrowEvent(), this); // do not register on production
 
         // Register commands
@@ -73,8 +68,6 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("tpdeny").setExecutor(new TpaCommand());
         getCommand("sethome").setExecutor(new SetHomeCommand());
         getCommand("home").setExecutor(new HomeCommand());
-        getCommand("spawn").setExecutor(new SpawnCommand());
-        getCommand("setspawn").setExecutor(new SetSpawnCommand());
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("broadcast").setExecutor(new BroadcastCommand());
@@ -82,9 +75,6 @@ public final class MagicznaKraina extends JavaPlugin {
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("fly").setExecutor(new FlyCommand());
 
-        // Initialize services
-        this.spawnService = new SpawnService();
-        this.spawnService.loadSpawnLocation();
 
         this.teleportationService = new TeleportationService();
 
@@ -101,6 +91,7 @@ public final class MagicznaKraina extends JavaPlugin {
         // Initialize "Welcome" module
         new WelcomeModule();
         new ResetWorldsModule();
+        new SpawnModule();
 
         // Load config
         //ConfigHelpers.loadConfig();
@@ -113,9 +104,6 @@ public final class MagicznaKraina extends JavaPlugin {
         getLogger().info("MagicznaKraina has been shutdown!");
     }
 
-    public void setConfig(FileConfiguration config) {
-        this.config = config;
-    }
 
     // Get plugin instance
     public static MagicznaKraina getInstance() {
@@ -137,6 +125,10 @@ public final class MagicznaKraina extends JavaPlugin {
     }
     public static UsersConfig getUserConfig() {
         return userConfig;
+    }
+
+    public void setConfig(FileConfiguration config) {
+        this.config = config;
     }
 
 

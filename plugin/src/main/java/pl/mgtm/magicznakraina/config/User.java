@@ -20,6 +20,9 @@ public class User implements Serializable {
 
     private boolean homeUnlocked = false;
 
+    @ConfigOptional
+    private boolean enderchestUnlocked = false;
+
     public User() {
     }
 
@@ -62,6 +65,14 @@ public class User implements Serializable {
 
     public Location getHome() {
         return this.home;
+    }
+
+    public void setEnderchestUnlocked(boolean enderchestUnlocked) {
+        this.enderchestUnlocked = enderchestUnlocked;
+    }
+
+    public boolean getEnderchestUnlocked() {
+        return this.enderchestUnlocked;
     }
 
     public void setBannedOnZeroHearts(boolean status) {

@@ -44,7 +44,6 @@ public class TestCommand extends PluginCommand {
                 userconfig.setHearts(userconfig.getHearts() + 1);
 
                 player.sendMessage("newusers2: " + userconfig.getHearts());
-                player.sendMessage("test" + pl.getUserConfig().getTest());
 
 
                 pl.getUserConfig().setUsers(users);

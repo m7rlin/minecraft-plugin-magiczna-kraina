@@ -1,28 +1,19 @@
 package pl.mgtm.magicznakraina.modules.serduszko.commands;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.ComponentBuilder;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.checkerframework.checker.units.qual.C;
 import pl.mgtm.magicznakraina.MagicznaKraina;
 import pl.mgtm.magicznakraina.command.CommandInfo;
 import pl.mgtm.magicznakraina.command.PluginCommand;
 import pl.mgtm.magicznakraina.config.User;
-import pl.mgtm.magicznakraina.helpers.ConfigHelpers;
 
-import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,7 +81,7 @@ public class ReviveCommand extends PluginCommand {
             player.sendMessage(ChatColor.GREEN + "Pomyślnie wskrzeszono gracza '" + revivePlayerName + "'.");
         } else {
             // Revive player
-            ConfigHelpers.setPlayerZeroHeartsBan(reviveOffilinePlayer.getUniqueId(), false);
+            revivePlayer.setBannedOnZeroHearts(false);
             sender.sendMessage(ChatColor.GREEN + "Pomyślnie wskrzeszono gracza '" + revivePlayerName + "'.");
         }
 

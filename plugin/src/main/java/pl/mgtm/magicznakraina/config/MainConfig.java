@@ -41,6 +41,11 @@ public interface MainConfig extends Config {
     }
 
     void setWelcomeModule(WelcomeModuleConfig welcomeModuleConfig);
+    default SpawnModuleConfig getSpawnModule() {
+        return new SpawnModuleConfig();
+    }
+
+    void setSpawnModule(SpawnModuleConfig spawnModuleConfig);
 
 }
 
