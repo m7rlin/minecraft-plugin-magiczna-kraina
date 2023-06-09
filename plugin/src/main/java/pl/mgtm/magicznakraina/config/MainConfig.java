@@ -4,7 +4,7 @@ import pl.mgtm.magicznakraina.api.config.Config;
 import pl.mgtm.magicznakraina.api.config.annotation.Comment;
 import pl.mgtm.magicznakraina.api.config.annotation.ConfigName;
 
-@ConfigName("merlin.yml")
+@ConfigName("config.yml")
 public interface MainConfig extends Config {
 
     default boolean getDebug() {
@@ -57,6 +57,12 @@ public interface MainConfig extends Config {
     }
 
     void setKitsModule(KitsModuleConfig kitsModuleConfig);
+
+    default BetterMobsModuleConfig getBetterMobsModule() {
+        return new BetterMobsModuleConfig(true);
+    }
+
+    void setBetterMobsModule(BetterMobsModuleConfig kitsModuleConfig);
 
 }
 

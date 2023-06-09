@@ -10,6 +10,7 @@ import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
 import pl.mgtm.magicznakraina.module.PluginModuleManager;
+import pl.mgtm.magicznakraina.modules.better_mobs.BetterMobsModule;
 import pl.mgtm.magicznakraina.modules.clever_sleep.CleverSleepModule;
 import pl.mgtm.magicznakraina.modules.home.HomeModule;
 import pl.mgtm.magicznakraina.modules.home.commands.HomeCommand;
@@ -89,6 +90,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new ResetWorldsModule();
         new SpawnModule();
         new HomeModule();
+        new BetterMobsModule();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
