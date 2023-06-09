@@ -15,10 +15,15 @@ public class PreLoginEvent implements Listener {
         Player player = event.getPlayer();
 
         User user = pl.getUserConfig().getUsers().get(player.getUniqueId().toString());
-        if (user == null) event.allow();
+        if (user == null) {
+            event.allow();
+            return;
+        }
 
         if (user.getBannedOnZeroHearts()) {
             event.disallow(PlayerLoginEvent.Result.KICK_OTHER, pl.serduszkoModule.getBannedPlayerMessage());
+        } else {
+            event.allow();
         }
     }
 

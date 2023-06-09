@@ -11,9 +11,9 @@ import java.util.Map;
 @ConfigName("users.yml")
 public interface UsersConfig extends Config {
 
-    default String getTest() {
+    /*default String getTest() {
         return "merlin is here";
-    }
+    }*/
 
    @ConfigOptional
     default HashMap<String, User> getUsers() {
