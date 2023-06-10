@@ -14,6 +14,11 @@ public class PreLoginEvent implements Listener {
     public void onPlayerJoinServer(PlayerLoginEvent event) {
         Player player = event.getPlayer();
 
+        if (pl.getUserConfig().getUsers() == null) {
+            event.allow();
+            return;
+        }
+
         User user = pl.getUserConfig().getUsers().get(player.getUniqueId().toString());
         if (user == null) {
             event.allow();

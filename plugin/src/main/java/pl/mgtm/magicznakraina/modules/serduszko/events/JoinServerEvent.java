@@ -24,7 +24,9 @@ public class JoinServerEvent implements Listener {
 
         // Add new user to config
         if (users.get(uuid) == null) {
-            users.put(uuid, new User(player.getName()));
+            User user = new User(player.getName());
+            user.setHearts(pl.getMainConfig().getSerduszkoModule().getDefaultHearts());
+            users.put(uuid, user);
             pl.getUserConfig().setUsers(users);
         }
 

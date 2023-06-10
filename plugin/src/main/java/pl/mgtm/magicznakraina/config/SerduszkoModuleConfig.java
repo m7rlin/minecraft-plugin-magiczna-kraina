@@ -15,9 +15,9 @@ public class SerduszkoModuleConfig implements Serializable {
     // Can players be revived
     private boolean playerReviveEnabled;
     // Default hearts when new user joined the server
-    private double defaultHearts = 6.0;
+    private double defaultHearts;
     // Max hearts player can get
-    private double heartsLimit = 40.0;
+    private double heartsLimit;
     // When player hearts reach 0 HP he will be banned.
     private boolean banOnZeroHearts = true;
     // Items required for revive. The items will be taken away.
@@ -26,14 +26,18 @@ public class SerduszkoModuleConfig implements Serializable {
     // Revive level
     private int reviveLevel = 30;
     //
-    private Integer[] levels = { 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 22, 24, 26, 27, 28, 29, 30, 31, 33, 35, 36, 37, 38, 39, 40 };
+    private Integer[] levels = {1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 7, 10, 11, 12, 13, 14, 15, 16, 17, 20, 22, 24, 26, 27, 28, 29, 30, 31, 33, 35, 36, 37, 38, 39, 40};
 
     public SerduszkoModuleConfig() {
     }
 
-    public SerduszkoModuleConfig(boolean moduleEnabled, boolean playerReviveEnabled) {
+    public SerduszkoModuleConfig(boolean moduleEnabled, boolean playerReviveEnabled, double defaultHearts, double heartsLimit, boolean banOnZeroHearts) {
         this.enabled = moduleEnabled;
         this.playerReviveEnabled = playerReviveEnabled;
+
+        this.setHeartsLimit(heartsLimit);
+        this.setDefaultHearts(defaultHearts);
+        this.setBanOnZeroHearts(banOnZeroHearts);
 
         List<ItemStack> reviveItems = new ArrayList<>();
         reviveItems.add(new ItemStack(Material.DIAMOND, 64));
@@ -87,5 +91,13 @@ public class SerduszkoModuleConfig implements Serializable {
 
     public Integer[] getLevels() {
         return levels;
+    }
+
+    public boolean getBanOnZeroHearts() {
+        return banOnZeroHearts;
+    }
+
+    public void setBanOnZeroHearts(boolean status) {
+        banOnZeroHearts = status;
     }
 }
