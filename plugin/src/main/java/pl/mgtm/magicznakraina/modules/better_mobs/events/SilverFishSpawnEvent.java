@@ -15,7 +15,7 @@ public class SilverFishSpawnEvent implements Listener {
         Block block = event.getBlock();
 
         // Check if the broken block is Stone
-        if (block.getType() == Material.STONE) {
+        if (block.getType() == Material.STONE || block.getType() == Material.DEEPSLATE) {
             // Get the Y-coordinate of the broken block
             int blockY = block.getLocation().getBlockY();
 
