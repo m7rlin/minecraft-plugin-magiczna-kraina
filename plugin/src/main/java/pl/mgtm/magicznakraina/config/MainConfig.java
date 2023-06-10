@@ -26,7 +26,7 @@ public interface MainConfig extends Config {
     */
 
     default SerduszkoModuleConfig getSerduszkoModule() {
-        return new SerduszkoModuleConfig(true, true);
+        return new SerduszkoModuleConfig(true, true, 10.0, 40.0, true);
     }
 
     void setSerduszkoModule(SerduszkoModuleConfig serduszkoModuleConfig);
