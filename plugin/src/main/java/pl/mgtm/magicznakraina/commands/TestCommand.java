@@ -1,7 +1,9 @@
 package pl.mgtm.magicznakraina.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -85,6 +87,8 @@ public class TestCommand extends PluginCommand {
                 }
 
                 player.sendMessage(ChatColor.GREEN + "new item has been added");
+            } else if (args[0].equalsIgnoreCase("sound")) {
+
             }
         }
 

@@ -70,6 +70,12 @@ public interface MainConfig extends Config {
 
     void setEconomyModule(EconomyModuleConfig economyModuleConfig);
 
+    default TimeMessagesModuleConfig getTimeMessagesModule() {
+        return new TimeMessagesModuleConfig(true);
+    }
+
+    void setTimeMessagesModule(TimeMessagesModuleConfig timeMessagesModuleConfig);
+
 }
 
 

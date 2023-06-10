@@ -23,6 +23,7 @@ import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
+import pl.mgtm.magicznakraina.modules.time_messages.TimeMessagesModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 import pl.mgtm.magicznakraina.services.TeleportationService;
@@ -102,6 +103,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new HomeModule();
         new BetterMobsModule();
         new EconomyModule();
+        new TimeMessagesModule();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
