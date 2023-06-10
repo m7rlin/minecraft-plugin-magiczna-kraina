@@ -7,14 +7,16 @@ public class TimeMessage implements Serializable {
 
     private boolean enabled = false;
     private int interval;
+    private int delay;
 
     private List<String> content;
 
     public TimeMessage() {
     }
 
-    public TimeMessage(int interval, List<String> content) {
+    public TimeMessage(List<String> content, int interval, int delay) {
         this.interval = interval;
+        this.delay = delay;
         this.content = content;
     }
 
@@ -32,6 +34,14 @@ public class TimeMessage implements Serializable {
 
     public int getInterval() {
         return interval;
+    }
+
+    public void setDelay(int status) {
+        delay = status;
+    }
+
+    public int getDelay() {
+        return delay;
     }
 
     public void setContent(List<String> content) {

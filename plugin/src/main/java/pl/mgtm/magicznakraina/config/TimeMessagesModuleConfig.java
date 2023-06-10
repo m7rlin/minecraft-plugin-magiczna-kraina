@@ -27,7 +27,7 @@ public class TimeMessagesModuleConfig implements Serializable {
         List<String> messages = new ArrayList<>();
         messages.add("hi ok");
 
-        TimeMessage timeMessage = new TimeMessage(2, messages);
+        TimeMessage timeMessage = new TimeMessage(messages, 2, 0);
         timeMessages.add(timeMessage);
 
         this.messages = timeMessages;

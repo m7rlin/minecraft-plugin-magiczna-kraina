@@ -31,6 +31,7 @@ public class TimeMessagesModule extends PluginModule {
         for (TimeMessage timeMessage : timeMessages) {
             List<String> content = timeMessage.getContent();
             int interval = timeMessage.getInterval();
+            int delay = timeMessage.getDelay();
 
             if (!timeMessage.getEnabled()) continue;
             new BukkitRunnable() {
@@ -42,7 +43,7 @@ public class TimeMessagesModule extends PluginModule {
                     Bukkit.broadcast(message);
                 }
 
-            }.runTaskTimerAsynchronously(pl, 0L, 20L * interval);
+            }.runTaskTimerAsynchronously(pl, (delay > 0) ? delay * 20L : 0L, 20L * interval);
 
 
         }
