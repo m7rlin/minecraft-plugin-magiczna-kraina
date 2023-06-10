@@ -37,7 +37,7 @@ public class MobDamageEvent implements Listener {
                     || event.getDamager().getType().equals(EntityType.SPIDER)) {
 
                 // Blast the player into the air
-                if (random.nextInt(1) == 0) { // 10% chance
+                if (random.nextInt(4) == 0) { // 25% chance
                     //player.sendMessage("To the air!");
 
                     // Only works when player is jumping
@@ -47,7 +47,7 @@ public class MobDamageEvent implements Listener {
                     player.setVelocity(player.getVelocity().add(new Vector(0, 1, 0)));
                 }
                 // Take away player's weapon
-                if (random.nextInt(2) == 0) { // 1% chance
+                if (random.nextInt(50) == 0) { // 2% chance
                     // Remove player hand item
                     //player.getInventory().setItemInMainHand(null);
 
