@@ -64,6 +64,18 @@ public interface MainConfig extends Config {
 
     void setBetterMobsModule(BetterMobsModuleConfig kitsModuleConfig);
 
+    default EconomyModuleConfig getEconomyModule() {
+        return new EconomyModuleConfig(true);
+    }
+
+    void setEconomyModule(EconomyModuleConfig economyModuleConfig);
+
+    default TimeMessagesModuleConfig getTimeMessagesModule() {
+        return new TimeMessagesModuleConfig(true);
+    }
+
+    void setTimeMessagesModule(TimeMessagesModuleConfig timeMessagesModuleConfig);
+
 }
 
 

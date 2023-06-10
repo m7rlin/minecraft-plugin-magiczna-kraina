@@ -9,6 +9,7 @@ import pl.mgtm.magicznakraina.api.economy.DecimalFormats;
 import pl.mgtm.magicznakraina.api.economy.EconomyAPI;
 import pl.mgtm.magicznakraina.api.economy.TaxType;
 import pl.mgtm.magicznakraina.commands.*;
+import pl.mgtm.magicznakraina.config.EconomyModuleConfig;
 import pl.mgtm.magicznakraina.config.KitsConfig;
 import pl.mgtm.magicznakraina.config.MainConfig;
 import pl.mgtm.magicznakraina.config.UsersConfig;
@@ -22,6 +23,7 @@ import pl.mgtm.magicznakraina.modules.protect_chests.ProtectedChestsModule;
 import pl.mgtm.magicznakraina.modules.reset_worlds.ResetWorldsModule;
 import pl.mgtm.magicznakraina.modules.serduszko.SerduszkoModule;
 import pl.mgtm.magicznakraina.modules.spawn.SpawnModule;
+import pl.mgtm.magicznakraina.modules.time_messages.TimeMessagesModule;
 import pl.mgtm.magicznakraina.modules.vanish.VanishModule;
 import pl.mgtm.magicznakraina.modules.welcome.WelcomeModule;
 import pl.mgtm.magicznakraina.services.TeleportationService;
@@ -63,8 +65,10 @@ public final class MagicznaKraina extends JavaPlugin {
         userConfig = ConfigAPI.init(UsersConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
         kitsConfig = ConfigAPI.init(KitsConfig.class, NameStyle.UNDERSCORE, CommentStyle.ABOVE_CONTENT, false, this);
 
+        EconomyModuleConfig ecoConfig = mainConfig.getEconomyModule();
+
         // Set EconomyAPI
-        eco = new EconomyAPI(0, TaxType.PERCENTAGE, "$", DecimalFormats.EUROPEAN);
+        eco = new EconomyAPI(0, TaxType.PERCENTAGE, ecoConfig.getCurrencySymbol(), DecimalFormats.EUROPEAN);
 
         PluginManager pm = getServer().getPluginManager();
 
@@ -99,6 +103,7 @@ public final class MagicznaKraina extends JavaPlugin {
         new HomeModule();
         new BetterMobsModule();
         new EconomyModule();
+        new TimeMessagesModule();
 
         getLogger().info("MagicznaKraina has been successfully loaded!");
     }
