@@ -30,12 +30,12 @@ jobs:
         id: actions_project_version_check
         with:
             token: ${{ secrets.GITHUB_TOKEN }}
-            file-to-check: pom.xml
+            file-to-check: plugin/pom.xml
             
       - name: use-version-from-check
         run: echo "New version is:" ${{ steps.actions_project_version_check.outputs.version }}
 
       - uses: actions/upload-artifact@v3
         with:
-          name: MagicznaKraina-v${{ env.RELEASE_VERSION }}
+          name: MagicznaKraina-v${{ steps.actions_project_version_check.outputs.version }}
           path: staging
