@@ -59,6 +59,6 @@ jobs:
               with:
                   generateReleaseNotes: true
                   bodyFile: 'changelog-release.md'
-                  artifacts: "staging/MagicznaKraina*.jar"
+                  artifacts: "staging/MagicznaKraina*.zip"
                 
         
