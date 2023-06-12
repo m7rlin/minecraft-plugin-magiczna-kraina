@@ -27,4 +27,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: MagicznaKraina
-          path: /home/runner/work/[**]/.jar
+          path: [**]/.jar
