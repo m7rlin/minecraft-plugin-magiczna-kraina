@@ -2,6 +2,7 @@ name: Java CI
 
 on:
     push:
+        branches: [ master ]
         tags:
             - 'v*'
             
@@ -25,7 +26,8 @@ jobs:
         uses: pr-mpt/actions-commit-hash@v2
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+#         run: mvn -B package --file pom.xml
+        run: mvn clean package
 
       - uses: actions/upload-artifact@v3
         with:
