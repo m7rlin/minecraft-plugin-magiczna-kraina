@@ -23,12 +23,8 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B package --file ./plugin/pom.xml
-#         run: mvn clean package
-        
-      - run: mkdir -p path/to/artifact
-      - run: echo hello > path/to/artifact/world.txt
 
       - uses: actions/upload-artifact@v3
         with:
           name: MagicznaKraina
-          path: path/to/artifact/world.txt
+          path: home/runner/work/[**]/.jar
