@@ -28,10 +28,10 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file ./plugin/pom.xml
 #         run: mvn clean package
+        
+      - run: mkdir output && cp target/*.jar output
 
       - uses: actions/upload-artifact@v3
         with:
           name: MagicznaKraina-${{ steps.commit.outputs.short }}.zip
-          path: |
-            build/libs/
-            LICENSE.txt
+          path: output
