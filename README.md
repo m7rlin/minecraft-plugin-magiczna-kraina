@@ -20,7 +20,7 @@ This plugin adds new mobs and functionality to the game, making it more challeng
 | Name              | Value        |
 |-------------------|--------------|
 | Java version      | 17           |
-| Minecraft version | 1.20         |
+| Minecraft version | 1.20.1       |
 | IDE               | InteliJ IDEA |
 
 ## Errors, suggestions
