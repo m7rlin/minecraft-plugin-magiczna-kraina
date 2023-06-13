@@ -24,7 +24,7 @@ jobs:
           - name: Build with Maven
             run: |
                 mvn -B package --file ./plugin/pom.xml
-                mkdir staging && cp plugin/target/original-*.jar staging/MagicznaKraina-v$Project_Version.jar
+                mkdir staging && cp plugin/target/original-*.jar "staging/MagicznaKraina-v$Project_Version.jar"
             env:
                 Project_Version: ${{ steps.actions_project_version_check.outputs.version }}
 
