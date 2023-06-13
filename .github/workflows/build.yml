@@ -26,7 +26,7 @@ jobs:
                 mvn -B package --file ./plugin/pom.xml
                 mkdir staging && cp plugin/target/original-*.jar "staging/MagicznaKraina-v$Project_Version.jar"
             env:
-                Project_Version: ${{ steps.actions_project_version_check.outputs.version }}
+                Project_Version: "${{ steps.actions_project_version_check.outputs.version }}5"
 
           - name: Get project version
             uses: avides/actions-project-version-check@v1.4.0
