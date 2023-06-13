@@ -63,10 +63,6 @@ jobs:
             - name: Display structure of downloaded files
               run: ls -R
               working-directory: downloads
-              
-            - name: Display structure of downloaded files (target)
-              run: ls -R
-              working-directory: plugin/target
             
             - name: create release
               uses: ncipollo/release-action@v1
