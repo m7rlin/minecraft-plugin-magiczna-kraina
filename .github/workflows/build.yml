@@ -8,6 +8,7 @@ on:
             
 jobs:
     build:
+        name: Build
         runs-on: ubuntu-latest
 
         steps:
@@ -57,7 +58,7 @@ jobs:
             - name: Download artifact
               uses: actions/download-artifact@master
               with:
-                name: MagicznaKraina-v1.5.0
+                name: 'MagicznaKraina-v1.5.0'
                 path: downloads
                 
             - name: Display structure of downloaded files
