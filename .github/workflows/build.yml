@@ -69,6 +69,6 @@ jobs:
               with:
                   generateReleaseNotes: true
                   bodyFile: 'changelog-release.md'
-                  artifacts: staging/**
+                  artifacts: downloads/**
                 
         
