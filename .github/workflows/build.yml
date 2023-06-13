@@ -20,14 +20,7 @@ jobs:
               java-version: '17'
               distribution: 'adopt'
               cache: maven
-
-          - name: Build with Maven
-            run: |
-                mvn -B package --file ./plugin/pom.xml
-                mkdir staging && cp plugin/target/original-*.jar "staging/MagicznaKraina-v$Project_Version.jar"
-            env:
-                Project_Version: "${{ steps.actions_project_version_check.outputs.version }}5"
-
+              
           - name: Get project version
             uses: avides/actions-project-version-check@v1.4.0
             id: actions_project_version_check
@@ -39,6 +32,13 @@ jobs:
           - name: Display version (debug)
             run: echo "New version is:" ${{ steps.actions_project_version_check.outputs.version }}
 
+          - name: Build with Maven
+            run: |
+                mvn -B package --file ./plugin/pom.xml
+                mkdir staging && cp plugin/target/original-*.jar "staging/MagicznaKraina-v$Project_Version.jar"
+            env:
+                Project_Version: ${{ steps.actions_project_version_check.outputs.version }}
+                
           - name: Upload jar file as .zip
             uses: actions/upload-artifact@v3
             with:
@@ -81,6 +81,6 @@ jobs:
               with:
                   generateReleaseNotes: true
                   bodyFile: 'changelog-release.md'
-                  artifacts: downloads/MagicznaKraina.jar
+                  artifacts: downloads/MagicznaKraina-v${{ steps.actions_project_version_check.outputs.version }}.jar
                 
         
