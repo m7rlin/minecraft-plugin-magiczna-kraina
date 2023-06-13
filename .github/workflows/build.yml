@@ -2,6 +2,7 @@ name: Java CI
 
 on:
     push:
+        branches: [dev]
         tags:
             - 'v*'
             
@@ -41,6 +42,7 @@ jobs:
             with:
               name: MagicznaKraina-v${{ steps.actions_project_version_check.outputs.version }}
               path: staging/MagicznaKraina.jar
+              if-no-files-found: error
     release:
         needs: [build]
         runs-on: ubuntu-latest
@@ -57,6 +59,6 @@ jobs:
               with:
                   generateReleaseNotes: true
                   bodyFile: 'changelog-release.md'
-                  artifacts: '/home/runner/work/minecraft-plugin-magiczna-kraina/minecraft-plugin-magiczna-kraina/MagicznaKraina*.zip'
+                  artifacts: staging/**
                 
         
