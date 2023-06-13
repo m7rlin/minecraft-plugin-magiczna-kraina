@@ -63,12 +63,16 @@ jobs:
             - name: Display structure of downloaded files
               run: ls -R
               working-directory: downloads
+              
+            - name: Display structure of downloaded files (target)
+              run: ls -R
+              working-directory: target
             
             - name: create release
               uses: ncipollo/release-action@v1
               with:
                   generateReleaseNotes: true
                   bodyFile: 'changelog-release.md'
-                  artifacts: downloads/**
+                  artifacts: downloads/MagicznaKraina.jar
                 
         
