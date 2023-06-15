@@ -37,6 +37,7 @@ public class BetterMobsModule extends PluginModule {
         super.registerEvents(new BossDeathEvent());
         super.registerEvents(new SilverFishSpawnEvent());
         super.registerEvents(new WitherEvent());
+        super.registerEvents(new ExplosiveAnimalsEvent());
 
     }
 
