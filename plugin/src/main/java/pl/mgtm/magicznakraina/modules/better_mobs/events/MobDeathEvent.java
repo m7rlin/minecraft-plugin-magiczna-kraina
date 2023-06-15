@@ -18,16 +18,6 @@ public class MobDeathEvent implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
 
-        // Check if the entity killed is a boss (Ender Dragon or Wither)
-        if (entity.getType().equals(EntityType.ENDER_DRAGON)
-                || entity.getType().equals(EntityType.WITHER)) {
-
-
-            // Increase boss health and damage
-            entity.setMaxHealth(entity.getMaxHealth() * 2);
-            entity.setHealth(entity.getMaxHealth());
-        }
-
 
         // Check if the entity killed is a Zombie or Spider
         if (entity.getType().equals(EntityType.ZOMBIE) || entity.getType().equals(EntityType.SPIDER) || entity.getType().equals(EntityType.SKELETON)) {

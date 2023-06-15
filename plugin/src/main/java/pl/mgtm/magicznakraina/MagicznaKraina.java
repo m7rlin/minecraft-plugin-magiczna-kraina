@@ -77,7 +77,7 @@ public final class MagicznaKraina extends JavaPlugin {
         //pm.registerEvents(new ExplosiveArrowEvent(), this); // do not register on production
 
         // Register commands
-        getCommand("test").setExecutor(new TestCommand()); // comment on production
+        //getCommand("test").setExecutor(new TestCommand()); // comment on production
         getCommand("tpa").setExecutor(new TpaCommand());
         getCommand("tpaccept").setExecutor(new TpaCommand());
         getCommand("tpdeny").setExecutor(new TpaCommand());
