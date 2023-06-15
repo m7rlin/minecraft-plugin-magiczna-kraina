@@ -1,5 +1,8 @@
 package pl.mgtm.magicznakraina.modules.better_mobs;
 
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
@@ -9,12 +12,15 @@ import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.better_mobs.events.*;
 
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @ModuleInfo(name = "better_mobs")
 public class BetterMobsModule extends PluginModule {
 
     private final MagicznaKraina pl = MagicznaKraina.getInstance();
+
+    private static List<String> witherNames = Arrays.asList("Kociak", "Mega Hydraulik", "Halinka");
 
 
     public BetterMobsModule() {
@@ -30,6 +36,7 @@ public class BetterMobsModule extends PluginModule {
         super.registerEvents(new MobSpawnEvent());
         super.registerEvents(new BossDeathEvent());
         super.registerEvents(new SilverFishSpawnEvent());
+        super.registerEvents(new WitherEvent());
 
     }
 
@@ -66,6 +73,43 @@ public class BetterMobsModule extends PluginModule {
     public static boolean shouldSpawnSilverfish(int spawnChance) {
         int chance = ThreadLocalRandom.current().nextInt(1, 101); // 1-100
         return chance <= spawnChance;
+    }
+
+    public static String getRandomWitherName() {
+        return witherNames.get((int) (Math.random() * witherNames.size()));
+    }
+
+    public static void spawnMobs(LivingEntity target, EntityType entityType, int count) {
+        World world = target.getWorld();
+        Location targetLocation = target.getLocation();
+
+        for (int i = 0; i < count; i++) {
+            Location randomLocation = getRandomLocationAround(targetLocation, 5);
+            world.spawnEntity(randomLocation, entityType);
+        }
+    }
+
+    public static void spawnElectricCreepers(World world, Location center) {
+        Location[] locations = {
+                center.clone().add(20, 0, 20),
+                center.clone().add(20, 0, -20),
+                center.clone().add(-20, 0, 20),
+                center.clone().add(-20, 0, -20)
+        };
+
+        for (Location location : locations) {
+            // Spawn electric creeper
+            Creeper creeper = (Creeper)world.spawnEntity(location, EntityType.CREEPER);
+            creeper.setPowered(true);
+        }
+    }
+
+    public static Location getRandomLocationAround(Location center, int radius) {
+        double angle = Math.random() * Math.PI * 2;
+        int x = (int) (center.getX() + radius * Math.cos(angle));
+        int z = (int) (center.getZ() + radius * Math.sin(angle));
+        int y = center.getWorld().getHighestBlockYAt(x, z);
+        return new Location(center.getWorld(), x + 0.5, y + 1, z + 0.5);
     }
 
 }
