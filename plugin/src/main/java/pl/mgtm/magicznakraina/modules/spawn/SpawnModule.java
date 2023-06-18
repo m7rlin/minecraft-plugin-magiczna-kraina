@@ -5,6 +5,7 @@ import pl.mgtm.magicznakraina.module.ModuleInfo;
 import pl.mgtm.magicznakraina.module.PluginModule;
 import pl.mgtm.magicznakraina.modules.spawn.commands.SetSpawnCommand;
 import pl.mgtm.magicznakraina.modules.spawn.commands.SpawnCommand;
+import pl.mgtm.magicznakraina.modules.spawn.events.JoinServerEvent;
 import pl.mgtm.magicznakraina.modules.spawn.events.RespawnEvent;
 
 @ModuleInfo(name = "spawn")
@@ -22,6 +23,7 @@ public class SpawnModule extends PluginModule {
 
         // Register events
         super.registerEvents(new RespawnEvent());
+        super.registerEvents(new JoinServerEvent());
 
     }
 }
